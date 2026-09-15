@@ -665,17 +665,27 @@ function advanceRail(steps) {
 
 /* ============ CONVERSATION FLOW ============ */
 function nextBot() {
-  const node = tree[state.step];
-  if (!node) return;
-  // Sequential tree for now
-  if (node.isReco) return showReco();
-  setReplies([]);
-  addTyping();
-  setTimeout(() => {
-    removeTyping();
-    addMessage('bot', node.bot);
-    setReplies(node.replies);
-  }, 700);
+  // Walk forward in the tree, but SKIP nodes whose `match.role` doesn't fit.
+  // Tree[0] is always the initial prompt. From there, find the next node
+  // whose match.role includes the user's stored role.
+  while (state.step < tree.length) {
+    const node = tree[state.step];
+    if (node.isReco) return showReco();
+    if (node.match && node.match.role && state.answers.role &&
+        !node.match.role.includes(state.answers.role)) {
+      // skip role-mismatched node
+      state.step++;
+      continue;
+    }
+    setReplies([]);
+    addTyping();
+    setTimeout(() => {
+      removeTyping();
+      addMessage('bot', node.bot);
+      setReplies(node.replies);
+    }, 700);
+    return;
+  }
 }
 
 function onChoice(value, label) {
