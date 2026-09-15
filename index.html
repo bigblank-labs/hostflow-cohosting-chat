@@ -367,8 +367,8 @@
     <span class="dot"></span>
     AI Team Active
   </span>
-  <h1>Find the right <span class="accent">cohosting</span> product for where you are.</h1>
-  <p>Two-minute chat. We'll recommend the right starting point — startup kit or mentorship cohort — based on where you are today.</p>
+  <h1>Cohosting tools for <span class="accent">where you are.</span></h1>
+  <p>Free worksheets, $7-200 toolkits, and a $1,000 live cohort. Two-minute chat recommends your starting point.</p>
 </section>
 
 <section class="chat-shell">
@@ -430,10 +430,10 @@
 
 <section class="proof">
   <div class="proof-row">
-    <div class="stat"><b>50+</b>owners</div>
-    <div class="stat"><b>100+</b>units</div>
-    <div class="stat"><b>4</b>countries</div>
-    <div class="stat"><b>+38%</b>avg revenue lift</div>
+    <div class="stat"><b>FREE</b>4 worksheets</div>
+    <div class="stat"><b>$7-37</b>tripwires</div>
+    <div class="stat"><b>$200</b>starter kit</div>
+    <div class="stat"><b>$1,000</b>mentorship</div>
   </div>
 </section>
 
@@ -479,6 +479,29 @@ const products = {
     ],
     cta: 'Join the Mentorship — $1,000'
   }
+};
+
+const SMALL_TICKETS = [
+  { code: 'L1', label: 'First 10 Nights Worksheet', price: 'FREE', tagline: 'A pricing worksheet for new cohosts', cta: 'Download — FREE', kind: 'pdf' },
+  { code: 'L2', label: 'Contract Checklist',       price: 'FREE', tagline: 'Clause-by-clause, before you sign',     cta: 'Download — FREE', kind: 'pdf' },
+  { code: 'L3', label: 'Listing Audit Card',       price: 'FREE', tagline: 'Score your listing in 15 points',         cta: 'Download — FREE', kind: 'pdf' },
+  { code: 'L4', label: 'Outreach Email Scripts',   price: 'FREE', tagline: '5 scripts for finding your first owners', cta: 'Download — FREE', kind: 'pdf' },
+  { code: 'T1', label: 'Pricing Calculator',       price: '$17',  tagline: 'Notion template, auto-calculates %',     cta: 'Get the template — $17', kind: 'notion' },
+  { code: 'T2', label: 'Guest Screening Scripts',  price: '$27',  tagline: '10 industry variants of the script',     cta: 'Get the script pack — $27', kind: 'pdf' },
+  { code: 'T3', label: 'Photo Checklist',          price: '$7',   tagline: '14 shots every listing needs',           cta: 'Get the checklist — $7', kind: 'pdf' },
+  { code: 'T4', label: 'First 30 Days Workbook',   price: '$37',  tagline: '30-day owner onboarding calendar',       cta: 'Get the workbook — $37', kind: 'pdf' }
+];
+
+// Public URL for each lead magnet (free) — set when Stripe + Resend are wired
+const SMALL_TICKET_URLS = {
+  L1: '/small-tickets/L1_first_10_nights_pricing_worksheet.pdf',
+  L2: '/small-tickets/L2_cohosting_contract_checklist.pdf',
+  L3: '/small-tickets/L3_listing_audit_self_score_card.pdf',
+  L4: '/small-tickets/L4_owner_outreach_email_templates.pdf',
+  T1: '__STRIPE_T1_PENDING__',
+  T2: '__STRIPE_T2_PENDING__',
+  T3: '__STRIPE_T3_PENDING__',
+  T4: '__STRIPE_T4_PENDING__'
 };
 
 const STRIPE_LINKS = {
@@ -701,6 +724,41 @@ function showReco() {
   setTimeout(() => {
     removeTyping();
     addMessage('bot', "Here's what I think fits. Based on what you said:");
+    // Small-ticket warm-up panel — surfaces free + cheap offers before the main pitch
+    const smallPanel = document.createElement('div');
+    smallPanel.className = 'product-rec small-ticket-panel';
+    smallPanel.innerHTML = `
+      <div class="label" style="color:#3D5AFE">Start with a free worksheet — 30 seconds</div>
+      <h3 style="margin-bottom:4px">First 10 Nights: A New Cohost's Pricing Worksheet</h3>
+      <div style="font-size:13px;opacity:0.85;margin-bottom:10px">A pricing worksheet for the first ten bookings you manage.</div>
+      <a class="cta" href="${SMALL_TICKET_URLS.L1}" target="_blank" rel="noopener"
+         style="background:#3D5AFE;color:white;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;text-decoration:none;display:inline-block">
+        Download — FREE →
+      </a>
+      <details style="margin-top:12px;font-size:12px;opacity:0.85">
+        <summary style="cursor:pointer;color:#9BB8FF;font-weight:600">More free + low-cost options</summary>
+        <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px">
+          ${SMALL_TICKETS.filter(t => t.code !== 'L1').map(t => {
+            const real = t.code.startsWith('L') || (SMALL_TICKET_URLS[t.code] && !SMALL_TICKET_URLS[t.code].startsWith('__'));
+            const href = real ? SMALL_TICKET_URLS[t.code] : '#waitlist';
+            const ctaText = real ? t.cta : 'Join the waitlist';
+            return `
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.1)">
+                <div>
+                  <div style="color:white;font-weight:600">${t.label}</div>
+                  <div style="font-size:11px;opacity:0.75">${t.tagline}</div>
+                </div>
+                <a href="${href}" target="_blank" rel="noopener"
+                   style="background:${real ? '#0B1220' : 'transparent'};color:#9BB8FF;border:1px solid #3D5AFE;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap">
+                  ${t.price} · ${ctaText}
+                </a>
+              </div>`;
+          }).join('')}
+        </div>
+      </details>
+    `;
+    messagesEl.appendChild(smallPanel);
+    // Main product card
     const recEl = document.createElement('div');
     recEl.className = 'product-rec';
     recEl.innerHTML = `
