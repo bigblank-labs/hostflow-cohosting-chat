@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hostflow Chat — Find your STR cohost fit</title>
+<meta name="description" content="Chat with the Hostflow team. Get matched with the right cohosting product for your situation." />
+<style>
+  /* === HOSTFLOW BRAND TOKENS === */
+  :root {
+    --hf-bg: #FFFFFF;
+    --hf-bg-soft: #F7F8FB;
+    --hf-navy: #0B1220;
+    --hf-navy-soft: #16202E;
+    --hf-blue: #3D5AFE;
+    --hf-blue-light: #9BB8FF;
+    --hf-red: #8D2924;
+    --hf-cream: #FFF2F1;
+    --hf-border: #E7EBF0;
+    --hf-text: #0B1220;
+    --hf-muted: #5B6473;
+    --hf-success: #10B981;
+    --hf-warn: #F59E0B;
+    --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--hf-bg);
+    color: var(--hf-text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  /* === TOP BAR === */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--hf-border);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: 18px; color: var(--hf-navy);
+  }
+  .brand-mark {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--hf-blue), var(--hf-blue-light));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 14px;
+  }
+  .topbar-nav { display: flex; gap: 24px; align-items: center; font-size: 14px; }
+  .topbar-nav a { color: var(--hf-muted); text-decoration: none; }
+  .topbar-nav a:hover { color: var(--hf-blue); }
+  /* === HERO === */
+  .hero {
+    max-width: 920px; margin: 0 auto; padding: 64px 32px 24px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    background: var(--hf-cream);
+    color: var(--hf-red);
+    font-size: 12px; font-weight: 600;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--hf-red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero h1 {
+    font-size: 44px; line-height: 1.1; letter-spacing: -0.02em;
+    margin: 20px 0 16px; color: var(--hf-navy);
+    font-weight: 700;
+  }
+  .hero h1 .accent { color: var(--hf-blue); }
+  .hero p {
+    font-size: 17px; color: var(--hf-muted);
+    max-width: 600px; margin: 0 auto;
+  }
+  /* === CHAT SURFACE === */
+  .chat-shell {
+    max-width: 720px; margin: 32px auto 80px;
+    padding: 0 32px;
+  }
+  .chat-card {
+    background: var(--hf-bg-soft);
+    border: 1px solid var(--hf-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px -32px rgba(11,18,32,0.18);
+  }
+  .chat-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px;
+    background: var(--hf-navy);
+    color: white;
+  }
+  .chat-header .avatars { display: flex; }
+  .chat-header .avatars .av {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 2px solid var(--hf-navy);
+    margin-left: -8px;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+  }
+  .chat-header .av:first-child { margin-left: 0; }
+  .av-cmo { background: linear-gradient(135deg, #6366F1, #A78BFA); }
+  .av-coo { background: linear-gradient(135deg, #0EA5A9, #10B981); }
+  .av-qa { background: linear-gradient(135deg, #F97316, #F59E0B); }
+  .av-specialist { background: linear-gradient(135deg, #EC4899, #D946EF); }
+  .chat-header .title {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+  }
+  .chat-header .sub {
+    font-size: 11px; opacity: 0.6;
+  }
+  .chat-header .status-dot {
+    margin-left: auto;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--hf-success);
+    box-shadow: 0 0 8px var(--hf-success);
+  }
+  /* === AGENT ACTIVITY FEED (left rail) === */
+  .chat-body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: 460px;
+  }
+  @media (max-width: 720px) {
+    .chat-body { grid-template-columns: 1fr; }
+    .chat-rail { display: none; }
+  }
+  .chat-rail {
+    background: white;
+    border-right: 1px solid var(--hf-border);
+    padding: 16px;
+    font-size: 12px;
+  }
+  .rail-title {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--hf-muted);
+    margin-bottom: 12px;
+  }
+  .rail-step {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--hf-border);
+    color: var(--hf-muted);
+    line-height: 1.4;
+  }
+  .rail-step:first-of-type { border-top: 0; }
+  .rail-step .icon {
+    width: 18px; height: 18px; border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    background: var(--hf-border);
+    color: var(--hf-muted);
+  }
+  .rail-step.active .icon {
+    background: var(--hf-blue);
+    color: white;
+    animation: spin 1.4s linear infinite;
+  }
+  .rail-step.done .icon {
+    background: var(--hf-success);
+    color: white;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .rail-step .label {
+    flex: 1;
+  }
+  .rail-step .label b { color: var(--hf-navy); }
+  .rail-step.active { color: var(--hf-text); }
+  .rail-step.active .label b { color: var(--hf-blue); }
+  /* === MESSAGES === */
+  .chat-main {
+    display: flex; flex-direction: column;
+    background: white;
+  }
+  .messages {
+    flex: 1; overflow-y: auto;
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 12px;
+    max-height: 480px;
+  }
+  .msg {
+    display: flex; gap: 10px;
+    max-width: 85%;
+  }
+  .msg.bot { align-self: flex-start; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg .bubble {
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .msg.bot .bubble {
+    background: var(--hf-bg-soft);
+    color: var(--hf-text);
+    border-bottom-left-radius: 4px;
+  }
+  .msg.user .bubble {
+    background: var(--hf-blue);
+    color: white;
+    border-bottom-right-radius: 4px;
+  }
+  .msg .avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    flex-shrink: 0;
+    font-size: 10px; font-weight: 700;
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .msg.bot .avatar { background: linear-gradient(135deg, var(--hf-blue), var(--hf-blue-light)); }
+  .msg.user .avatar { background: var(--hf-navy); }
+  /* === QUICK REPLIES === */
+  .quick-replies {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 0 24px 16px;
+  }
+  .chip {
+    padding: 8px 14px;
+    background: white;
+    border: 1px solid var(--hf-border);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--hf-text);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .chip:hover {
+    border-color: var(--hf-blue);
+    background: var(--hf-cream);
+    color: var(--hf-blue);
+  }
+  /* === INPUT === */
+  .chat-input {
+    display: flex; gap: 8px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--hf-border);
+    background: white;
+  }
+  .chat-input input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--hf-border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--hf-bg-soft);
+    color: var(--hf-text);
+    outline: none;
+  }
+  .chat-input input:focus { border-color: var(--hf-blue); }
+  .chat-input button {
+    padding: 0 18px;
+    background: var(--hf-blue);
+    color: white;
+    border: 0; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .chat-input button:hover { background: #2B4BFF; }
+  /* === PRODUCT CARD === */
+  .product-rec {
+    margin-top: 12px;
+    padding: 16px;
+    background: var(--hf-navy);
+    color: white;
+    border-radius: 12px;
+    max-width: 85%;
+    font-size: 14px;
+  }
+  .product-rec .label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--hf-blue-light); font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .product-rec h3 { margin: 0 0 6px; font-size: 18px; }
+  .product-rec .price {
+    font-family: var(--font-mono);
+    font-size: 22px; font-weight: 700;
+    margin: 8px 0;
+    color: white;
+  }
+  .product-rec ul { margin: 8px 0; padding-left: 18px; opacity: 0.85; }
+  .product-rec ul li { margin-bottom: 4px; }
+  .product-rec .cta {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 20px;
+    background: var(--hf-blue);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .product-rec .cta:hover { background: #2B4BFF; }
+  /* === META FOOTER === */
+  .meta-footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--hf-muted);
+    padding: 32px;
+    border-top: 1px solid var(--hf-border);
+  }
+  .meta-footer .legal { margin-top: 6px; opacity: 0.7; }
+  /* === LOADING ANIM === */
+  .typing { display: inline-flex; gap: 4px; padding: 8px 12px; }
+  .typing .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--hf-muted);
+    animation: bounce 1.2s ease-in-out infinite;
+  }
+  .typing .dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing .dot:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-4px); opacity: 1; } }
+  /* === SEEN ON === */
+  .proof {
+    max-width: 920px; margin: 0 auto;
+    padding: 24px 32px 48px;
+    text-align: center;
+    color: var(--hf-muted);
+  }
+  .proof-row {
+    display: flex; justify-content: center; gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .proof-row .stat b { font-size: 18px; color: var(--hf-navy); display: block; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">H</div>
+    Hostflow
+  </div>
+  <nav class="topbar-nav">
+    <a href="/co-hosting">Co-hosting</a>
+    <a href="/products">Products</a>
+    <a href="/case-studies">Case studies</a>
+    <a href="/chat" style="color:var(--hf-blue);font-weight:600">Chat</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="hero-eyebrow">
+    <span class="dot"></span>
+    AI Team Active
+  </span>
+  <h1>Find the right <span class="accent">cohosting</span> product for where you are.</h1>
+  <p>Two-minute chat. We'll recommend the right starting point — startup kit or mentorship cohort — based on where you are today.</p>
+</section>
+
+<section class="chat-shell">
+  <div class="chat-card">
+    <div class="chat-header">
+      <div class="avatars">
+        <div class="av av-cmo" title="CMO">CM</div>
+        <div class="av av-coo" title="COO">CO</div>
+        <div class="av av-qa" title="QA">QA</div>
+        <div class="av av-specialist" title="Specialist">S+</div>
+      </div>
+      <div>
+        <div class="title">Hostflow routing team — 3 managers + on-call specialists</div>
+        <div class="sub">Each manager delegates to a specialist from the registry for hands-on work</div>
+      </div>
+      <div class="status-dot" title="Live"></div>
+    </div>
+
+    <div class="chat-body">
+      <!-- Left rail: visible agent activity -->
+      <aside class="chat-rail" aria-label="Agent activity">
+        <div class="rail-title">Live agent activity</div>
+        <div class="rail-step done" data-step="intake">
+          <div class="icon">✓</div>
+          <div class="label"><b>CMO</b><br/>Routing your situation</div>
+        </div>
+        <div class="rail-step" data-step="select">
+          <div class="icon">○</div>
+          <div class="label"><b>Select-agent</b><br/>Picking a specialist</div>
+        </div>
+        <div class="rail-step" data-step="research">
+          <div class="icon">○</div>
+          <div class="label"><b>Specialist</b><br/>Pulling relevant cohost data</div>
+        </div>
+        <div class="rail-step" data-step="draft">
+          <div class="icon">○</div>
+          <div class="label"><b>COO</b><br/>Drafting recommendation</div>
+        </div>
+        <div class="rail-step" data-step="qa">
+          <div class="icon">○</div>
+          <div class="label"><b>QA</b><br/>Brand-voice + claim check</div>
+        </div>
+      </aside>
+
+      <!-- Messages -->
+      <main class="chat-main">
+        <div class="messages" id="messages">
+          <!-- initial bot message inserted by JS -->
+        </div>
+        <div class="quick-replies" id="replies"></div>
+        <form class="chat-input" id="form" autocomplete="off">
+          <input type="text" id="input" placeholder="Type your answer..." />
+          <button type="submit">Send</button>
+        </form>
+      </main>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="proof-row">
+    <div class="stat"><b>50+</b>owners</div>
+    <div class="stat"><b>100+</b>units</div>
+    <div class="stat"><b>4</b>countries</div>
+    <div class="stat"><b>+38%</b>avg revenue lift</div>
+  </div>
+</section>
+
+<footer class="meta-footer">
+  <div>Hostflow — cohosting done right. Snow Studio operating system.</div>
+  <div class="legal">No income guarantees. Cohosting is work. Results depend on your market, your listings, and your effort.</div>
+</footer>
+
+<script>
+/* ============ STATE ============ */
+const state = {
+  step: 0,
+  answers: {},
+  recommended: null
+};
+
+const products = {
+  starter: {
+    label: 'Cohosting Startup Kit',
+    slug: 'cohosting-startup-kit',
+    price: '$200',
+    tagline: 'The documents I wish I had when I started.',
+    bullets: [
+      '10 PDF modules — cohosting contracts, pricing calculator, guest-screening scripts',
+      'Listing audit checklist (Airbnb, VRBO, Furnished Finder)',
+      '4-week email sequence to send to your first property owner',
+      'Cohost contract template (3 models: percentage, flat, hybrid)',
+      'Pricing & fee negotiation scripts'
+    ],
+    cta: 'Get the Startup Kit — $200'
+  },
+  mentor: {
+    label: 'Cohosting Mentorship',
+    slug: 'cohosting-mentorship',
+    price: '$1,000',
+    tagline: '6-week cohort. Live calls. Private channel. Real cases.',
+    bullets: [
+      '6-week live cohort with weekly 90-min group calls',
+      'Private peer channel for the duration of the cohort',
+      'Review of your first 3 cohost contracts with feedback',
+      'Market-rate pricing audit for your target city',
+      '1:1 async Loom review of your first listing audit'
+    ],
+    cta: 'Join the Mentorship — $1,000'
+  }
+};
+
+const STRIPE_LINKS = {
+  // Stripe Payment Links — replace these when Josh sets up the account.
+  // Until then, the CTA shows "coming soon" instead of trying to charge.
+  starter: '__STRIPE_STARTER_PENDING__',
+  mentor:  '__STRIPE_MENTOR_PENDING__'
+};
+
+// UI affordance for when Stripe isn't yet wired
+function ctaLabel(rec) {
+  const real = STRIPE_LINKS[rec] && !STRIPE_LINKS[rec].startsWith('__');
+  if (!real) {
+    return 'Join the waitlist — coming this week';
+  }
+  return products[rec].cta;
+}
+
+function ctaHref(rec) {
+  const real = STRIPE_LINKS[rec] && !STRIPE_LINKS[rec].startsWith('__');
+  if (!real) {
+    return '#waitlist';
+  }
+  return STRIPE_LINKS[rec];
+}
+
+/* ============ CONVERSATION TREE ============ */
+const tree = [
+  {
+    bot: "Hey — I'm the Hostflow team (CMO orchestrating). Two-minute chat to find the right product. What's your situation today?",
+    replies: [
+      { label: "I'm new — never cohosted before", value: "new" },
+      { label: "I cohost already, want to scale", value: "scaling" },
+      { label: "I run an STR, considering cohosting others", value: "considering" }
+    ],
+    store: 'role'
+  },
+  {
+    match: { role: ['new'] },
+    bot: "Got it — first-time cohost. Where are you based? It changes which contracts you need and what fee structure the market supports.",
+    replies: [
+      { label: "US (single state)", value: "us_single" },
+      { label: "US (multi-state)", value: "us_multi" },
+      { label: "Outside the US", value: "intl" }
+    ],
+    store: 'geo'
+  },
+  {
+    match: { role: ['scaling'] },
+    bot: "Cool — you already have traction. What's the bottleneck right now?",
+    replies: [
+      { label: "Pricing + contracts", value: "pricing" },
+      { label: "Finding more owners", value: "owners" },
+      { label: "Operational SOPs / delegation", value: "ops" }
+    ],
+    store: 'bottleneck'
+  },
+  {
+    match: { role: ['considering'] },
+    bot: "Makes sense — the difference between running your listing and running other people's listings is mostly contracts + delegation. What's holding you back?",
+    replies: [
+      { label: "Not sure if I have time", value: "time" },
+      { label: "Don't know how to find owners", value: "owners" },
+      { label: "Worried about the legal side", value: "legal" }
+    ],
+    store: 'blocker'
+  },
+  // Reco step
+  {
+    isReco: true
+  },
+  // Closing
+  {
+    bot: "If a 6-week cohort feels right later, the mentorship at $1,000 is here too. Anything else, or want me to add this to your notes?",
+    replies: [
+      { label: "That's all — thanks", value: "done" },
+      { label: "Show me the other one too", value: "other" }
+    ],
+    store: 'close'
+  }
+];
+
+/* ============ RENDERING ============ */
+const messagesEl = document.getElementById('messages');
+const repliesEl = document.getElementById('replies');
+const formEl = document.getElementById('form');
+const inputEl = document.getElementById('input');
+
+function addMessage(who, text, opts={}) {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + (who === 'bot' ? 'bot' : 'user');
+  const av = document.createElement('div');
+  av.className = 'avatar';
+  av.textContent = who === 'bot' ? 'S' : 'J';
+  const bub = document.createElement('div');
+  bub.className = 'bubble';
+  bub.textContent = text;
+  wrap.appendChild(av);
+  wrap.appendChild(bub);
+  messagesEl.appendChild(wrap);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function addTyping() {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg bot';
+  wrap.id = 'typing';
+  wrap.innerHTML = '<div class="avatar">S</div><div class="bubble"><div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
+  messagesEl.appendChild(wrap);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return wrap;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+function setReplies(replies) {
+  repliesEl.innerHTML = '';
+  replies.forEach(r => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.type = 'button';
+    b.textContent = r.label;
+    b.onclick = () => {
+      onChoice(r.value, r.label);
+    };
+    repliesEl.appendChild(b);
+  });
+}
+
+function clearReplies() { repliesEl.innerHTML = ''; }
+
+function advanceRail(steps) {
+  const map = ['intake','select','research','draft','qa'];
+  let i = 0;
+  function tick() {
+    if (i >= steps.length) return;
+    const key = steps[i];
+    const el = document.querySelector(`.rail-step[data-step="${key}"]`);
+    if (el) {
+      el.classList.add('active');
+      el.querySelector('.icon').textContent = '◐';
+      // Mark previous done
+      const prevKey = map[map.indexOf(key) - 1];
+      if (prevKey) {
+        const prev = document.querySelector(`.rail-step[data-step="${prevKey}"]`);
+        if (prev) {
+          prev.classList.remove('active');
+          prev.classList.add('done');
+          prev.querySelector('.icon').textContent = '✓';
+        }
+      }
+    }
+    i++;
+    setTimeout(tick, 900);
+  }
+  tick();
+}
+
+/* ============ CONVERSATION FLOW ============ */
+function nextBot() {
+  const node = tree[state.step];
+  if (!node) return;
+  // Sequential tree for now
+  if (node.isReco) return showReco();
+  setReplies([]);
+  addTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMessage('bot', node.bot);
+    setReplies(node.replies);
+  }, 700);
+}
+
+function onChoice(value, label) {
+  addMessage('user', label);
+  clearReplies();
+  const node = tree[state.step];
+  if (node && node.store) state.answers[node.store] = value;
+  state.step++;
+  // Run rail animation when we leave node 0
+  if (state.step === 1) advanceRail(['select','research','draft','qa']);
+  setTimeout(() => nextBot(), 600);
+}
+
+/* ============ RECOMMENDATION ============ */
+function pickProduct() {
+  // Simple logic — based on role + ancillary
+  const role = state.answers.role;
+  const newGeo = state.answers.geo;       // new
+  const scalingBottle = state.answers.bottleneck;  // scaling
+  const blocker = state.answers.blocker;  // considering
+
+  if (role === 'new') {
+    // New → startup kit. Geography just adds contract diversity.
+    return 'starter';
+  }
+  if (role === 'scaling') {
+    // Scaling → mentor likely
+    if (scalingBottle === 'pricing' || scalingBottle === 'ops') return 'mentor';
+    return 'mentor';
+  }
+  if (role === 'considering') {
+    // Considering → starter (they need the documents first)
+    return 'starter';
+  }
+  return 'starter';
+}
+
+function showReco() {
+  const rec = pickProduct();
+  state.recommended = rec;
+  const p = products[rec];
+
+  advanceRail(['select','research','draft','qa']);
+
+  addTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMessage('bot', "Here's what I think fits. Based on what you said:");
+    const recEl = document.createElement('div');
+    recEl.className = 'product-rec';
+    recEl.innerHTML = `
+      <div class="label">Recommended for you</div>
+      <h3>${p.label}</h3>
+      <div>${p.tagline}</div>
+      <div class="price">${p.price}</div>
+      <ul>${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+      <a class="cta" href="${ctaHref(rec)}" target="_blank" rel="noopener">${ctaLabel(rec)} →</a>
+    `;
+    messagesEl.appendChild(recEl);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    state.step++;
+    setTimeout(() => nextBot(), 600);
+  }, 900);
+}
+
+/* ============ INIT ============ */
+formEl.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const v = inputEl.value.trim();
+  if (!v) return;
+  onChoice(v, v);
+});
+
+// Initial rail: intake already in motion
+document.querySelector('.rail-step[data-step="intake"]').classList.add('active');
+document.querySelector('.rail-step[data-step="intake"] .icon').textContent = '◐';
+nextBot();
+</script>
+</body>
+</html>
