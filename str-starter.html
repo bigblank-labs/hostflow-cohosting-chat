@@ -4,26 +4,24 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HostFlow — Co-Hosting Starter Kit</title>
-<meta name="description" content="Everything you need to run, scale, and streamline your short-term rental business. Templates. Systems. Automations. Real results." />
+<meta name="description" content="Templates. Systems. Automations. Real results. Everything you need to run, scale, and streamline your short-term rental business." />
 <style>
-  /* === HOSTFLOW TOKENS === */
+  /* === HOSTFLOW BRAND TOKENS === */
   :root {
     --hf-bg: #FFFFFF;
-    --hf-bg-soft: #F5F7FB;
+    --hf-bg-soft: #F5F5F7;
+    --hf-bg-lavender: #ECEDFB;
     --hf-navy: #0B1220;
     --hf-navy-soft: #16202E;
     --hf-blue: #3D5AFE;
     --hf-blue-light: #9BB8FF;
     --hf-blue-pale: #E8EDFF;
-    --hf-blue-soft: #D9E0FF;
-    --hf-red: #8D2924;
-    --hf-cream: #FFF2F1;
-    --hf-border: #E7EBF0;
     --hf-text: #0B1220;
-    --hf-muted: #5B6473;
-    --hf-tagline: #1A2333;
-    --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --hf-text-soft: #5B6473;
+    --hf-muted: #8B92A3;
+    --hf-border: #E7EBF0;
+    --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
   * { box-sizing: border-box; }
   body {
@@ -31,49 +29,34 @@
     font-family: var(--font-body);
     background: var(--hf-bg);
     color: var(--hf-text);
-    line-height: 1.55;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  /* === TOP BAR === */
+  /* === TOP NAV === */
   .topbar {
     display: flex; align-items: center; justify-content: space-between;
     padding: 16px 32px;
+    border-bottom: 1px solid var(--hf-border);
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--hf-border);
     position: sticky; top: 0; z-index: 50;
   }
   .brand {
     display: flex; align-items: center; gap: 10px;
-    font-weight: 700; font-size: 20px;
+    font-weight: 700; font-size: 18px;
     color: var(--hf-navy);
-    letter-spacing: -0.01em;
   }
   .brand-mark {
-    width: 32px; height: 32px;
+    width: 28px; height: 28px;
     background: var(--hf-blue);
-    border-radius: 8px;
+    border-radius: 6px;
     display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 700; font-size: 16px;
+    flex-shrink: 0;
   }
-  /* The Hostflow logo is actually a stylized water drop with three curved lines */
-  .brand-mark.hostflow {
-    position: relative;
-    background: transparent;
-  }
-  .brand-mark.hostflow::before {
-    content: '';
-    position: absolute;
-    width: 32px; height: 32px;
-    background:
-      radial-gradient(ellipse at 30% 25%, var(--hf-blue) 30%, transparent 31%),
-      radial-gradient(ellipse at 70% 25%, var(--hf-blue) 30%, transparent 31%),
-      radial-gradient(ellipse at 50% 70%, var(--hf-blue) 35%, transparent 36%);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    transform: rotate(0deg);
-  }
+  .brand-mark svg { width: 16px; height: 16px; }
   .topbar-nav { display: flex; gap: 28px; align-items: center; font-size: 14px; }
-  .topbar-nav a { color: var(--hf-muted); text-decoration: none; }
+  .topbar-nav a { color: var(--hf-text-soft); text-decoration: none; }
   .topbar-nav a:hover { color: var(--hf-blue); }
   .topbar-cta {
     display: inline-flex; align-items: center; gap: 6px;
@@ -83,142 +66,114 @@
     border-radius: 999px;
     font-size: 13px; font-weight: 600;
     text-decoration: none;
+    transition: background 0.15s;
   }
-  /* === HERO with kit box visual === */
+  .topbar-cta:hover { background: #2B4BFF; }
+  /* === HERO === */
   .hero {
-    padding: 56px 32px 96px;
+    padding: 64px 32px 80px;
     background: var(--hf-bg);
-    position: relative;
     overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: 50%;
-    background:
-      radial-gradient(circle at 70% 30%, rgba(155, 184, 255, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 90% 70%, rgba(217, 224, 255, 0.2) 0%, transparent 40%);
-    pointer-events: none;
   }
   .hero-inner {
     max-width: 1280px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
     align-items: center;
-    position: relative;
   }
-  @media (max-width: 980px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-    .hero-visual { order: -1; }
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 64px; }
+    .hero-visual { order: -1; max-width: 600px; margin: 0 auto; }
   }
-  .hero-text { position: relative; }
-  .hero-brand-line {
-    display: flex; align-items: center; gap: 14px;
-    margin-bottom: 32px;
+  .hero-text {}
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px;
+    background: var(--hf-blue-pale);
+    color: var(--hf-blue);
+    font-size: 12px; font-weight: 700;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
   }
-  .hero-brand-logo {
-    width: 56px; height: 56px;
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
     background: var(--hf-blue);
-    border-radius: 12px;
-    position: relative;
-    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
   }
-  /* Stylized water-drop hostflow logo */
-  .hero-brand-logo::before {
-    content: '';
-    position: absolute;
-    inset: 8px;
-    background:
-      radial-gradient(ellipse at 30% 30%, white 25%, transparent 26%),
-      radial-gradient(ellipse at 70% 30%, white 25%, transparent 26%),
-      radial-gradient(ellipse at 50% 65%, white 30%, transparent 31%);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  }
-  .hero-brand-name {
-    font-size: 56px;
-    font-weight: 700;
-    color: var(--hf-navy);
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
   .hero-tagline {
-    position: absolute;
-    top: 0; right: 0;
-    text-align: right;
-    font-size: 14px;
-    line-height: 1.4;
-    color: var(--hf-muted);
-    letter-spacing: 0.04em;
-  }
-  @media (max-width: 980px) {
-    .hero-tagline { position: static; text-align: left; margin-bottom: 16px; }
-  }
-  .hero-tagline .accent {
-    color: var(--hf-navy);
-    font-weight: 700;
+    font-size: 13px; font-weight: 700;
+    color: var(--hf-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
   }
   .hero h1 {
-    font-size: 36px; line-height: 1.1;
-    margin: 0 0 20px;
+    font-size: 64px;
+    line-height: 1.05;
+    margin: 0 0 24px;
     color: var(--hf-navy);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -0.025em;
   }
   .hero .sub {
-    font-size: 22px; line-height: 1.4;
-    color: var(--hf-tagline);
-    margin: 0 0 28px;
-    max-width: 480px;
-    font-weight: 400;
+    font-size: 19px;
+    color: var(--hf-text-soft);
+    margin: 0 0 36px;
+    max-width: 520px;
+    line-height: 1.5;
   }
-  /* Category strip below sub */
+  /* Category strip */
   .cat-strip {
     display: flex; gap: 24px;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
     flex-wrap: wrap;
   }
   .cat-strip .cat {
     font-size: 12px; font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     color: var(--hf-muted);
     position: relative;
   }
   .cat-strip .cat:not(:last-child)::after {
-    content: '•';
+    content: '';
     position: absolute;
-    right: -14px;
-    color: var(--hf-blue);
-    font-weight: 700;
+    right: -14px; top: 50%;
+    width: 4px; height: 4px;
+    background: var(--hf-blue);
+    border-radius: 50%;
+    transform: translateY(-50%);
   }
-  /* Feature list (the 5 bullets) */
+  /* Feature list */
   .feature-list {
     list-style: none;
     padding: 0;
     margin: 0 0 40px;
     display: grid;
-    gap: 20px;
+    gap: 18px;
   }
   .feature-list li {
-    display: flex; align-items: flex-start; gap: 16px;
+    display: flex; align-items: flex-start; gap: 14px;
   }
   .feature-list .icon {
-    width: 40px; height: 40px;
+    width: 36px; height: 36px;
     flex-shrink: 0;
     background: var(--hf-bg-soft);
-    border: 1px solid var(--hf-border);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     color: var(--hf-navy);
   }
-  .feature-list .icon svg { width: 20px; height: 20px; }
+  .feature-list .icon svg { width: 18px; height: 18px; }
   .feature-list .text {
-    font-size: 16px;
-    line-height: 1.4;
+    font-size: 15px;
+    line-height: 1.5;
+    padding-top: 4px;
   }
   .feature-list .text b {
     display: block;
@@ -226,293 +181,246 @@
     font-weight: 700;
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     margin-bottom: 2px;
   }
-  .feature-list .text span {
-    color: var(--hf-muted);
-  }
+  .feature-list .text span { color: var(--hf-text-soft); }
   .cta-row {
-    display: flex; gap: 16px;
+    display: flex; gap: 24px;
     align-items: center;
     flex-wrap: wrap;
   }
   .cta-primary {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 18px 36px;
+    padding: 16px 32px;
     background: var(--hf-blue);
     color: white;
     border-radius: 999px;
-    font-size: 17px; font-weight: 700;
+    font-size: 16px; font-weight: 700;
     text-decoration: none;
     transition: all 0.15s;
     box-shadow: 0 12px 24px -8px rgba(61, 90, 254, 0.4);
   }
   .cta-primary:hover { background: #2B4BFF; transform: translateY(-2px); }
   .cta-secondary {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 18px 28px;
+    display: inline-flex; align-items: center;
+    padding: 16px 0;
     background: transparent;
     color: var(--hf-blue);
     font-size: 15px; font-weight: 600;
     text-decoration: none;
-    border-bottom: 1.5px solid var(--hf-blue);
+    border-bottom: 2px solid var(--hf-blue);
   }
-  /* === HERO VISUAL (kit box + laptop + desk) === */
+  /* === HERO VISUAL — clean front-view desk scene === */
   .hero-visual {
     position: relative;
     aspect-ratio: 5/4;
     width: 100%;
-    background: var(--hf-bg-soft);
-    border-radius: 24px;
+    background: var(--hf-bg-lavender);
+    border-radius: 32px;
     overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 30px 80px -20px rgba(11, 18, 32, 0.12);
   }
-  /* The desk scene: laptop + coffee + phone + kit box + scattered papers */
-  .hero-visual::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, rgba(217, 224, 255, 0.4) 0%, transparent 60%),
-      radial-gradient(circle at 20% 80%, rgba(11, 18, 32, 0.05) 0%, transparent 30%),
-      radial-gradient(circle at 80% 20%, rgba(217, 224, 255, 0.5) 0%, transparent 40%);
-  }
-  /* The laptop in the center showing the Hostflow brand */
+  /* The laptop (centered, front view) */
   .scene-laptop {
-    position: relative;
-    width: 70%;
-    aspect-ratio: 4/3;
-    background: linear-gradient(135deg, #1a2333 0%, #0B1220 100%);
-    border-radius: 8px 8px 16px 16px;
-    box-shadow: 0 30px 60px -20px rgba(11, 18, 32, 0.4);
+    position: absolute;
+    top: 18%;
+    left: 8%;
+    width: 78%;
+    background: linear-gradient(180deg, #1A1F2E 0%, #0B1220 100%);
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: 0 30px 60px -20px rgba(11, 18, 32, 0.3);
     z-index: 2;
   }
-  .scene-laptop::before {
+  .scene-screen {
+    background: white;
+    border-radius: 8px;
+    padding: 16px 18px;
+    overflow: hidden;
+    position: relative;
+  }
+  .scene-screen::after {
     content: '';
     position: absolute;
-    inset: 6px;
-    background: white;
-    border-radius: 4px;
+    bottom: 0; left: 0; right: 0;
+    height: 55%;
+    background: linear-gradient(180deg, rgba(11,18,32,0) 0%, rgba(11,18,32,0.85) 100%);
+    pointer-events: none;
+    border-radius: 0 0 8px 8px;
   }
-  /* The "screen" content */
-  .scene-screen {
-    position: absolute;
-    inset: 6px;
-    background: white;
-    border-radius: 4px;
-    padding: 16px;
-    display: flex; flex-direction: column; gap: 8px;
-    overflow: hidden;
+  .scene-screen .laptop-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
   }
-  .scene-screen .topbar-mini {
-    display: flex; align-items: center; gap: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--hf-border);
-  }
-  .scene-screen .topbar-mini .brand-mini {
+  .scene-screen .laptop-brand {
     display: flex; align-items: center; gap: 6px;
-    font-size: 9px; font-weight: 700;
+    font-size: 10px; font-weight: 700;
     color: var(--hf-navy);
   }
-  .scene-screen .topbar-mini .brand-mini .dot-mini {
+  .scene-screen .laptop-brand-mark {
     width: 12px; height: 12px;
     background: var(--hf-blue);
     border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
   }
-  .scene-screen .topbar-mini .nav-mini {
-    display: flex; gap: 8px;
-    margin-left: auto;
-  }
-  .scene-screen .topbar-mini .nav-mini span {
-    font-size: 7px;
-    color: var(--hf-muted);
+  .scene-screen .laptop-brand-mark svg { width: 8px; height: 8px; }
+  .scene-screen .laptop-nav-right {
+    display: flex; gap: 10px;
+    font-size: 8px;
+    color: var(--hf-text-soft);
   }
   .scene-screen h5 {
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 1.25;
     font-weight: 700;
     color: var(--hf-navy);
-    margin: 4px 0 2px;
-    line-height: 1.2;
-  }
-  .scene-screen p.mini-sub {
-    font-size: 9px;
-    color: var(--hf-muted);
-    margin: 0;
-  }
-  .scene-screen .hero-img {
-    margin-top: auto;
-    aspect-ratio: 3/2;
-    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
-    border-radius: 4px;
+    margin: 0 0 8px;
+    max-width: 70%;
     position: relative;
-    overflow: hidden;
+    z-index: 2;
   }
-  .scene-screen .hero-img::before {
+  .scene-screen p {
+    font-size: 9px;
+    line-height: 1.4;
+    color: var(--hf-text-soft);
+    margin: 0;
+    max-width: 60%;
+    position: relative;
+    z-index: 2;
+  }
+  /* Laptop hinge at bottom */
+  .scene-laptop::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 30% 60%, rgba(255,255,255,0.15) 0%, transparent 50%),
-      linear-gradient(180deg, rgba(155, 184, 255, 0.3) 0%, rgba(11, 18, 32, 0.2) 100%);
+    bottom: -10px;
+    left: 8%; right: 8%;
+    height: 10px;
+    background: linear-gradient(180deg, #1A1F2E 0%, #2A2F3E 100%);
+    border-radius: 0 0 14px 14px;
+    z-index: 1;
   }
-  /* The "kit box" on the right */
+  .scene-laptop::after {
+    content: '';
+    position: absolute;
+    bottom: -22px;
+    left: 18%; right: 18%;
+    height: 4px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 0 0 12px 12px;
+    filter: blur(4px);
+    z-index: 0;
+  }
+  /* The kit box (right side, overlapping) */
   .scene-kit {
     position: absolute;
-    right: 6%; top: 15%;
-    width: 28%;
-    aspect-ratio: 3/4;
-    background: linear-gradient(135deg, #16202E 0%, #0B1220 100%);
-    border-radius: 4px;
-    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4);
-    z-index: 3;
-    display: flex; flex-direction: column; justify-content: space-between;
-    padding: 12px;
-  }
-  .scene-kit::before {
-    content: '';
-    position: absolute;
-    inset: 1px;
-    background: linear-gradient(135deg, var(--hf-blue) 0%, #16202E 100%);
-    border-radius: 3px;
-    opacity: 0.3;
+    top: 14%; right: 4%;
+    width: 36%;
+    background: var(--hf-navy);
+    border-radius: 8px;
+    padding: 18px 16px;
+    box-shadow: 0 30px 60px -20px rgba(11, 18, 32, 0.5);
+    z-index: 4;
+    color: white;
   }
   .scene-kit .kit-logo {
     width: 24px; height: 24px;
     background: var(--hf-blue);
-    border-radius: 4px;
-    position: relative;
-    z-index: 1;
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
   }
-  .scene-kit .kit-logo::before {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    background:
-      radial-gradient(ellipse at 30% 30%, white 25%, transparent 26%),
-      radial-gradient(ellipse at 70% 30%, white 25%, transparent 26%),
-      radial-gradient(ellipse at 50% 65%, white 30%, transparent 31%);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  .scene-kit .kit-logo svg { width: 14px; height: 14px; }
+  .scene-kit .kit-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.25;
+    margin-bottom: 10px;
   }
-  .scene-kit .kit-text {
-    z-index: 1;
-    color: white;
+  .scene-kit .kit-subtitle {
     font-size: 9px;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-  .scene-kit .kit-text .small {
-    font-size: 7px;
-    opacity: 0.7;
-    margin-top: 4px;
-  }
-  .scene-kit .kit-tag {
-    z-index: 1;
     color: var(--hf-blue-light);
-    font-size: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .scene-kit .kit-tagline {
+    font-size: 9px;
+    color: var(--hf-blue-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    line-height: 1.4;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(155, 184, 255, 0.2);
   }
-  /* The "coffee mug" in the lower left */
-  .scene-mug {
-    position: absolute;
-    left: 10%; bottom: 18%;
-    width: 50px; height: 60px;
-    background: #1a1a1a;
-    border-radius: 4px 4px 8px 8px;
-    z-index: 2;
-  }
-  .scene-mug::before {
-    content: '';
-    position: absolute;
-    top: 4px; left: 4px; right: 4px;
-    height: 12px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 2px;
-  }
-  .scene-mug::after {
-    content: '';
-    position: absolute;
-    right: -8px; top: 20px;
-    width: 8px; height: 12px;
-    background: transparent;
-    border: 3px solid #1a1a1a;
-    border-radius: 0 4px 4px 0;
-    border-left: 0;
-  }
-  /* The "phone" in the lower right */
+  /* The phone (lower right, hanging off the kit) */
   .scene-phone {
     position: absolute;
-    right: 12%; bottom: 16%;
-    width: 50px; height: 90px;
+    bottom: 22%; right: 6%;
+    width: 22%;
     background: var(--hf-navy);
     border-radius: 8px;
-    z-index: 2;
-    display: flex; align-items: center; justify-content: center;
     padding: 4px;
+    z-index: 5;
+    box-shadow: 0 12px 24px -8px rgba(11, 18, 32, 0.3);
   }
-  .scene-phone::before {
-    content: 'Better\\A Systems.\\A Higher\\A Returns.';
-    white-space: pre;
-    position: absolute;
-    inset: 4px;
-    background: var(--hf-bg);
+  .scene-phone-screen {
+    background: white;
     border-radius: 6px;
-    font-size: 6px;
+    padding: 14px 10px;
+    font-size: 9px;
     font-weight: 700;
     color: var(--hf-navy);
-    line-height: 1.3;
-    display: flex;
-    align-items: center;
-    padding: 6px;
+    line-height: 1.4;
   }
-  /* The "papers" scattered at the bottom */
-  .scene-paper-1 {
+  /* The papers (scattered at the bottom) */
+  .scene-paper {
     position: absolute;
-    left: 30%; bottom: 8%;
-    width: 18%; aspect-ratio: 3/4;
+    bottom: 6%;
+    width: 18%;
+    aspect-ratio: 3/4;
     background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    box-shadow: 0 6px 16px -6px rgba(11, 18, 32, 0.15);
+    padding: 16px 10px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .scene-paper.left {
+    left: 16%;
     transform: rotate(-3deg);
-    z-index: 1;
-    padding: 8px;
-    display: flex; flex-direction: column; gap: 4px;
   }
-  .scene-paper-1 .title {
-    font-size: 8px; font-weight: 700;
-    color: var(--hf-navy);
+  .scene-paper.middle {
+    left: 36%;
+    transform: rotate(1deg);
   }
-  .scene-paper-1 .item {
-    height: 4px;
-    background: var(--hf-border);
-    border-radius: 1px;
-  }
-  .scene-paper-2 {
-    position: absolute;
-    left: 50%; bottom: 6%;
-    width: 18%; aspect-ratio: 3/4;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  .scene-paper.right {
+    left: 56%;
     transform: rotate(2deg);
-    z-index: 1;
-    padding: 8px;
-    display: flex; flex-direction: column; gap: 4px;
   }
-  .scene-paper-2 .title {
-    font-size: 8px; font-weight: 700;
-    color: var(--hf-navy);
+  .scene-paper .line {
+    height: 3px;
+    background: var(--hf-bg-soft);
+    border-radius: 2px;
   }
-  .scene-paper-2 .item {
-    height: 4px;
-    background: var(--hf-border);
-    border-radius: 1px;
+  .scene-paper .line.short { width: 60%; }
+  .scene-paper .line.medium { width: 80%; }
+  .scene-paper .line.title {
+    height: 5px;
+    background: var(--hf-navy);
+    margin-bottom: 6px;
+    width: 70%;
   }
-  /* === STAT STRIP (4 stats at the bottom of the hero) === */
+  /* === STAT STRIP === */
   .stat-strip {
     background: var(--hf-navy);
     color: white;
     padding: 28px 32px;
-    margin-top: -1px;
   }
   .stat-strip-inner {
     max-width: 1280px;
@@ -531,10 +439,10 @@
     padding: 0 24px;
   }
   .stat-strip .stat .icon {
-    width: 32px; height: 32px;
+    width: 28px; height: 28px;
     color: var(--hf-blue-light);
   }
-  .stat-strip .stat .icon svg { width: 32px; height: 32px; }
+  .stat-strip .stat .icon svg { width: 28px; height: 28px; }
   .stat-strip .stat .text {
     display: flex; flex-direction: column;
     line-height: 1.2;
@@ -552,9 +460,6 @@
   .stat-strip .sep {
     width: 1px; height: 32px;
     background: rgba(255,255,255,0.15);
-  }
-  .stat-strip .cta {
-    margin-left: auto;
   }
   /* === CONTENT SECTIONS === */
   section { padding: 80px 32px; }
@@ -576,13 +481,13 @@
     margin-bottom: 16px;
   }
   .section-sub {
-    color: var(--hf-muted);
+    color: var(--hf-text-soft);
     margin: 0 0 56px;
     font-size: 18px;
     max-width: 640px;
-    line-height: 1.5;
+    line-height: 1.55;
   }
-  /* === SYSTEM (modules grid) === */
+  /* === MODULES === */
   .modules-section { background: var(--hf-bg); }
   .modules-grid {
     display: grid;
@@ -618,7 +523,7 @@
   }
   .module-card p {
     font-size: 13px;
-    color: var(--hf-muted);
+    color: var(--hf-text-soft);
     margin: 0;
     line-height: 1.5;
   }
@@ -646,15 +551,14 @@
     padding-bottom: 12px;
     border-bottom: 1px solid var(--hf-border);
   }
-  .compare-card.bad .label { color: var(--hf-muted); }
+  .compare-card.bad .label { color: var(--hf-text-soft); }
   .compare-card.good .label { color: var(--hf-blue); }
   .compare-card ul { list-style: none; padding: 0; margin: 0; }
   .compare-card li {
-    padding: 12px 0;
+    padding: 12px 0 12px 28px;
     border-bottom: 1px solid var(--hf-border);
     font-size: 15px;
     position: relative;
-    padding-left: 28px;
   }
   .compare-card li:last-child { border-bottom: 0; }
   .compare-card li::before {
@@ -662,19 +566,10 @@
     font-weight: 700;
     font-size: 18px;
   }
-  .compare-card.bad li::before {
-    content: '×';
-    color: var(--hf-muted);
-  }
-  .compare-card.good li::before {
-    content: '✓';
-    color: var(--hf-blue);
-  }
-  /* === FREE PDF SECTION (navy) === */
-  .free-section {
-    background: var(--hf-navy);
-    color: white;
-  }
+  .compare-card.bad li::before { content: '×'; color: var(--hf-text-soft); }
+  .compare-card.good li::before { content: '✓'; color: var(--hf-blue); }
+  /* === FREE PDF === */
+  .free-section { background: var(--hf-navy); color: white; }
   .free-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -696,10 +591,8 @@
     font-size: 16px; font-weight: 700;
     text-decoration: none;
     margin-top: 24px;
-    transition: all 0.15s;
   }
   .free-cta-btn:hover { background: var(--hf-blue-pale); }
-  /* PDF mock on right */
   .pdf-mock {
     background: white;
     border-radius: 8px;
@@ -710,22 +603,9 @@
     max-width: 400px;
     margin: 0 auto;
   }
-  .pdf-mock .pdf-corner {
-    position: absolute;
-    top: -10px; right: -10px;
-    background: var(--hf-blue);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 10px; font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
   .pdf-mock h4 { font-size: 18px; margin: 0 0 6px; }
-  .pdf-mock .sub { color: var(--hf-muted); font-size: 12px; margin: 0 0 20px; }
-  .pdf-mock .cat-list {
-    display: grid; gap: 8px;
-  }
+  .pdf-mock .sub { color: var(--hf-text-soft); font-size: 12px; margin: 0 0 20px; }
+  .pdf-mock .cat-list { display: grid; gap: 8px; }
   .pdf-mock .cat {
     display: flex; justify-content: space-between; align-items: center;
     padding: 8px 12px;
@@ -734,11 +614,7 @@
     font-size: 11px;
   }
   .pdf-mock .cat .name { font-weight: 700; color: var(--hf-navy); }
-  .pdf-mock .cat .count {
-    color: var(--hf-blue);
-    font-weight: 700;
-    font-family: var(--font-mono);
-  }
+  .pdf-mock .cat .count { color: var(--hf-blue); font-weight: 700; }
   /* === PRICING === */
   .pricing-section { background: var(--hf-bg-soft); }
   .pricing-card {
@@ -770,20 +646,16 @@
   }
   .pricing-head .price small {
     font-size: 18px;
-    color: var(--hf-muted);
+    color: var(--hf-text-soft);
     font-weight: 400;
   }
   .pricing-head .sub {
-    color: var(--hf-muted);
+    color: var(--hf-text-soft);
     font-size: 14px;
     margin-top: 12px;
   }
   .pricing-body { padding: 32px 40px 40px; }
-  .pricing-body ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 28px;
-  }
+  .pricing-body ul { list-style: none; padding: 0; margin: 0 0 28px; }
   .pricing-body li {
     padding: 10px 0 10px 28px;
     border-bottom: 1px solid var(--hf-border);
@@ -807,7 +679,6 @@
     font-size: 17px; font-weight: 700;
     text-align: center;
     text-decoration: none;
-    transition: background 0.15s;
   }
   .pricing-cta:hover { background: #2B4BFF; }
   /* === FAQ === */
@@ -835,7 +706,7 @@
   }
   details[open] summary::after { content: '−'; }
   details p {
-    color: var(--hf-muted);
+    color: var(--hf-text-soft);
     font-size: 14px;
     margin: 12px 0 0;
   }
@@ -845,12 +716,12 @@
     text-align: center;
   }
   .final-cta h2 { font-size: 36px; color: var(--hf-navy); margin: 0 0 16px; }
-  .final-cta p { color: var(--hf-muted); margin: 0 auto 28px; max-width: 540px; }
+  .final-cta p { color: var(--hf-text-soft); margin: 0 auto 28px; max-width: 540px; }
   footer {
     padding: 32px;
     text-align: center;
     border-top: 1px solid var(--hf-border);
-    color: var(--hf-muted);
+    color: var(--hf-text-soft);
     font-size: 12px;
   }
   footer .legal { opacity: 0.7; margin-top: 4px; }
@@ -860,7 +731,13 @@
 
 <header class="topbar">
   <div class="brand">
-    <div class="brand-mark"></div>
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="white">
+        <ellipse cx="8" cy="10" rx="3" ry="2.5" opacity="0.95"/>
+        <ellipse cx="16" cy="10" rx="3" ry="2.5" opacity="0.95"/>
+        <ellipse cx="12" cy="16" rx="4" ry="3" opacity="0.95"/>
+      </svg>
+    </div>
     Hostflow
   </div>
   <nav class="topbar-nav">
@@ -869,21 +746,21 @@
     <a href="/pricing">Pricing</a>
     <a href="/resources">Resources</a>
   </nav>
-  <a class="topbar-cta" href="#pricing">Get Started →</a>
+  <a class="topbar-cta" href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" target="_blank" rel="noopener">
+    Get Started →
+  </a>
 </header>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-tagline">
-        OPERATE<br>SMARTER.<br><span class="accent">HOST BETTER.</span>
-      </div>
+      <span class="hero-eyebrow">
+        <span class="dot"></span>
+        Templates · Systems · Automations
+      </span>
 
-      <div class="hero-brand-line">
-        <div class="hero-brand-logo"></div>
-        <div class="hero-brand-name">Hostflow</div>
-      </div>
+      <div class="hero-tagline">OPERATE SMARTER. HOST BETTER.</div>
 
       <h1>Co-Hosting<br>Starter Kit</h1>
       <p class="sub">Everything you need to run, scale, and streamline your short-term rental business.</p>
@@ -902,7 +779,7 @@
           </div>
           <div class="text">
             <b>SOP Library</b>
-            <span>Done-for-you standard operating procedures</span>
+            <span>Done-for-you standard operating procedures for every task</span>
           </div>
         </li>
         <li>
@@ -911,7 +788,7 @@
           </div>
           <div class="text">
             <b>Guest Templates</b>
-            <span>Messages for every situation</span>
+            <span>Pre-written messages for every guest situation</span>
           </div>
         </li>
         <li>
@@ -925,11 +802,11 @@
         </li>
         <li>
           <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <div class="text">
             <b>Automations</b>
-            <span>AI prompts and workflows</span>
+            <span>AI prompts and workflows that run while you sleep</span>
           </div>
         </li>
         <li>
@@ -945,63 +822,98 @@
 
       <div class="cta-row">
         <a class="cta-primary" href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" target="_blank" rel="noopener">
-          Get the Starter Kit →
+          Get the Starter Kit — $49
         </a>
         <a class="cta-secondary" href="#free">
-          Or start with the free 21 prompts
+          Or get the free 21 prompts
         </a>
       </div>
     </div>
 
-    <!-- The desk scene (kit box + laptop + coffee + phone + papers) -->
+    <!-- The desk scene -->
     <div class="hero-visual">
-      <!-- Laptop showing Hostflow brand -->
+      <!-- The laptop -->
       <div class="scene-laptop">
         <div class="scene-screen">
-          <div class="topbar-mini">
-            <div class="brand-mini"><div class="dot-mini"></div> Hostflow</div>
-            <div class="nav-mini">
-              <span>Home</span><span>Solutions</span><span>Pricing</span><span>Resources</span>
+          <div class="laptop-nav">
+            <div class="laptop-brand">
+              <div class="laptop-brand-mark">
+                <svg viewBox="0 0 24 24" fill="white">
+                  <ellipse cx="8" cy="10" rx="3" ry="2.5"/>
+                  <ellipse cx="16" cy="10" rx="3" ry="2.5"/>
+                  <ellipse cx="12" cy="16" rx="4" ry="3"/>
+                </svg>
+              </div>
+              Hostflow
+            </div>
+            <div class="laptop-nav-right">
+              <span>Home</span>
+              <span>Solutions</span>
+              <span>Pricing</span>
             </div>
           </div>
-          <h5>Modern<br>Cohosting for<br>Higher Returns.</h5>
-          <p class="mini-sub">Systems, people, and technology to help you scale your short-term rental business.</p>
-          <div class="hero-img"></div>
+          <h5>Modern Cohosting for<br>Higher Returns.</h5>
+          <p>Systems, people, and technology to help you scale your short-term rental business.</p>
         </div>
       </div>
 
-      <!-- Kit box on the right -->
+      <!-- The kit box -->
       <div class="scene-kit">
-        <div class="kit-logo"></div>
-        <div class="kit-text">
-          CO-HOSTING<br>STARTER<br>KIT
-          <div class="small">TEMPLATES. SYSTEMS.<br>AUTOMATIONS. REAL RESULTS.</div>
+        <div class="kit-logo">
+          <svg viewBox="0 0 24 24" fill="white">
+            <ellipse cx="8" cy="10" rx="3" ry="2.5"/>
+            <ellipse cx="16" cy="10" rx="3" ry="2.5"/>
+            <ellipse cx="12" cy="16" rx="4" ry="3"/>
+          </svg>
         </div>
-        <div class="kit-tag">OPERATE SMARTER.<br>HOST BETTER.</div>
+        <div class="kit-title">Co-Hosting<br>Starter Kit</div>
+        <div class="kit-subtitle">Templates. Systems.<br>Automations. Real<br>Results.</div>
+        <div class="kit-tagline">Operate Smarter.<br>Host Better.</div>
       </div>
 
-      <!-- Coffee mug -->
-      <div class="scene-mug"></div>
-
-      <!-- Phone -->
-      <div class="scene-phone"></div>
+      <!-- The phone (lower right) -->
+      <div class="scene-phone">
+        <div class="scene-phone-screen">
+          Better Systems. Higher Returns.
+        </div>
+      </div>
 
       <!-- Scattered papers -->
-      <div class="scene-paper-1">
-        <div class="title" style="font-size: 9px; font-weight: 700; color: var(--hf-navy); margin-bottom: 6px;">Guest Messaging</div>
-        <div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div>
-        <div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div>
+      <div class="scene-paper left">
+        <div class="line title"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
       </div>
-      <div class="scene-paper-2">
-        <div class="title" style="font-size: 9px; font-weight: 700; color: var(--hf-navy); margin-bottom: 6px;">Turnover Checklist</div>
-        <div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div>
-        <div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div>
+      <div class="scene-paper middle">
+        <div class="line title"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
+      </div>
+      <div class="scene-paper right">
+        <div class="line title"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
+        <div class="line medium"></div>
+        <div class="line short"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== STAT STRIP (4 stats + CTA) ===== -->
+<!-- ===== STAT STRIP ===== -->
 <div class="stat-strip">
   <div class="stat-strip-inner">
     <div class="stat">
@@ -1019,7 +931,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
       </div>
       <div class="text">
-        <span class="top">Increase Revenue</span>
+        <span class="top">Increase revenue</span>
         <span class="bot">Optimized systems</span>
       </div>
     </div>
@@ -1029,7 +941,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </div>
       <div class="text">
-        <span class="top">Reduce Stress</span>
+        <span class="top">Reduce stress</span>
         <span class="bot">Clear processes</span>
       </div>
     </div>
@@ -1039,19 +951,14 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
       <div class="text">
-        <span class="top">Scale Faster</span>
+        <span class="top">Scale faster</span>
         <span class="bot">Built by real operators</span>
       </div>
-    </div>
-    <div class="cta">
-      <a class="cta-primary" href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" target="_blank" rel="noopener">
-        Get the Starter Kit →
-      </a>
     </div>
   </div>
 </div>
 
-<!-- ===== THE 10 MODULES ===== -->
+<!-- ===== MODULES ===== -->
 <section class="modules-section">
   <div class="container">
     <div class="section-eyebrow">What's inside</div>
@@ -1147,7 +1054,7 @@
   </div>
 </section>
 
-<!-- ===== FREE PDF SECTION ===== -->
+<!-- ===== FREE PDF ===== -->
 <section class="free-section" id="free">
   <div class="container">
     <div class="free-grid">
@@ -1163,7 +1070,6 @@
 
       <div style="position: relative;">
         <div class="pdf-mock">
-          <div class="pdf-corner">PDF · 14 pages</div>
           <h4>21 AI Prompts Every<br>Airbnb Host Should Have</h4>
           <div class="sub">Prompts for guest messages, pricing, listing audits, owner outreach, and the 2am panic texts.</div>
 
@@ -1209,7 +1115,7 @@
         <a class="pricing-cta" href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" target="_blank" rel="noopener">
           Get the Starter System — $49
         </a>
-        <p style="text-align:center;font-size:12px;color:var(--hf-muted);margin:16px 0 0">30-day refund · No subscription · Yours forever</p>
+        <p style="text-align:center;font-size:12px;color:var(--hf-text-soft);margin:16px 0 0">30-day refund · No subscription · Yours forever</p>
       </div>
     </div>
   </div>
@@ -1220,7 +1126,7 @@
   <div class="container">
     <div class="section-eyebrow" style="display:block; text-align:center;">FAQ</div>
     <h2 class="section-title" style="text-align:center;">Eight things people ask first.</h2>
-    <p style="text-align:center;color:var(--hf-muted);margin:0 auto 48px">If yours isn't here, message us at hostflow.me/contact.</p>
+    <p style="text-align:center;color:var(--hf-text-soft);margin:0 auto 48px">If yours isn't here, message us at hostflow.me/contact.</p>
 
     <div class="faq-grid">
       <details>
