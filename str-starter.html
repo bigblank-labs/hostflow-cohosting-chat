@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HostFlow STR Starter System — Start your cohosting business this weekend</title>
+<meta name="description" content="$49. 10 modules. 50+ SOPs. The contracts I wish I had. Or get the free 21 AI prompts first." />
+<style>
+  :root {
+    --hf-bg: #FFFFFF;
+    --hf-bg-soft: #F7F8FB;
+    --hf-navy: #0B1220;
+    --hf-navy-soft: #16202E;
+    --hf-blue: #3D5AFE;
+    --hf-blue-light: #9BB8FF;
+    --hf-red: #8D2924;
+    --hf-cream: #FFF2F1;
+    --hf-border: #E7EBF0;
+    --hf-text: #0B1220;
+    --hf-muted: #5B6473;
+    --hf-success: #10B981;
+    --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--hf-bg);
+    color: var(--hf-text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* TOP BAR */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--hf-border);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: 18px; color: var(--hf-navy);
+  }
+  .brand-mark {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--hf-blue), var(--hf-blue-light));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 14px;
+  }
+  .topbar-nav { display: flex; gap: 24px; align-items: center; font-size: 14px; }
+  .topbar-nav a { color: var(--hf-muted); text-decoration: none; }
+  .topbar-nav a:hover { color: var(--hf-blue); }
+  /* HERO */
+  .hero {
+    max-width: 920px; margin: 0 auto; padding: 64px 32px 32px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    background: var(--hf-cream);
+    color: var(--hf-red);
+    font-size: 12px; font-weight: 600;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--hf-red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero h1 {
+    font-size: 44px; line-height: 1.1; letter-spacing: -0.02em;
+    margin: 20px 0 16px; color: var(--hf-navy);
+    font-weight: 700;
+  }
+  .hero h1 .accent { color: var(--hf-blue); }
+  .hero .price {
+    font-size: 36px; font-weight: 700;
+    margin: 16px 0;
+    color: var(--hf-navy);
+  }
+  .hero p {
+    font-size: 17px; color: var(--hf-muted);
+    max-width: 640px; margin: 0 auto;
+  }
+  /* CTA buttons */
+  .cta-row {
+    display: flex; gap: 16px; justify-content: center;
+    margin: 32px 0 16px;
+    flex-wrap: wrap;
+  }
+  .cta-primary {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--hf-blue);
+    color: white;
+    border-radius: 10px;
+    font-size: 16px; font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .cta-primary:hover { background: #2B4BFF; }
+  .cta-secondary {
+    display: inline-block;
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--hf-blue);
+    border: 2px solid var(--hf-blue);
+    border-radius: 10px;
+    font-size: 16px; font-weight: 600;
+    text-decoration: none;
+  }
+  .cta-secondary:hover { background: var(--hf-cream); }
+  /* SECTIONS */
+  section { padding: 48px 32px; }
+  section.alt { background: var(--hf-bg-soft); }
+  .container { max-width: 920px; margin: 0 auto; }
+  h2.section-title {
+    font-size: 28px; color: var(--hf-navy);
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .section-sub {
+    color: var(--hf-muted);
+    margin: 0 0 32px;
+    font-size: 16px;
+  }
+  /* MODULES LIST */
+  .modules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .modules { grid-template-columns: 1fr; }
+  }
+  .module-card {
+    padding: 20px 22px;
+    background: white;
+    border: 1px solid var(--hf-border);
+    border-radius: 10px;
+  }
+  .module-card .num {
+    font-size: 11px; font-weight: 700;
+    color: var(--hf-blue);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .module-card h3 {
+    font-size: 16px; margin: 0 0 6px;
+    color: var(--hf-navy);
+  }
+  .module-card p {
+    font-size: 13px; color: var(--hf-muted);
+    margin: 0;
+  }
+  /* FAQ */
+  .faq-grid { display: grid; gap: 12px; }
+  details {
+    padding: 16px 20px;
+    background: white;
+    border: 1px solid var(--hf-border);
+    border-radius: 10px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--hf-navy);
+    font-size: 15px;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after {
+    content: '+';
+    color: var(--hf-blue);
+    font-size: 20px;
+    font-weight: 400;
+  }
+  details[open] summary::after { content: '−'; }
+  details p {
+    color: var(--hf-muted);
+    font-size: 14px;
+    margin: 12px 0 0;
+  }
+  /* FINAL CTA */
+  .final-cta {
+    background: var(--hf-navy);
+    color: white;
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+    margin: 0 32px;
+  }
+  .final-cta h2 { color: white; margin-top: 0; }
+  .final-cta .price {
+    color: white;
+    font-size: 42px;
+  }
+  .final-cta p { color: rgba(255,255,255,0.85); }
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--hf-muted);
+    font-size: 12px;
+  }
+  footer .legal { opacity: 0.7; margin-top: 4px; }
+  /* PROOF BAR */
+  .proof-bar {
+    display: flex; justify-content: center; gap: 32px;
+    padding: 16px 32px;
+    background: var(--hf-bg-soft);
+    border-top: 1px solid var(--hf-border);
+    border-bottom: 1px solid var(--hf-border);
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .proof-bar b { color: var(--hf-navy); display: block; font-size: 16px; }
+  .proof-bar .stat { text-align: center; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">H</div>
+    Hostflow
+  </div>
+  <nav class="topbar-nav">
+    <a href="/co-hosting">Co-hosting</a>
+    <a href="/str-starter" style="color:var(--hf-blue);font-weight:600">Starter System</a>
+    <a href="/mentorship">Mentorship</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="hero-eyebrow">
+    <span class="dot"></span>
+    Available Now
+  </span>
+  <h1>Start your cohosting business <span class="accent">this weekend.</span></h1>
+  <div class="price">$49</div>
+  <p>10 modules. 50+ SOPs. The contracts I wish I had. The 30-day plan to land your first client.</p>
+  <div class="cta-row">
+    <a class="cta-primary" href="#pricing">Get the Starter System — $49</a>
+    <a class="cta-secondary" href="#free">Or get the free 21 AI prompts first →</a>
+  </div>
+</section>
+
+<div class="proof-bar">
+  <div class="stat"><b>FREE</b>21 AI prompts</div>
+  <div class="stat"><b>10</b>modules</div>
+  <div class="stat"><b>50+</b>SOPs</div>
+  <div class="stat"><b>18-clause</b>contract</div>
+  <div class="stat"><b>30-day</b>launch plan</div>
+</div>
+
+<section class="alt">
+  <div class="container">
+    <h2 class="section-title">What's inside the Starter System</h2>
+    <p class="section-sub">A complete operating reference, designed for the first 90 days of your cohosting practice.</p>
+    <div class="modules">
+      <div class="module-card">
+        <div class="num">Module 1</div>
+        <h3>Cohosting 101</h3>
+        <p>What it is. What it isn't. The three fee models. What you actually do day-to-day.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 2</div>
+        <h3>The 30-Day Plan</h3>
+        <p>Week-by-week calendar to land your first cohosting client. The first 30 days are about signing, not perfecting.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 3</div>
+        <h3>Pricing Your Service</h3>
+        <p>The math + four worked examples across urban, cabin, mid-term, and portfolio scenarios.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 4</div>
+        <h3>The Cohost Contract</h3>
+        <p>18-clause template + three fee model variants. Eight clauses you cannot skip.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 5</div>
+        <h3>The Listing Audit</h3>
+        <p>15-point audit for every new client. Run it within 48 hours of the discovery call.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 6</div>
+        <h3>Guest Screening</h3>
+        <p>Four-question pre-approval + 10 industry variants for urban, cabin, beach, FF, and more.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 7</div>
+        <h3>Dynamic Pricing</h3>
+        <p>Manual daily pricing rules + when to switch to software. Day-of-week, seasonality, lead time, occupancy.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 8</div>
+        <h3>The Monthly Statement</h3>
+        <p>What owners see + how to send one. The single biggest retention tool you have.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 9</div>
+        <h3>Owner Outreach</h3>
+        <p>Five email scripts + four channels for finding clients. Listing-mining, real-estate agents, FF, Reddit.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Module 10</div>
+        <h3>Scaling 1-5 Properties</h3>
+        <p>The time-per-property milestones + when to hire your first cleaner, VA, and managing cohost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="section-title">The four questions this answers</h2>
+    <p class="section-sub">If you have been thinking about becoming a cohost — or you're already running a few and wondering how to scale — these are the four questions you actually need answered.</p>
+    <div class="modules">
+      <div class="module-card">
+        <div class="num">Q1</div>
+        <h3>Should I be a cohost?</h3>
+        <p>The honest answer. Who this works for, who it doesn't, and the three fee models that change your answer.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Q2</div>
+        <h3>How do I price my service?</h3>
+        <p>Math, not vibes. Four worked examples show what your percentage should be in different scenarios.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Q3</div>
+        <h3>What do I tell owners?</h3>
+        <p>The 15-point audit and the 18-clause contract — so you walk in with a plan, not a pitch.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Q4</div>
+        <h3>How do I run it day-to-day?</h3>
+        <p>Screening, pricing, monthly statements — the SOPs for the work that compounds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="free">
+  <div class="container">
+    <h2 class="section-title">Or get the free 21 AI prompts first</h2>
+    <p class="section-sub">21 prompts for guest messages, pricing, listing audits, owner outreach, and the 2am panic texts. Use them in Claude, ChatGPT, or any AI assistant.</p>
+    <div class="cta-row" style="margin-top:24px">
+      <a class="cta-primary" href="/free/21-ai-prompts-every-airbnb-host.pdf" target="_blank" rel="noopener">
+        Download the 21 AI Prompts — FREE
+      </a>
+    </div>
+    <p style="margin-top:24px;font-size:13px;color:var(--hf-muted)">
+      The 21 prompts are the front door. The Starter System is the full operating playbook behind them. Start with the prompts if you're new; upgrade to the system once you've signed a client.
+    </p>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <h2 class="section-title">What's in the $49 Starter System</h2>
+    <div class="modules" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="module-card">
+        <div class="num">Format</div>
+        <h3>PDF + downloads</h3>
+        <p>50+ pages. Instant download. Yours forever. Editable templates included.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">What's included</div>
+        <h3>The full system</h3>
+        <p>10 modules, 18-clause contract template, 30-day launch calendar, listing audit, dynamic pricing rules, monthly statement template.</p>
+      </div>
+      <div class="module-card">
+        <div class="num">Price</div>
+        <h3>$49 once</h3>
+        <p>No subscription. No upsells in the PDF. The next step up is the $1,000 mentorship cohort — opt-in only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <h2 class="section-title">Frequently asked questions</h2>
+    <p class="section-sub">Eight things people ask before they buy.</p>
+    <div class="faq-grid">
+      <details>
+        <summary>Is this for someone who has never cohosted before?</summary>
+        <p>Yes. Module 1 is the operating definition (what cohosting is, what it isn't). Module 2 is the 30-day plan. Module 4 is the contract. The whole PDF is designed for the first 90 days.</p>
+      </details>
+      <details>
+        <summary>What if I'm already managing a few properties?</summary>
+        <p>Modules 4, 7, 8, 10 are where you'll spend most of your time. The contract template, dynamic pricing rules, monthly statement template, and the scaling milestones are calibrated for someone already running a portfolio.</p>
+      </details>
+      <details>
+        <summary>How is this different from a $2-3k mentorship?</summary>
+        <p>It isn't. A mentorship gets you live coaching, accountability, and case reviews. This PDF gets you the operating reference. Many people who buy the Starter System later graduate to the $1,000 mentorship for the cohort experience — designed to be a stepping stone, not a replacement.</p>
+      </details>
+      <details>
+        <summary>What's the refund policy?</summary>
+        <p>30-day no-questions-asked refund. If the PDF doesn't earn its keep in your first month, email us and we'll refund.</p>
+      </details>
+      <details>
+        <summary>When should I upgrade to the $1,000 mentorship?</summary>
+        <p>When you have 3+ active properties and the bottleneck is no longer "what should I do" but "how do I get unstuck on this specific situation." The mentorship cohort runs for 6 weeks with weekly calls — designed for operators who are running, not for people who are planning.</p>
+      </details>
+      <details>
+        <summary>Do you offer a discount?</summary>
+        <p>Only as a launch promotion for the first 14 days after release. The price will be $49 for those 14 days, then $59 after that.</p>
+      </details>
+      <details>
+        <summary>Is this PDF updated?</summary>
+        <p>Yes. Buyers get all future updates for free via email when the PDF changes materially. We update once or twice a year as the STR / cohosting market shifts.</p>
+      </details>
+      <details>
+        <summary>What if I have a question while reading?</summary>
+        <p>Email hostflow.me/contact and we'll respond within 24 hours. The Starter System is not a mentorship, but we don't leave buyers hanging either.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="final-cta">
+    <h2 class="section-title">The 30-day plan starts when you click.</h2>
+    <div class="price">$49</div>
+    <p>10 modules. 50+ SOPs. The 18-clause contract. The 30-day launch calendar. PDF + downloadable templates. Instant delivery.</p>
+    <div class="cta-row" style="margin-top:24px">
+      <a class="cta-primary" href="https://buy.stripe.com/test_PLACEHOLDER_STARTER_49" target="_blank" rel="noopener">
+        Get the Starter System — $49
+      </a>
+    </div>
+    <p style="margin-top:16px;font-size:13px">
+      Or get the free 21 AI prompts first — <a href="/free/21-ai-prompts-every-airbnb-host.pdf" style="color:var(--hf-blue-light)">download here</a>.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div>Hostflow — cohosting done right. Snow Studio operating system.</div>
+  <div class="legal">Cohosting is work. No income guarantees. Results depend on your market, your listings, and your effort.</div>
+</footer>
+
+</body>
+</html>
