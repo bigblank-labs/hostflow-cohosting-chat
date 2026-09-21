@@ -69,7 +69,7 @@ body::before {
   padding: 0.65rem 1rem 0.65rem 1.25rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.6rem;
   font-size: 14px;
   transition: all 600ms var(--ease);
   box-shadow: 0 1px 2px rgba(15, 17, 21, 0.04), 0 12px 32px rgba(15, 17, 21, 0.06);
@@ -100,7 +100,7 @@ body::before {
 .nav-logo::before { width: 14px; height: 14px; left: 4px; top: 4px; }
 .nav-logo::after { width: 9px; height: 9px; left: 12px; top: 12px; }
 .nav-links { display: flex; gap: 1.5rem; }
-.nav-links a {
+a[href^="#"] { white-space: nowrap; } .nav-links a {
   color: var(--ink-soft);
   text-decoration: none;
   font-weight: 500;
@@ -119,7 +119,7 @@ body::before {
   transform: translateX(-50%);
 }
 .nav-links a:hover::after { width: 100%; }
-.nav-cta {
+.nav-cta { white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -155,7 +155,7 @@ body::before {
   .nav { padding: 0.55rem 0.75rem 0.55rem 1rem; gap: 0.75rem; }
   .nav-links { display: none; }
   .nav-toggle { display: block; }
-  .nav-cta { padding: 0.5rem 0.85rem; font-size: 13px; }
+  .nav-cta { white-space: nowrap; padding: 0.5rem 0.85rem; font-size: 13px; }
 }
 
 /* HERO */
@@ -285,7 +285,7 @@ body::before {
 .btn-secondary:hover .btn-arrow { background: rgba(15, 17, 21, 0.12); }
 .hero-meta {
   display: flex;
-  gap: 2rem;
+  gap: 1.6rem;
   padding-top: 2rem;
   border-top: 1px solid var(--line-soft);
   flex-wrap: wrap;
@@ -1174,8 +1174,8 @@ body::before {
     HostFlow
   </a>
   <div class="nav-links">
-    <a href="#system">What's inside</a>
-    <a href="#how">How it works</a>
+    <a href="#system">System</a>
+    <a href="#how">Process</a>
     <a href="#proof">Results</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
@@ -1184,7 +1184,7 @@ body::before {
     <span></span><span></span><span></span>
   </button>
   <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="nav-cta">
-    Get the Kit — $49
+    Get Kit — $49
     <span class="nav-cta-arrow">↗</span>
   </a>
 </nav>
@@ -1204,7 +1204,7 @@ body::before {
     </p>
     <div class="hero-ctas">
       <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary">
-        Get the Co-Host Kit — $49
+        Get the Kit — $49
         <span class="btn-arrow">↗</span>
       </a>
       <a href="#system" class="btn btn-secondary">
@@ -1489,7 +1489,7 @@ body::before {
       <li><span class="pricing-check">✓</span> 21-term STR glossary for the new operator</li>
     </ul>
     <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary pricing-cta">
-      Get the Kit — $49
+      Get Kit — $49
       <span class="btn-arrow">↗</span>
     </a>
     <div class="pricing-trust">
@@ -1562,7 +1562,7 @@ body::before {
     <p class="final-cta-sub reveal">$49 is the price of a domain renewal. The Kit is the operating reference for the rest of your cohosting practice. First client pays for itself in week 2.</p>
     <div class="reveal">
       <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary pricing-cta" style="width: auto; padding: 1.15rem 2rem; font-size: 16px;">
-        Get the Co-Host Kit — $49
+        Get the Kit — $49
         <span class="btn-arrow">↗</span>
       </a>
     </div>
@@ -1581,8 +1581,8 @@ body::before {
       <div class="footer-col">
         <div class="footer-col-title">Product</div>
         <ul>
-          <li><a href="#system">What's inside</a></li>
-          <li><a href="#how">How it works</a></li>
+          <li><a href="#system">System</a></li>
+          <li><a href="#how">Process</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
