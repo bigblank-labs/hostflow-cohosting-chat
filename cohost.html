@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HostFlow — Charge for what you already know</title>
+<meta name="description" content="The cohosting operating kit for creators. Templates, scripts, math. $49 once.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF8F2;
+  --ink: #0E0F12;
+  --muted: #6B6F78;
+  --soft: #E8E4D8;
+  --accent: #B94A2C;
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Inter', -apple-system, sans-serif;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: var(--body); font-size: 15px; line-height: 1.5; color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
+  z-index: 50;
+  background: rgba(250, 248, 242, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(14, 15, 18, 0.07);
+  border-radius: 999px;
+  padding: 0.55rem 0.65rem 0.55rem 1.1rem;
+  display: flex; align-items: center; gap: 1.25rem;
+  font-size: 13.5px;
+  box-shadow: 0 2px 8px rgba(14, 15, 18, 0.04);
+}
+.nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 14.5px; letter-spacing: -0.01em; text-decoration: none; color: var(--ink); }
+.nav-logo { width: 24px; height: 24px; background: var(--ink); border-radius: 7px; display: grid; place-items: center; position: relative; overflow: hidden; }
+.nav-logo::before, .nav-logo::after { content: ''; position: absolute; background: var(--bg); border-radius: 50%; }
+.nav-logo::before { width: 12px; height: 12px; left: 3px; top: 3px; }
+.nav-logo::after { width: 7px; height: 7px; left: 10px; top: 10px; }
+.nav-cta { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--ink); color: var(--bg); padding: 0.5rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 13px; text-decoration: none; transition: all 400ms var(--ease); white-space: nowrap; }
+.nav-cta:hover { transform: scale(1.03); }
+.nav-cta-arrow { width: 16px; height: 16px; border-radius: 50%; background: rgba(250, 248, 242, 0.16); display: grid; place-items: center; font-size: 9px; }
+@media (max-width: 720px) { .nav-brand span { display: none; } }
+
+/* HERO — one screen */
+.hero {
+  min-height: 100dvh;
+  padding: 8rem 1.5rem 3rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); font-weight: 600;
+  margin-bottom: 1.75rem;
+  width: fit-content;
+}
+.hero-tag-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  max-width: 22ch;
+}
+.hero-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.hero-sub {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-bottom: 2.25rem;
+  max-width: 50ch;
+}
+.hero-ctas { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 4rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.85rem 1.35rem; border-radius: 999px;
+  font-weight: 600; font-size: 14.5px; text-decoration: none;
+  transition: all 400ms var(--ease);
+  border: none; cursor: pointer; font-family: inherit;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { transform: scale(1.03); }
+.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--soft); }
+.btn-secondary:hover { background: white; border-color: var(--ink); }
+.btn-arrow { width: 20px; height: 20px; border-radius: 50%; background: rgba(250, 248, 242, 0.15); display: grid; place-items: center; font-size: 10px; }
+.btn-secondary .btn-arrow { background: rgba(14, 15, 18, 0.06); }
+.btn:hover .btn-arrow { transform: translateX(2px) translateY(-2px); }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--soft);
+  max-width: 720px;
+}
+.hero-stat { display: flex; flex-direction: column; gap: 0.2rem; }
+.hero-stat-num { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
+.hero-stat-num em { font-style: italic; color: var(--accent); }
+.hero-stat-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); font-weight: 600; }
+@media (max-width: 720px) {
+  .hero { padding-top: 6rem; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+
+/* SECTION 2 — Opportunity */
+.opportunity {
+  background: var(--ink);
+  color: white;
+  padding: 6rem 1.5rem;
+}
+.opportunity-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: center;
+}
+.opp-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 1.25rem; }
+.opp-title { font-family: var(--display); font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.05; letter-spacing: -0.025em; font-weight: 500; }
+.opp-title em { font-style: italic; color: var(--accent); }
+.opp-body { font-size: 16px; line-height: 1.6; color: rgba(255, 255, 255, 0.7); margin-top: 1.25rem; max-width: 36ch; }
+.opp-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; max-width: 36ch; }
+.opp-stat-box { border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 1.25rem; }
+.opp-stat-num { font-family: var(--display); font-size: 32px; font-weight: 600; color: var(--accent); letter-spacing: -0.02em; }
+.opp-stat-num em { font-style: italic; }
+.opp-stat-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.5); margin-top: 0.25rem; }
+@media (max-width: 720px) {
+  .opportunity-inner { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* SECTION 3 — Value */
+.value { padding: 6rem 1.5rem; }
+.value-inner { max-width: 1080px; margin: 0 auto; }
+.value-head { text-align: center; margin-bottom: 3.5rem; }
+.value-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(185, 74, 44, 0.08); color: var(--accent); padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; border: 1px solid rgba(185, 74, 44, 0.16); margin-bottom: 1.5rem; }
+.value-title { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; line-height: 1.05; letter-spacing: -0.025em; max-width: 24ch; margin: 0 auto; }
+.value-title em { font-style: italic; color: var(--accent); }
+.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.value-item {
+  background: white;
+  border: 1px solid var(--soft);
+  border-radius: 18px;
+  padding: 1.5rem;
+  transition: all 400ms var(--ease);
+}
+.value-item:hover { border-color: var(--ink); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(14, 15, 18, 0.06); }
+.value-num { font-family: var(--display); font-size: 14px; font-style: italic; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
+.value-name { font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.15; }
+.value-desc { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+@media (max-width: 720px) { .value-grid { grid-template-columns: 1fr; } }
+
+/* CLOSE */
+.close {
+  background: var(--bg);
+  padding: 6rem 1.5rem 4rem;
+  border-top: 1px solid var(--soft);
+}
+.close-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+.close-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(14, 15, 18, 0.05); color: var(--ink); padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 1.5rem; }
+.close-title { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; letter-spacing: -0.03em; font-weight: 500; margin-bottom: 1rem; }
+.close-title em { font-style: italic; color: var(--accent); }
+.close-body { font-size: 16px; color: var(--muted); line-height: 1.5; margin-bottom: 2.25rem; max-width: 44ch; margin-left: auto; margin-right: auto; }
+.close-price { display: inline-flex; align-items: baseline; gap: 0.4rem; margin-bottom: 1.75rem; }
+.close-price-currency { font-family: var(--display); font-size: 20px; color: var(--muted); }
+.close-price-amount { font-family: var(--display); font-size: 56px; font-weight: 600; letter-spacing: -0.03em; color: var(--ink); line-height: 0.9; }
+.close-price-amount em { font-style: italic; color: var(--accent); }
+.close-price-period { font-size: 14px; color: var(--muted); }
+.close-trust { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; font-size: 11.5px; color: var(--muted); flex-wrap: wrap; }
+
+/* FOOTER */
+.footer { padding: 2rem 1.5rem; text-align: center; font-size: 12px; color: var(--muted); border-top: 1px solid var(--soft); }
+.footer em { font-style: italic; color: var(--accent); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-brand">
+    <span class="nav-logo"></span>
+    <span>HostFlow</span>
+  </a>
+  <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="nav-cta">
+    Get Kit · $49
+    <span class="nav-cta-arrow">↗</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-tag">
+    <span class="hero-tag-dot"></span>
+    For creators who already run STRs
+  </div>
+  <h1 class="hero-title">
+    Charge for what you <em>already know.</em>
+  </h1>
+  <p class="hero-sub">
+    You already run short-term rentals. The Cohost Kit turns that into a paid practice — templates, scripts, and pricing math that land your first paying owner in 30 days.
+  </p>
+  <div class="hero-ctas">
+    <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary">
+      Get the Kit — $49
+      <span class="btn-arrow">↗</span>
+    </a>
+    <a href="#opportunity" class="btn btn-secondary">
+      See what's inside
+      <span class="btn-arrow">↓</span>
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num"><em>54</em>pp</div>
+      <div class="hero-stat-label">Operating reference</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num"><em>10</em></div>
+      <div class="hero-stat-label">Copy-paste deliverables</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$<em>49</em></div>
+      <div class="hero-stat-label">One payment · yours forever</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num"><em>30</em> days</div>
+      <div class="hero-stat-label">To first paying client</div>
+    </div>
+  </div>
+</header>
+
+<!-- OPPORTUNITY -->
+<section id="opportunity" class="opportunity">
+  <div class="opportunity-inner">
+    <div>
+      <div class="opp-eyebrow">The Opportunity</div>
+      <h2 class="opp-title">Creators who run STRs are sitting on a <em>$400/month</em> income stream they aren't charging for.</h2>
+    </div>
+    <div>
+      <p class="opp-body">
+        You already price, screen, clean-turn, and statement your own listing. Other hosts need exactly that — done for them — and they'll pay 20-30% of every booking for it. One signed cohost engagement covers the cost of the Kit inside two weeks.
+      </p>
+      <div class="opp-stat-row">
+        <div class="opp-stat-box">
+          <div class="opp-stat-num"><em>25%</em></div>
+          <div class="opp-stat-lbl">Cohost fee per booking</div>
+        </div>
+        <div class="opp-stat-box">
+          <div class="opp-stat-num"><em>$1,250</em></div>
+          <div class="opp-stat-lbl">Avg first-month fee</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE -->
+<section class="value">
+  <div class="value-inner">
+    <div class="value-head">
+      <div class="value-eyebrow">What you get</div>
+      <h2 class="value-title">10 deliverables. <em>All copy-paste ready.</em></h2>
+    </div>
+    <div class="value-grid">
+      <div class="value-item">
+        <div class="value-num">/01</div>
+        <div class="value-name">18-clause cohost agreement</div>
+        <div class="value-desc">A real, fully-filled contract (Sarah M. × Snow Studio LLC, every clause) plus the bracketed template.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">/02</div>
+        <div class="value-name">Discovery call script</div>
+        <div class="value-desc">20-min structure, 4 objection handlers, the 15-point audit scorecard filled in on every call.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">/03</div>
+        <div class="value-name">30-day plan, day-by-day</div>
+        <div class="value-desc">Positioning brief, prospect list, outreach scripts, follow-up cadence — every task, every day.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">/04</div>
+        <div class="value-name">13 guest message templates</div>
+        <div class="value-desc">Inquiry, booking, pre-arrival, day-of, mid-stay, checkout, thank-you, review, decline, party-decline.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">/05</div>
+        <div class="value-name">Outreach scripts × 5 channels</div>
+        <div class="value-desc">Cold email, follow-up, agent referral, Furnished Finder DM, Reddit, SMS, voicemail. Plus a closed 4-touch sequence.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">/06</div>
+        <div class="value-name">Pricing calculator</div>
+        <div class="value-desc">5-step comp-set methodology, the 4 adjustments, worked 30-night example (+23% revenue).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="close-inner">
+    <div class="close-eyebrow">Get the Kit</div>
+    <h2 class="close-title">$49. <em>Once.</em> Yours forever.</h2>
+    <p class="close-body">Stripe checkout. Instant PDF download. Free updates to v8, v9, v10 as they ship.</p>
+    <div class="close-price">
+      <span class="close-price-currency">$</span>
+      <span class="close-price-amount"><em>49</em></span>
+      <span class="close-price-period">one-time</span>
+    </div>
+    <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary" style="padding: 1rem 1.75rem; font-size: 16px;">
+      Get the Kit — $49
+      <span class="btn-arrow">↗</span>
+    </a>
+    <div class="close-trust">
+      <span>✓ Instant download</span>
+      <span>✓ Stripe checkout</span>
+      <span>✓ 7-day refund</span>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  © 2026 Hostflow · A Snow Studio venture · <em>Operate smarter. Host better.</em>
+</footer>
+
+</body>
+</html>
