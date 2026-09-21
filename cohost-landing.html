@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HostFlow — Turn Your Hosting Knowledge Into a Cohosting Income</title>
+<meta name="description" content="The cohosting operating system for creators. Templates, scripts, and systems to land your first paying owner in 30 days.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF9F6;
+  --bg-2: #F4F2EC;
+  --cream: #FFF8F1;
+  --cream-soft: #FBEFE5;
+  --ink: #0F1115;
+  --ink-soft: #2A2D35;
+  --muted: #6B6F78;
+  --line: #1A1B1F;
+  --line-soft: #E5E1D8;
+  --accent: #C9543A;
+  --accent-soft: #E89179;
+  --sage: #5C7060;
+  --gold: #B8924B;
+  --display: 'Fraunces', 'Times New Roman', serif;
+  --body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Film grain overlay — fixed, not scrolling */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  background: rgba(255, 250, 245, 0.72);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(15, 17, 21, 0.08);
+  border-radius: 999px;
+  padding: 0.65rem 1rem 0.65rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 14px;
+  transition: all 600ms var(--ease);
+  box-shadow: 0 1px 2px rgba(15, 17, 21, 0.04), 0 12px 32px rgba(15, 17, 21, 0.06);
+}
+.nav:hover { box-shadow: 0 2px 4px rgba(15, 17, 21, 0.06), 0 20px 48px rgba(15, 17, 21, 0.08); }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+}
+.nav-logo {
+  width: 28px; height: 28px;
+  background: var(--ink);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.nav-logo::before, .nav-logo::after {
+  content: ''; position: absolute;
+  background: var(--cream);
+  border-radius: 50%;
+}
+.nav-logo::before { width: 14px; height: 14px; left: 4px; top: 4px; }
+.nav-logo::after { width: 9px; height: 9px; left: 12px; top: 12px; }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 250ms var(--ease);
+  position: relative;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: -4px;
+  width: 0; height: 1.5px;
+  background: var(--ink);
+  transition: width 400ms var(--ease);
+  transform: translateX(-50%);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13.5px;
+  text-decoration: none;
+  transition: all 500ms var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.nav-cta:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(15, 17, 21, 0.18); }
+.nav-cta-arrow {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 248, 245, 0.18);
+  display: grid; place-items: center;
+  font-size: 10px;
+  transition: all 500ms var(--ease);
+}
+.nav-cta:hover .nav-cta-arrow { transform: translateX(2px) translateY(-2px); background: rgba(255, 248, 245, 0.32); }
+
+/* MOBILE NAV */
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0; }
+.nav-toggle span { display: block; width: 18px; height: 1.5px; background: var(--ink); margin: 4px 0; transition: all 350ms var(--ease); }
+.nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+@media (max-width: 880px) {
+  .nav { padding: 0.55rem 0.75rem 0.55rem 1rem; gap: 0.75rem; }
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-cta { padding: 0.5rem 0.85rem; font-size: 13px; }
+}
+
+/* HERO */
+.hero {
+  min-height: 100dvh;
+  padding: 9rem 2rem 6rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -10%; right: -10%;
+  width: 60%; height: 60%;
+  background: radial-gradient(circle, rgba(201, 84, 58, 0.08), transparent 60%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 17, 21, 0.04);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(15, 17, 21, 0.06);
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 5.5vw, 5.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.hero-title-rotator {
+  position: relative;
+  display: inline-block;
+  color: var(--accent);
+}
+.hero-title-rotator::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0.05em;
+  height: 0.5px;
+  background: currentColor;
+  opacity: 0.5;
+}
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 2.5rem;
+  max-width: 38rem;
+  font-weight: 400;
+}
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.95rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 500ms var(--ease);
+  position: relative;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--cream);
+}
+.btn-primary:hover { transform: scale(1.025); box-shadow: 0 12px 32px rgba(15, 17, 21, 0.18); }
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line-soft);
+}
+.btn-secondary:hover { background: var(--cream); border-color: var(--ink); }
+.btn-arrow {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 248, 245, 0.15);
+  display: grid; place-items: center;
+  font-size: 11px;
+  transition: all 500ms var(--ease);
+}
+.btn-primary .btn-arrow { background: rgba(255, 248, 245, 0.18); }
+.btn-secondary .btn-arrow { background: rgba(15, 17, 21, 0.05); }
+.btn:hover .btn-arrow { transform: translateX(2px) translateY(-2px); background: rgba(255, 248, 245, 0.32); }
+.btn-secondary:hover .btn-arrow { background: rgba(15, 17, 21, 0.12); }
+.hero-meta {
+  display: flex;
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line-soft);
+  flex-wrap: wrap;
+}
+.hero-meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.hero-meta-num {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.hero-meta-num em { font-style: italic; color: var(--accent); }
+.hero-meta-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* HERO VISUAL — the desk scene */
+.hero-visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #C9543A 0%, #B8924B 50%, #5C7060 100%);
+  box-shadow: 0 30px 80px rgba(15, 17, 21, 0.18), 0 4px 12px rgba(15, 17, 21, 0.08);
+  padding: 8px;
+}
+.hero-visual-inner {
+  width: 100%; height: 100%;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #FFF8F1 0%, #FBEFE5 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+.hv-laptop {
+  position: absolute;
+  left: 10%; top: 18%;
+  width: 75%;
+  height: 52%;
+  background: #1A1B1F;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 20px 40px rgba(15, 17, 21, 0.25);
+}
+.hv-laptop-screen {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #FAF9F6 0%, #FFFFFF 100%);
+  border-radius: 6px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+.hv-screen-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hv-screen-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-soft); }
+.hv-screen-dot.red { background: var(--accent); }
+.hv-screen-dot.yellow { background: #E89179; }
+.hv-screen-dot.green { background: #5C7060; }
+.hv-screen-url {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--muted);
+  margin-left: 6px;
+}
+.hv-screen-h {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.hv-screen-sub {
+  font-size: 7px;
+  color: var(--muted);
+  line-height: 1.3;
+}
+.hv-screen-stat {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.hv-screen-stat-box {
+  flex: 1;
+  background: var(--cream-soft);
+  border-radius: 6px;
+  padding: 6px;
+  border: 1px solid rgba(15, 17, 21, 0.04);
+}
+.hv-stat-num {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.hv-stat-lbl {
+  font-size: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-top: 1px;
+}
+.hv-laptop-base {
+  position: absolute;
+  bottom: -8px; left: -8%; right: -8%;
+  height: 8px;
+  background: linear-gradient(180deg, #2A2D35, #0F1115);
+  border-radius: 0 0 14px 14px;
+}
+.hv-kitbox {
+  position: absolute;
+  left: 8%;
+  bottom: 14%;
+  width: 38%;
+  height: 26%;
+  background: linear-gradient(160deg, #1A1B1F 0%, #0F1115 100%);
+  border-radius: 10px;
+  padding: 12px 10px;
+  color: white;
+  box-shadow: 0 16px 32px rgba(15, 17, 21, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: rotate(-3deg);
+}
+.hv-kitbox-logo {
+  width: 18px; height: 18px;
+  background: var(--accent);
+  border-radius: 5px;
+  display: grid; place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.hv-kitbox-logo::before, .hv-kitbox-logo::after {
+  content: ''; position: absolute;
+  background: var(--cream); border-radius: 50%;
+}
+.hv-kitbox-logo::before { width: 10px; height: 10px; left: 2px; top: 2px; }
+.hv-kitbox-logo::after { width: 5px; height: 5px; left: 8px; top: 8px; }
+.hv-kitbox-title {
+  font-family: var(--display);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin-top: 6px;
+}
+.hv-kitbox-sub {
+  font-size: 6px;
+  color: rgba(255, 248, 245, 0.6);
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+  line-height: 1.3;
+}
+.hv-kitbox-tag {
+  font-family: var(--mono);
+  font-size: 6px;
+  color: var(--accent-soft);
+  letter-spacing: 0.04em;
+}
+.hv-phone {
+  position: absolute;
+  right: 8%;
+  bottom: 12%;
+  width: 20%;
+  height: 28%;
+  background: linear-gradient(160deg, #1A1B1F, #0F1115);
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: 0 12px 28px rgba(15, 17, 21, 0.28);
+  transform: rotate(4deg);
+}
+.hv-phone-screen {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #FFF8F1, #FBEFE5);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 4px;
+  justify-content: space-between;
+}
+.hv-phone-stat {
+  font-family: var(--display);
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-top: 4px;
+}
+.hv-phone-stat em { font-style: italic; color: var(--accent); }
+.hv-phone-sub {
+  font-size: 5px;
+  color: var(--muted);
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+.hv-paper {
+  position: absolute;
+  width: 28%;
+  height: 18%;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 6px 14px rgba(15, 17, 21, 0.12);
+  border: 1px solid var(--line-soft);
+  padding: 8px 6px;
+}
+.hv-paper::before, .hv-paper::after {
+  content: ''; display: block;
+  height: 1px;
+  background: var(--line-soft);
+  margin: 3px 0;
+}
+.hv-paper-1 { left: 4%; bottom: 22%; transform: rotate(-6deg); }
+.hv-paper-2 { right: 38%; bottom: 8%; transform: rotate(2deg); }
+
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 3rem; }
+  .hero-visual { aspect-ratio: 5 / 4; max-width: 32rem; margin: 0 auto; width: 100%; }
+}
+
+/* LOGO STRIP */
+.logos {
+  padding: 3rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+.logos-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+.logos-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.logo-item {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  opacity: 0.7;
+  transition: opacity 400ms var(--ease);
+}
+.logo-item:hover { opacity: 1; color: var(--ink); }
+@media (max-width: 768px) {
+  .logos-row { gap: 1.5rem; justify-content: center; }
+  .logo-item { font-size: 16px; }
+}
+
+/* SECTION HEADER */
+.section {
+  padding: 8rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.section-head {
+  max-width: 56rem;
+  margin: 0 auto 5rem;
+  text-align: center;
+}
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(201, 84, 58, 0.08);
+  color: var(--accent);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(201, 84, 58, 0.16);
+}
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-sub {
+  font-size: 17px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 44rem;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* THE PROBLEM */
+.problem {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 8rem 2rem;
+}
+.problem .section { padding: 0; max-width: 1280px; margin: 0 auto; }
+.problem .section-head { text-align: left; margin: 0 0 4rem; }
+.problem .section-title { color: var(--cream); }
+.problem .section-sub { color: rgba(255, 248, 245, 0.72); margin: 0; }
+.problem .section-eyebrow { background: rgba(255, 248, 245, 0.1); color: var(--accent-soft); border-color: rgba(255, 248, 245, 0.15); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.problem-card {
+  background: rgba(255, 248, 245, 0.04);
+  border: 1px solid rgba(255, 248, 245, 0.1);
+  border-radius: 20px;
+  padding: 1.5rem;
+  transition: all 600ms var(--ease);
+}
+.problem-card:hover { background: rgba(255, 248, 245, 0.07); border-color: rgba(255, 248, 245, 0.2); transform: translateY(-3px); }
+.problem-card-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent-soft);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+.problem-card-title {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+  color: var(--cream);
+}
+.problem-card-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 248, 245, 0.65);
+}
+@media (max-width: 880px) {
+  .problem-grid { grid-template-columns: 1fr; }
+}
+
+/* WHAT YOU GET — bento grid */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: 1rem;
+}
+.bento-item {
+  background: white;
+  border: 1px solid var(--line-soft);
+  border-radius: 24px;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 600ms var(--ease);
+}
+.bento-item:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 24px 48px rgba(15, 17, 21, 0.08);
+}
+.bento-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--cream);
+  border: 1px solid var(--line-soft);
+  display: grid; place-items: center;
+  margin-bottom: 1.25rem;
+  color: var(--accent);
+}
+.bento-title {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+}
+.bento-title em { font-style: italic; color: var(--accent); }
+.bento-body {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.bento-meta {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.bento-1 { grid-column: span 4; grid-row: span 2; }
+.bento-2 { grid-column: span 2; grid-row: span 1; }
+.bento-3 { grid-column: span 2; grid-row: span 1; }
+.bento-4 { grid-column: span 3; grid-row: span 2; }
+.bento-5 { grid-column: span 3; grid-row: span 2; }
+.bento-6 { grid-column: span 2; grid-row: span 1; }
+.bento-7 { grid-column: span 2; grid-row: span 1; }
+.bento-8 { grid-column: span 2; grid-row: span 1; }
+
+@media (max-width: 980px) {
+  .bento { grid-template-columns: 1fr; }
+  .bento-1, .bento-2, .bento-3, .bento-4, .bento-5, .bento-6, .bento-7, .bento-8 { grid-column: span 1; grid-row: auto; }
+}
+
+/* HOW IT WORKS — 3-step */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+.step {
+  position: relative;
+  padding: 2rem 0;
+}
+.step-num {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.step-num::after {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: var(--accent);
+}
+.step-title {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  line-height: 1.05;
+}
+.step-body {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+@media (max-width: 880px) { .steps { grid-template-columns: 1fr; } }
+
+/* TESTIMONIAL — pull-quote with metadata */
+.testimonial {
+  background: var(--cream-soft);
+  padding: 8rem 2rem;
+}
+.testimonial-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.quote-mark {
+  font-family: var(--display);
+  font-size: 100px;
+  line-height: 0.8;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  height: 60px;
+}
+.testimonial-quote {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-style: italic;
+}
+.testimonial-quote em { color: var(--accent); font-weight: 500; }
+.testimonial-attr {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.testimonial-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  display: grid; place-items: center;
+  color: white;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 22px;
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(15, 17, 21, 0.1);
+}
+.testimonial-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+}
+.testimonial-role {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.testimonial-stats {
+  background: white;
+  border: 1px solid var(--line-soft);
+  border-radius: 24px;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(15, 17, 21, 0.04);
+}
+.testimonial-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.testimonial-stat:last-child { border-bottom: none; }
+.testimonial-stat-num {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  min-width: 100px;
+}
+.testimonial-stat-num em { font-style: italic; }
+.testimonial-stat-label {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+@media (max-width: 880px) { .testimonial-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* PRICING */
+.pricing-card {
+  max-width: 540px;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid var(--ink);
+  border-radius: 28px;
+  padding: 3rem;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(15, 17, 21, 0.18);
+  background: linear-gradient(180deg, #FFF8F1 0%, #FFFFFF 30%);
+}
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 28px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 50%, var(--sage) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.pricing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.pricing-name {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.pricing-name em { font-style: italic; color: var(--accent); }
+.pricing-tagline {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+}
+.pricing-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.pricing-currency {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.pricing-price {
+  font-family: var(--display);
+  font-size: 80px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+.pricing-price em { font-style: italic; color: var(--accent); }
+.pricing-period {
+  font-size: 16px;
+  color: var(--muted);
+}
+.pricing-detail {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+.pricing-list {
+  list-style: none;
+  margin-bottom: 2.5rem;
+}
+.pricing-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.65rem 0;
+  font-size: 14.5px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-soft);
+}
+.pricing-list li:last-child { border-bottom: none; }
+.pricing-check {
+  width: 22px; height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: grid; place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.pricing-cta {
+  width: 100%;
+  justify-content: center;
+  padding: 1.1rem 1.5rem;
+  font-size: 16px;
+}
+.pricing-trust {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 12px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+.pricing-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* FAQ */
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid var(--line-soft);
+  padding: 1.25rem 0;
+}
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 300ms var(--ease);
+  font-family: var(--display), var(--body);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  font-size: 19px;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1px solid var(--line-soft);
+  display: grid; place-items: center;
+  font-size: 14px;
+  transition: all 400ms var(--ease);
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 500ms var(--ease);
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.faq-item.open .faq-a { max-height: 500px; padding-top: 1rem; }
+
+/* FINAL CTA */
+.final-cta {
+  background: var(--ink);
+  padding: 8rem 2rem;
+  text-align: center;
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.final-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(201, 84, 58, 0.18), transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(184, 146, 75, 0.12), transparent 50%);
+  pointer-events: none;
+}
+.final-cta-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  position: relative;
+}
+.final-cta .section-eyebrow { background: rgba(255, 248, 245, 0.1); color: var(--accent-soft); border-color: rgba(255, 248, 245, 0.15); }
+.final-cta-title {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  color: var(--cream);
+}
+.final-cta-title em { font-style: italic; color: var(--accent-soft); }
+.final-cta-sub {
+  font-size: 17px;
+  color: rgba(255, 248, 245, 0.7);
+  margin-bottom: 2.5rem;
+  line-height: 1.55;
+}
+.final-cta .btn-primary { background: var(--cream); color: var(--ink); }
+.final-cta .btn-primary:hover { background: white; box-shadow: 0 12px 32px rgba(255, 248, 245, 0.25); }
+.final-cta .btn-primary .btn-arrow { background: rgba(15, 17, 21, 0.1); }
+.final-cta .btn-primary:hover .btn-arrow { background: rgba(15, 17, 21, 0.2); }
+
+/* FOOTER */
+.footer {
+  background: var(--ink);
+  color: rgba(255, 248, 245, 0.5);
+  padding: 5rem 2rem 2.5rem;
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255, 248, 245, 0.1);
+  margin-bottom: 2.5rem;
+}
+.footer-brand-name {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.footer-brand-name em { font-style: italic; color: var(--accent-soft); }
+.footer-brand-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 248, 245, 0.6);
+  max-width: 22rem;
+}
+.footer-col-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.75rem; }
+.footer-col a {
+  font-size: 14px;
+  color: rgba(255, 248, 245, 0.6);
+  text-decoration: none;
+  transition: color 300ms var(--ease);
+}
+.footer-col a:hover { color: var(--cream); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255, 248, 245, 0.4);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .footer-brand-desc { max-width: none; }
+}
+
+/* REVEAL ANIMATIONS */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(8px);
+  transition: opacity 1000ms var(--ease), transform 1000ms var(--ease), filter 1000ms var(--ease);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-brand">
+    <div class="nav-logo"></div>
+    HostFlow
+  </a>
+  <div class="nav-links">
+    <a href="#system">What's inside</a>
+    <a href="#how">How it works</a>
+    <a href="#proof">Results</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <button class="nav-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="nav-cta">
+    Get the Kit — $49
+    <span class="nav-cta-arrow">↗</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-text reveal">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      For creators who already run STRs
+    </div>
+    <h1 class="hero-title">
+      Your hosting knowledge is worth <em>$400</em>/month per owner. Stop giving it away.
+    </h1>
+    <p class="hero-sub">
+      You're already running short-term rentals. You already know the playbook. The Cohost Operating System is the templates, scripts, and pricing math that turn what you know into a paid cohosting practice — and land your first paying owner in 30 days.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary">
+        Get the Co-Host Kit — $49
+        <span class="btn-arrow">↗</span>
+      </a>
+      <a href="#system" class="btn btn-secondary">
+        See what's inside
+        <span class="btn-arrow">↓</span>
+      </a>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-num"><em>54</em>pp</div>
+        <div class="hero-meta-label">Operating reference</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num"><em>10</em></div>
+        <div class="hero-meta-label">Copy-paste deliverables</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">$<em>49</em></div>
+        <div class="hero-meta-label">One payment, yours forever</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num"><em>30</em>d</div>
+        <div class="hero-meta-label">To first paying client</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="hero-visual-inner">
+      <div class="hv-paper hv-paper-1"></div>
+      <div class="hv-paper hv-paper-2"></div>
+      <div class="hv-laptop">
+        <div class="hv-laptop-screen">
+          <div class="hv-screen-row">
+            <span class="hv-screen-dot red"></span>
+            <span class="hv-screen-dot yellow"></span>
+            <span class="hv-screen-dot green"></span>
+            <span class="hv-screen-url">hostflow.me/the-blue-cabin</span>
+          </div>
+          <div class="hv-screen-h">$3,847 net payout</div>
+          <div class="hv-screen-sub">May 2026 — up 18% from April</div>
+          <div class="hv-screen-stat">
+            <div class="hv-screen-stat-box">
+              <div class="hv-stat-num">75<em>%</em></div>
+              <div class="hv-stat-lbl">Occupancy</div>
+            </div>
+            <div class="hv-screen-stat-box">
+              <div class="hv-stat-num">$<em>213</em></div>
+              <div class="hv-stat-lbl">ADR</div>
+            </div>
+            <div class="hv-screen-stat-box">
+              <div class="hv-stat-num">$6.8<em>K</em></div>
+              <div class="hv-stat-lbl">Revenue</div>
+            </div>
+          </div>
+        </div>
+        <div class="hv-laptop-base"></div>
+      </div>
+      <div class="hv-kitbox">
+        <div class="hv-kitbox-logo"></div>
+        <div class="hv-kitbox-title">CO-HOSTING STARTER KIT</div>
+        <div class="hv-kitbox-sub">TEMPLATES · SYSTEMS · AUTOMATIONS · REAL RESULTS</div>
+        <div class="hv-kitbox-tag">OPERATE SMARTER. HOST BETTER.</div>
+      </div>
+      <div class="hv-phone">
+        <div class="hv-phone-screen">
+          <div class="hv-phone-stat">$<em>3,847</em></div>
+          <div class="hv-phone-sub">Net to owner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- LOGO STRIP -->
+<div class="logos">
+  <div class="logos-label">Built for creators already running on these platforms</div>
+  <div class="logos-row">
+    <div class="logo-item">Airbnb</div>
+    <div class="logo-item">VRBO</div>
+    <div class="logo-item">Booking.com</div>
+    <div class="logo-item">PriceLabs</div>
+    <div class="logo-item">Hospitable</div>
+    <div class="logo-item">OwnerRez</div>
+    <div class="logo-item">Furnished Finder</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The gap most creators miss</div>
+      <h2 class="section-title">You teach Airbnb for free on YouTube. <em>Meanwhile</em>, other hosts are getting paid to manage other people's listings.</h2>
+      <p class="section-sub">You already run your own listing. You already know dynamic pricing, the 15-point audit, what makes a Superhost. So why are you giving that knowledge away — when there's a $400/month-paying owner for it on the other side of one cold pitch?</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="problem-card-num">/01</div>
+        <div class="problem-card-title">You already do the work.</div>
+        <div class="problem-card-body">You already clean turn, write listing copy, respond to guests, adjust pricing, send statements. The hard skill is already in your hands. The gap is packaging it.</div>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-card-num">/02</div>
+        <div class="problem-card-title">You're not packaging it.</div>
+        <div class="problem-card-body">Your Instagram posts teaching pricing. Your YouTube videos on guest screening. All free, all driving views — and zero of it converts into a paying cohosting client.</div>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-card-num">/03</div>
+        <div class="problem-card-title">Owners don't need more advice.</div>
+        <div class="problem-card-body">They need someone to run their listing. Someone who will reply within 24 hours, adjust the price on Friday, send the monthly statement on the 5th, screen the next guest, and clean turn between bookings. They're paying for the operator, not the consultant.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET — bento -->
+<section id="system" class="section">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">The Cohost Operating System</div>
+    <h2 class="section-title">Everything you need to land, sign, and run your first cohosting client.</h2>
+    <p class="section-sub">54 pages. 10 deliverables. Every template has a worked example (a real, finished artifact from a real property) and a copy-paste template with brackets. Read the example, copy the template, run the playbook.</p>
+  </div>
+  <div class="bento">
+    <div class="bento-item bento-1 reveal">
+      <div class="bento-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div class="bento-title">The <em>full</em> 18-clause cohost agreement</div>
+      <div class="bento-body">A real, fully-filled-out contract — every name, every date, every dollar amount, every insurance policy number — plus the bracketed template you copy for each new owner. No more guessing what the final document looks like.</div>
+      <div class="bento-meta">Module 4 · 18 clauses · pages 14–22</div>
+    </div>
+    <div class="bento-item bento-2 reveal">
+      <div class="bento-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.94l.7 4.21a1 1 0 01-.5 1.06L9 10.5a11 11 0 005 5l1.29-1.43a1 1 0 011.06-.5l4.21.7a1 1 0 01.94.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>
+      </div>
+      <div class="bento-title">Discovery call script</div>
+      <div class="bento-body">The 20-minute structure that converts prospects. Includes 4 objection handlers.</div>
+      <div class="bento-meta">Module 3</div>
+    </div>
+    <div class="bento-item bento-3 reveal">
+      <div class="bento-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <div class="bento-title">30-day plan, day-by-day</div>
+      <div class="bento-body">Day 1 through Day 30 — concrete tasks, specific pitches, exact scripts.</div>
+      <div class="bento-meta">Module 1</div>
+    </div>
+    <div class="bento-item bento-4 reveal">
+      <div class="bento-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      </div>
+      <div class="bento-title">13 guest message templates</div>
+      <div class="bento-body">Inquiry, booking confirmation, pre-arrival, day-of, mid-stay, checkout, thank-you, review request, pre-approval, decline — every touchpoint covered. Save as Quick Replies once; use them forever.</div>
+      <div class="bento-meta">Module 10 · 13 templates</div>
+    </div>
+    <div class="bento-item bento-5 reveal">
+      <div class="bento-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 7h6m0 10v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6a2 2 0 012 2v2m7 0h-6a2 2 0 00-2 2v10a2 2 0 002 2h6a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg>
+      </div>
+      <div class="bento-title">Outreach scripts — every channel</div>
+      <div class="bento-body">5 email templates, a Furnished Finder DM, a Reddit value-add comment, an SMS follow-up, and a 90-second voicemail script. Plus a worked 4-touch sequence that closed a real client.</div>
+      <div class="bento-meta">Module 8 · 5 channels</div>
+    </div>
+    <div class="bento-item bento-6 reveal">
+      <div class="bento-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      </div>
+      <div class="bento-title">2-page proposal template</div>
+      <div class="bento-body">The closing document you send 48 hours after the discovery call. Worked example included.</div>
+      <div class="bento-meta">Module 9</div>
+    </div>
+    <div class="bento-item bento-7 reveal">
+      <div class="bento-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div class="bento-title">7-zone cleaner SOP</div>
+      <div class="bento-body">Photo-verification form, quarterly deep-clean checklist, handoff protocol.</div>
+      <div class="bento-meta">Module 6</div>
+    </div>
+    <div class="bento-item bento-8 reveal">
+      <div class="bento-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+      </div>
+      <div class="bento-title">Pricing calculator</div>
+      <div class="bento-body">5-step comp-set methodology + the 4 adjustments + worked 30-night example.</div>
+      <div class="bento-meta">Appendix A</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background: var(--cream-soft);">
+  <div class="section">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">How it unfolds</div>
+      <h2 class="section-title">From kit to first paying client in <em>30 days.</em></h2>
+      <p class="section-sub">The system follows a 3-phase loop: position → pitch → operate. Each phase has a Day-1 to Day-N script.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">PHASE 01 / DAY 1</div>
+        <h3 class="step-title">Position.</h3>
+        <p class="step-body">Write your 1-page brief: niche, geography, owner ICP, fee structure, differentiation. Day 2 draft your contract. Day 3 build your 30-name prospect list.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">PHASE 02 / WEEK 2</div>
+        <h3 class="step-title">Pitch.</h3>
+        <p class="step-body">Send 5 cold pitches per day for 10 days. Use the 15-point audit scorecard. Run discovery calls. Walk the audit on screen-share. Send the audit + proposal within 48 hours.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">PHASE 03 / WEEK 3-4</div>
+        <h3 class="step-title">Operate.</h3>
+        <p class="step-body">Close first client. Run the 30-minute kickoff. Install the cleaning rotation. Adjust pricing daily. Send the first monthly statement on the 5th. Earn your first $400+ cohost fee by month-end.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section id="proof" class="testimonial">
+  <div class="testimonial-inner">
+    <div class="reveal">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-quote">
+        I run my own 3BR cabin in Asheville and post pricing tips on Instagram. The Co-Host Kit turned my audience into a paying practice — <em>first client signed in 11 days</em>, $1,250/month at 25% + minimum. The worked contract alone saved me a lawyer.
+      </p>
+      <div class="testimonial-attr">
+        <div class="testimonial-avatar">S</div>
+        <div>
+          <div class="testimonial-name">Snow Studio operating as Hostflow</div>
+          <div class="testimonial-role">Creator · Asheville, NC · 1st client Nov 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-stats reveal">
+      <div class="testimonial-stat">
+        <div class="testimonial-stat-num"><em>11</em></div>
+        <div class="testimonial-stat-label">Days from kit-purchase to first signed client</div>
+      </div>
+      <div class="testimonial-stat">
+        <div class="testimonial-stat-num">$<em>1,250</em></div>
+        <div class="testimonial-stat-label">First-month cohost fee (25% + minimum)</div>
+      </div>
+      <div class="testimonial-stat">
+        <div class="testimonial-stat-num"><em>0</em></div>
+        <div class="testimonial-stat-label">Lawyer hours spent drafting the contract</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="section">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="section-title">$49. <em>Once.</em> Yours forever.</h2>
+    <p class="section-sub">The same kit a real cohosting agency uses to run its operations. 54 pages of working templates, scripts, and math.</p>
+  </div>
+  <div class="pricing-card reveal">
+    <div class="pricing-badge">★ THE CO-HOST KIT</div>
+    <div class="pricing-name">Co-Hosting Starter Kit <em>v7</em></div>
+    <p class="pricing-tagline">The full operating reference. One PDF. Copy everything.</p>
+    <div class="pricing-amount">
+      <span class="pricing-currency">$</span>
+      <span class="pricing-price"><em>49</em></span>
+      <span class="pricing-period">one-time</span>
+    </div>
+    <p class="pricing-detail">Lifetime access. Free updates to v8, v9, v10 as they ship. No subscription.</p>
+    <ul class="pricing-list">
+      <li><span class="pricing-check">✓</span> The fully-filled 18-clause cohost agreement (worked example + bracketed template)</li>
+      <li><span class="pricing-check">✓</span> Discovery call script + 4 objection handlers</li>
+      <li><span class="pricing-check">✓</span> 30-day plan, day-by-day</li>
+      <li><span class="pricing-check">✓</span> 13 guest message templates</li>
+      <li><span class="pricing-check">✓</span> Outreach scripts (5 emails + DM + SMS + voicemail)</li>
+      <li><span class="pricing-check">✓</span> 2-page proposal template with worked example</li>
+      <li><span class="pricing-check">✓</span> 7-zone cleaner SOP + photo verification</li>
+      <li><span class="pricing-check">✓</span> 30/60/90-day onboarding milestones</li>
+      <li><span class="pricing-check">✓</span> Monthly + quarterly + annual owner reports</li>
+      <li><span class="pricing-check">✓</span> Maintenance SOP + 4-tier triage + vendor network</li>
+      <li><span class="pricing-check">✓</span> Pricing calculator + comp-set methodology</li>
+      <li><span class="pricing-check">✓</span> 8 infographics embedded (the 3 fee models, audit radial, funnel, scaling curve, pricing heatmap)</li>
+      <li><span class="pricing-check">✓</span> 21-term STR glossary for the new operator</li>
+    </ul>
+    <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary pricing-cta">
+      Get the Kit — $49
+      <span class="btn-arrow">↗</span>
+    </a>
+    <div class="pricing-trust">
+      <span class="pricing-trust-item">✓ Instant download</span>
+      <span class="pricing-trust-item">✓ Stripe checkout</span>
+      <span class="pricing-trust-item">✓ Yours forever</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background: var(--cream-soft);">
+  <div class="section">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-title">What creators ask before they buy.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">
+          I'm an STR creator, not a cohost yet. Will this actually help?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Yes — that's the exact use case. If you already run your own listing, you already have 90% of the operating skill. The Kit adds the missing 10%: the 18-clause contract, the 30-day plan, the outreach scripts, the audit scorecard, the pricing math. Read Module 1 (the positioning brief) and you'll know within an hour whether this is for you.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          I don't have any cohosting experience yet — can I still use this?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>The Kit assumes you can run a listing. If you've never managed an Airbnb, start by managing your own — the Kit will then give you the playbook to convert that into a paid practice. If you've never run a listing at all, the Kit isn't the right starting point; rent and run one first.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Is the contract legally binding?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>It's a real contract, written in legal-style language, populated with all the clauses a cohosting engagement needs. But it's a template, not legal advice — your attorney should review before signing with real money. The worked example shows what a finalized contract looks like; you adapt it to your state and your structure.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Do I get updates?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Yes. v7 is the current edition. v8, v9, v10 ship as the playbook is refined; every buyer gets the new editions free.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Can I share it with my audience?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>The Kit is for one operator. You can of course teach the playbook to your audience — that's why we built it for creators. But you can't redistribute the PDF, resell it, or include it in a course without permission. If you want to teach it at scale, get in touch.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          What if I hate it?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Email snow@hostflow.me within 7 days. Refund. No friction.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <div class="section-eyebrow reveal">Last thought</div>
+    <h2 class="final-cta-title reveal">You already know how. <em>Charge for it.</em></h2>
+    <p class="final-cta-sub reveal">$49 is the price of a domain renewal. The Kit is the operating reference for the rest of your cohosting practice. First client pays for itself in week 2.</p>
+    <div class="reveal">
+      <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary pricing-cta" style="width: auto; padding: 1.15rem 2rem; font-size: 16px;">
+        Get the Co-Host Kit — $49
+        <span class="btn-arrow">↗</span>
+      </a>
+    </div>
+    <p style="margin-top: 1.5rem; font-size: 13px; color: rgba(255, 248, 245, 0.5);">Stripe checkout · Instant PDF download · 7-day refund</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Host<em>Flow</em></div>
+        <p class="footer-brand-desc">The cohosting operating system for creators. Built by Snow Studio. Operating as Hostflow.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <ul>
+          <li><a href="#system">What's inside</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Resources</div>
+        <ul>
+          <li><a href="#">Sample contract</a></li>
+          <li><a href="#">Audit scorecard</a></li>
+          <li><a href="#">30-day plan PDF</a></li>
+          <li><a href="#">Glossary</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul>
+          <li><a href="mailto:snow@hostflow.me">snow@hostflow.me</a></li>
+          <li><a href="#">Snow Studio</a></li>
+          <li><a href="#">hostflow.me</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Hostflow · A Snow Studio venture</div>
+      <div>OPERATE SMARTER. HOST BETTER.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// Mobile nav toggle
+const toggle = document.querySelector('.nav-toggle');
+const links = document.querySelector('.nav-links');
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    links.style.display = links.style.display === 'flex' ? '' : 'flex';
+  });
+}
+</script>
+
+</body>
+</html>
