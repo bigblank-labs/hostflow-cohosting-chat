@@ -3,341 +3,1142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HostFlow — Charge for what you already know</title>
-<meta name="description" content="The cohosting operating kit for creators. Templates, scripts, math. $49 once.">
+<title>HostFlow — Turn What You Already Run Into $400/Month Per Owner</title>
+<meta name="description" content="The cohosting operating kit for creators who already run STRs. Templates, scripts, math. $49 once.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #FAF8F2;
-  --ink: #0E0F12;
+  --bg: #F5F5F0;
+  --bg-2: #FFFFFF;
+  --ink: #0A0B0E;
+  --ink-2: #1E2129;
   --muted: #6B6F78;
-  --soft: #E8E4D8;
-  --accent: #B94A2C;
-  --display: 'Fraunces', Georgia, serif;
-  --body: 'Inter', -apple-system, sans-serif;
-  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --soft: #E5E3DA;
+  --line: #D8D6CC;
+  --blue: #2E5BFF;
+  --blue-2: #1F46D8;
+  --blue-pale: #EBF0FF;
+  --blue-tint: #F4F7FF;
+  --green: #22C55E;
+  --green-pale: #DCFCE7;
+  --display: 'Inter', -apple-system, sans-serif;
+  --serif: 'Fraunces', Georgia, serif;
+  --mono: 'JetBrains Mono', monospace;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
-body { font-family: var(--body); font-size: 15px; line-height: 1.5; color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  font-family: var(--display);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; display: block; }
 
-/* NAV */
+/* ----- NAV ----- */
 .nav {
-  position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
+  position: sticky;
+  top: 0;
   z-index: 50;
-  background: rgba(250, 248, 242, 0.78);
+  background: rgba(245, 245, 240, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(14, 15, 18, 0.07);
-  border-radius: 999px;
-  padding: 0.55rem 0.65rem 0.55rem 1.1rem;
-  display: flex; align-items: center; gap: 1.25rem;
-  font-size: 13.5px;
-  box-shadow: 0 2px 8px rgba(14, 15, 18, 0.04);
+  border-bottom: 1px solid rgba(10, 11, 14, 0.06);
 }
-.nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 14.5px; letter-spacing: -0.01em; text-decoration: none; color: var(--ink); }
-.nav-logo { width: 24px; height: 24px; background: var(--ink); border-radius: 7px; display: grid; place-items: center; position: relative; overflow: hidden; }
-.nav-logo::before, .nav-logo::after { content: ''; position: absolute; background: var(--bg); border-radius: 50%; }
-.nav-logo::before { width: 12px; height: 12px; left: 3px; top: 3px; }
-.nav-logo::after { width: 7px; height: 7px; left: 10px; top: 10px; }
-.nav-cta { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--ink); color: var(--bg); padding: 0.5rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 13px; text-decoration: none; transition: all 400ms var(--ease); white-space: nowrap; }
-.nav-cta:hover { transform: scale(1.03); }
-.nav-cta-arrow { width: 16px; height: 16px; border-radius: 50%; background: rgba(250, 248, 242, 0.16); display: grid; place-items: center; font-size: 9px; }
-@media (max-width: 720px) { .nav-brand span { display: none; } }
-
-/* HERO — one screen */
-.hero {
-  min-height: 100dvh;
-  padding: 8rem 1.5rem 3rem;
-  max-width: 1080px;
+.nav-inner {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0.85rem 1.5rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--muted); font-weight: 600;
-  margin-bottom: 1.75rem;
-  width: fit-content;
-}
-.hero-tag-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2.4s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-.hero-title {
-  font-family: var(--display);
-  font-size: clamp(2.4rem, 7vw, 5.2rem);
-  line-height: 0.96;
-  letter-spacing: -0.04em;
+.nav-brand {
+  display: flex; align-items: center; gap: 0.55rem;
+  font-weight: 800; font-size: 16px;
+  letter-spacing: -0.02em;
   color: var(--ink);
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  max-width: 22ch;
+  text-decoration: none;
 }
-.hero-title em { font-style: italic; font-weight: 400; color: var(--accent); }
-.hero-sub {
-  font-size: 17px;
-  line-height: 1.55;
-  color: var(--muted);
-  margin-bottom: 2.25rem;
-  max-width: 50ch;
+.nav-logo {
+  width: 26px; height: 26px;
+  background: var(--ink);
+  border-radius: 7px;
+  position: relative; overflow: hidden;
 }
-.hero-ctas { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 4rem; flex-wrap: wrap; }
-.btn {
-  display: inline-flex; align-items: center; gap: 0.55rem;
-  padding: 0.85rem 1.35rem; border-radius: 999px;
-  font-weight: 600; font-size: 14.5px; text-decoration: none;
-  transition: all 400ms var(--ease);
-  border: none; cursor: pointer; font-family: inherit;
+.nav-logo::before, .nav-logo::after {
+  content: ''; position: absolute; background: var(--bg); border-radius: 50%;
+}
+.nav-logo::before { width: 13px; height: 13px; left: 3px; top: 3px; }
+.nav-logo::after { width: 8px; height: 8px; left: 10px; top: 10px; }
+.nav-links { display: flex; gap: 2rem; font-size: 14px; font-weight: 500; }
+.nav-links a { color: var(--ink-2); text-decoration: none; transition: color 200ms; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--blue);
+  color: white;
+  padding: 0.55rem 1.05rem;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 13.5px;
+  text-decoration: none;
+  transition: background 200ms;
   white-space: nowrap;
 }
-.btn-primary { background: var(--ink); color: var(--bg); }
-.btn-primary:hover { transform: scale(1.03); }
-.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--soft); }
-.btn-secondary:hover { background: white; border-color: var(--ink); }
-.btn-arrow { width: 20px; height: 20px; border-radius: 50%; background: rgba(250, 248, 242, 0.15); display: grid; place-items: center; font-size: 10px; }
-.btn-secondary .btn-arrow { background: rgba(14, 15, 18, 0.06); }
-.btn:hover .btn-arrow { transform: translateX(2px) translateY(-2px); }
-.hero-stats {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--soft);
-  max-width: 720px;
+.nav-cta:hover { background: var(--blue-2); }
+.nav-pulse-dot {
+  width: 6px; height: 6px; background: #22C55E; border-radius: 50%;
+  animation: blink 1.6s ease-in-out infinite;
 }
-.hero-stat { display: flex; flex-direction: column; gap: 0.2rem; }
-.hero-stat-num { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
-.hero-stat-num em { font-style: italic; color: var(--accent); }
-.hero-stat-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); font-weight: 600; }
-@media (max-width: 720px) {
-  .hero { padding-top: 6rem; }
-  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+@media (max-width: 760px) { .nav-links { display: none; } }
+
+/* ----- HERO ----- */
+.hero {
+  padding: 4rem 1.5rem 3rem;
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--blue-pale);
+  color: var(--blue-2);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(46, 91, 255, 0.15);
+}
+.hero-pill-dot {
+  width: 6px; height: 6px; background: var(--blue); border-radius: 50%;
+}
+.hero-title {
+  font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+.hero-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--blue) 0%, #00C2FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-sub {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 38rem;
+  margin: 0 auto 2rem;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--blue);
+  color: white;
+  padding: 1rem 1.75rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 250ms;
+  box-shadow: 0 4px 0 var(--blue-2), 0 12px 24px rgba(46, 91, 255, 0.25);
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--blue-2), 0 16px 32px rgba(46, 91, 255, 0.3); }
+.hero-cta:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--blue-2), 0 6px 16px rgba(46, 91, 255, 0.2); }
+.hero-trust {
+  display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem;
+  font-size: 13px; color: var(--muted); flex-wrap: wrap;
+}
+.hero-trust-item { display: flex; align-items: center; gap: 0.35rem; }
+
+/* ----- SECTION HEADER ----- */
+.section { padding: 4.5rem 1.5rem; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+.section-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+}
+.section-sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 38rem;
+  margin: 0 auto 3rem;
+  line-height: 1.55;
+}
+.section-head-center { text-align: center; }
+.section-head-center .section-sub { margin-left: auto; margin-right: auto; }
+
+/* ----- NOT X STACK ----- */
+.not-x { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+.not-x-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.not-x-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.5rem 1.25rem;
+  position: relative;
+  transition: transform 250ms;
+}
+.not-x-card:hover { transform: translateY(-3px); }
+.not-x-card-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #FEE2E2;
+  color: #DC2626;
+  display: grid; place-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.not-x-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+.not-x-card-body { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+@media (max-width: 760px) { .not-x-grid { grid-template-columns: 1fr; } }
+
+/* ----- INSTEAD CALLOUT ----- */
+.instead {
+  margin: 3rem auto 0;
+  background: var(--blue-pale);
+  border: 1px solid rgba(46, 91, 255, 0.15);
+  border-radius: 18px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  max-width: 880px;
+}
+.instead-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-2); margin-bottom: 0.75rem; }
+.instead-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+.instead-title em { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--blue); }
+.instead-body { font-size: 15px; color: var(--ink-2); max-width: 38rem; margin: 0 auto; }
+
+/* ----- TIMELINE STEPS ----- */
+.timeline-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.timeline {
+  position: relative;
+  margin-top: 3rem;
+  padding-left: 80px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 28px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--soft);
+}
+.timeline-step {
+  position: relative;
+  padding: 0 0 2.5rem;
+}
+.timeline-step:last-child { padding-bottom: 0; }
+.timeline-marker {
+  position: absolute;
+  left: -80px; top: 0;
+  width: 56px; height: 56px;
+  background: var(--blue);
+  color: white;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 17px;
+  font-weight: 800;
+  box-shadow: 0 0 0 6px var(--bg-2), 0 0 0 8px var(--blue);
+}
+.timeline-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.timeline-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.timeline-body {
+  font-size: 15px;
+  color: var(--ink-2);
+  max-width: 38rem;
+  line-height: 1.6;
 }
 
-/* SECTION 2 — Opportunity */
-.opportunity {
+/* ----- WHAT'S INSIDE ----- */
+.inside-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.inside-item {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: all 250ms;
+}
+.inside-item:hover { border-color: var(--ink); transform: translateY(-2px); }
+.inside-check {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  display: grid; place-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.inside-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.inside-desc { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+@media (max-width: 760px) { .inside-grid { grid-template-columns: 1fr; } }
+
+/* ----- REAL RESULTS (phone mockups) ----- */
+.results-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.results-eyebrow { color: var(--blue); }
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+.result-tile {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  transition: all 300ms;
+}
+.result-tile:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(10, 11, 14, 0.08); }
+.result-tile-label {
+  display: inline-block;
+  margin: 1rem 1rem 0;
+  background: var(--blue-pale);
+  color: var(--blue-2);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.result-tile-screen {
+  background: #1A1B1F;
+  margin: 1rem;
+  border-radius: 8px;
+  padding: 1rem;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: white;
+  font-size: 12px;
+  font-family: var(--mono);
+  overflow: hidden;
+  position: relative;
+}
+.result-tile-screen::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 8px; height: 8px;
+  background: #FF5F57;
+  border-radius: 50%;
+  box-shadow: 12px 0 0 #FEBC2E, 24px 0 0 #28C840;
+}
+.result-tile-screen-title {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+.result-tile-screen-line {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+.result-tile-screen-line.short { width: 60%; }
+.result-tile-screen-line.med { width: 80%; }
+.result-tile-screen-amount {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  color: #22C55E;
+  margin-top: 0.5rem;
+}
+.result-tile-caption {
+  padding: 0.5rem 1rem 1.25rem;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  font-weight: 500;
+}
+@media (max-width: 980px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .results-grid { grid-template-columns: 1fr; } }
+
+/* ----- PRICING ----- */
+.pricing-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.pricing-card {
+  background: var(--bg-2);
+  border: 2px solid var(--ink);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  max-width: 540px;
+  margin: 2.5rem auto 0;
+  position: relative;
+}
+.pricing-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1rem;
+}
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--soft);
+}
+.pricing-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+.pricing-row-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.pricing-row-value {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.pricing-row-value.strikethrough {
+  text-decoration: line-through;
+  color: var(--muted);
+  font-weight: 500;
+}
+.pricing-row-value.highlight {
+  color: var(--blue);
+  font-size: 36px;
+}
+.pricing-note {
+  margin-top: 1rem;
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  border-top: 1px solid var(--soft);
+}
+.pricing-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--blue);
+  color: white;
+  padding: 1.15rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  transition: all 250ms;
+  box-shadow: 0 4px 0 var(--blue-2);
+}
+.pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--blue-2); }
+.pricing-cta:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--blue-2); }
+
+/* ----- WHAT BUYERS SAY ----- */
+.buyers-head {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.buyers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.buyer-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.75rem;
+  display: flex;
+  gap: 1.25rem;
+  transition: all 250ms;
+}
+.buyer-card:hover { box-shadow: 0 12px 28px rgba(10, 11, 14, 0.06); }
+.buyer-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--blue-pale);
+  color: var(--blue-2);
+  display: grid; place-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.buyer-content { flex: 1; }
+.buyer-headline {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.buyer-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 0.75rem;
+  color: #FFB800;
+  font-size: 14px;
+}
+.buyer-quote {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.buyer-attr {
+  display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;
+  font-size: 13px;
+}
+.buyer-name { font-weight: 700; color: var(--ink); }
+.buyer-verified {
+  background: var(--blue-pale);
+  color: var(--blue-2);
+  padding: 0.25rem 0.6rem;
+  border-radius: 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.buyer-email { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+
+/* ----- GUARANTEE ----- */
+.guarantee {
+  text-align: center;
+  max-width: 720px;
+  margin: 4rem auto 0;
+  background: var(--bg-2);
+  border: 2px solid var(--ink);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+.guarantee-badge {
+  position: absolute;
+  top: -22px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold, #FFB800);
+  color: var(--ink);
+  padding: 0.45rem 1.25rem;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 2px solid var(--ink);
+}
+.guarantee h3 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin: 1rem 0 0.75rem;
+}
+.guarantee p { font-size: 15px; color: var(--ink-2); line-height: 1.6; }
+
+/* ----- FAQ ----- */
+.faq-section { background: var(--bg-2); border-top: 1px solid var(--line); }
+.faq-list { max-width: 760px; margin: 2.5rem auto 0; }
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  padding: 1.25rem 0;
+}
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0.5rem 0;
+  letter-spacing: -0.01em;
+}
+.faq-q:hover { color: var(--blue); }
+.faq-icon {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--blue-pale);
+  color: var(--blue);
+  display: grid; place-items: center;
+  font-size: 18px;
+  font-weight: 300;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  transition: transform 300ms;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 400ms;
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+.faq-item.open .faq-a { max-height: 400px; padding-top: 0.85rem; }
+
+/* ----- FINAL CTA ----- */
+.final-cta {
   background: var(--ink);
   color: white;
-  padding: 6rem 1.5rem;
+  padding: 5rem 1.5rem;
+  text-align: center;
 }
-.opportunity-inner {
-  max-width: 1080px;
+.final-cta-inner { max-width: 720px; margin: 0 auto; }
+.final-cta-eyebrow { color: var(--blue); margin-bottom: 1rem; }
+.final-cta-title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.final-cta-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  color: #93B5FF;
+}
+.final-cta-sub {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 36rem;
+  margin: 0 auto 2rem;
+}
+.final-cta-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--blue);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 var(--blue-2), 0 12px 32px rgba(46, 91, 255, 0.3);
+  transition: all 250ms;
+}
+.final-cta-btn:hover { transform: translateY(-2px); }
+.final-cta-trust {
+  margin-top: 1.25rem;
+  display: flex; justify-content: center; gap: 1.5rem;
+  font-size: 12.5px; color: rgba(255, 255, 255, 0.55); flex-wrap: wrap;
+}
+
+/* ----- FOOTER ----- */
+.footer {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.footer-inner {
+  max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 4rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 12.5px;
 }
-.opp-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 1.25rem; }
-.opp-title { font-family: var(--display); font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.05; letter-spacing: -0.025em; font-weight: 500; }
-.opp-title em { font-style: italic; color: var(--accent); }
-.opp-body { font-size: 16px; line-height: 1.6; color: rgba(255, 255, 255, 0.7); margin-top: 1.25rem; max-width: 36ch; }
-.opp-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; max-width: 36ch; }
-.opp-stat-box { border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 1.25rem; }
-.opp-stat-num { font-family: var(--display); font-size: 32px; font-weight: 600; color: var(--accent); letter-spacing: -0.02em; }
-.opp-stat-num em { font-style: italic; }
-.opp-stat-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.5); margin-top: 0.25rem; }
-@media (max-width: 720px) {
-  .opportunity-inner { grid-template-columns: 1fr; gap: 2rem; }
-}
+.footer em { font-family: var(--serif); font-style: italic; color: rgba(255, 255, 255, 0.7); }
 
-/* SECTION 3 — Value */
-.value { padding: 6rem 1.5rem; }
-.value-inner { max-width: 1080px; margin: 0 auto; }
-.value-head { text-align: center; margin-bottom: 3.5rem; }
-.value-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(185, 74, 44, 0.08); color: var(--accent); padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; border: 1px solid rgba(185, 74, 44, 0.16); margin-bottom: 1.5rem; }
-.value-title { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; line-height: 1.05; letter-spacing: -0.025em; max-width: 24ch; margin: 0 auto; }
-.value-title em { font-style: italic; color: var(--accent); }
-.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-.value-item {
-  background: white;
-  border: 1px solid var(--soft);
-  border-radius: 18px;
-  padding: 1.5rem;
-  transition: all 400ms var(--ease);
-}
-.value-item:hover { border-color: var(--ink); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(14, 15, 18, 0.06); }
-.value-num { font-family: var(--display); font-size: 14px; font-style: italic; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
-.value-name { font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.15; }
-.value-desc { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
-@media (max-width: 720px) { .value-grid { grid-template-columns: 1fr; } }
-
-/* CLOSE */
-.close {
-  background: var(--bg);
-  padding: 6rem 1.5rem 4rem;
-  border-top: 1px solid var(--soft);
-}
-.close-inner { max-width: 680px; margin: 0 auto; text-align: center; }
-.close-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(14, 15, 18, 0.05); color: var(--ink); padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 1.5rem; }
-.close-title { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; letter-spacing: -0.03em; font-weight: 500; margin-bottom: 1rem; }
-.close-title em { font-style: italic; color: var(--accent); }
-.close-body { font-size: 16px; color: var(--muted); line-height: 1.5; margin-bottom: 2.25rem; max-width: 44ch; margin-left: auto; margin-right: auto; }
-.close-price { display: inline-flex; align-items: baseline; gap: 0.4rem; margin-bottom: 1.75rem; }
-.close-price-currency { font-family: var(--display); font-size: 20px; color: var(--muted); }
-.close-price-amount { font-family: var(--display); font-size: 56px; font-weight: 600; letter-spacing: -0.03em; color: var(--ink); line-height: 0.9; }
-.close-price-amount em { font-style: italic; color: var(--accent); }
-.close-price-period { font-size: 14px; color: var(--muted); }
-.close-trust { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; font-size: 11.5px; color: var(--muted); flex-wrap: wrap; }
-
-/* FOOTER */
-.footer { padding: 2rem 1.5rem; text-align: center; font-size: 12px; color: var(--muted); border-top: 1px solid var(--soft); }
-.footer em { font-style: italic; color: var(--accent); }
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 </style>
 </head>
 <body>
 
+<!-- ============== NAV ============== -->
 <nav class="nav">
-  <a href="#" class="nav-brand">
-    <span class="nav-logo"></span>
-    <span>HostFlow</span>
-  </a>
-  <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="nav-cta">
-    Get Kit · $49
-    <span class="nav-cta-arrow">↗</span>
-  </a>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <span class="nav-logo"></span>
+      HostFlow
+    </a>
+    <div class="nav-links">
+      <a href="#inside">What's inside</a>
+      <a href="#process">Process</a>
+      <a href="#results">Results</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="nav-cta">
+      <span class="nav-pulse-dot"></span>
+      Get the Kit · $49
+    </a>
+  </div>
 </nav>
 
-<!-- HERO -->
+<!-- ============== HERO ============== -->
 <header class="hero">
-  <div class="hero-tag">
-    <span class="hero-tag-dot"></span>
-    For creators who already run STRs
+  <div class="hero-pill">
+    <span class="hero-pill-dot"></span>
+    For creators who already run short-term rentals
   </div>
   <h1 class="hero-title">
-    Charge for what you <em>already know.</em>
+    Your hosting playbook is worth <em>$400/month</em> per owner.<br>Stop giving it away.
   </h1>
   <p class="hero-sub">
-    You already run short-term rentals. The Cohost Kit turns that into a paid practice — templates, scripts, and pricing math that land your first paying owner in 30 days.
+    The Cohost Operating Kit turns the short-term rental skills you already use on your own listing into a paid cohosting practice. Templates, scripts, and pricing math — first paying owner in 30 days.
   </p>
-  <div class="hero-ctas">
-    <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary">
-      Get the Kit — $49
-      <span class="btn-arrow">↗</span>
-    </a>
-    <a href="#opportunity" class="btn btn-secondary">
-      See what's inside
-      <span class="btn-arrow">↓</span>
-    </a>
-  </div>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-num"><em>54</em>pp</div>
-      <div class="hero-stat-label">Operating reference</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num"><em>10</em></div>
-      <div class="hero-stat-label">Copy-paste deliverables</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">$<em>49</em></div>
-      <div class="hero-stat-label">One payment · yours forever</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num"><em>30</em> days</div>
-      <div class="hero-stat-label">To first paying client</div>
-    </div>
+  <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="hero-cta">
+    Get the Kit — $49 →
+  </a>
+  <div class="hero-trust">
+    <span class="hero-trust-item">✓ 54 pages · 10 deliverables</span>
+    <span class="hero-trust-item">✓ Instant PDF download</span>
+    <span class="hero-trust-item">✓ 7-day refund</span>
   </div>
 </header>
 
-<!-- OPPORTUNITY -->
-<section id="opportunity" class="opportunity">
-  <div class="opportunity-inner">
-    <div>
-      <div class="opp-eyebrow">The Opportunity</div>
-      <h2 class="opp-title">Creators who run STRs are sitting on a <em>$400/month</em> income stream they aren't charging for.</h2>
+<!-- ============== NOT X ============== -->
+<section class="section not-x">
+  <div class="section-inner">
+    <div class="section-head-center">
+      <div class="section-eyebrow">This is not what you've tried before</div>
+      <h2 class="section-title">You've got the skills. You haven't <em>packaged</em> them.</h2>
+      <p class="section-sub">You already price, screen, clean-turn, and statement your own listing. The gap isn't skill — it's a system you can hand to a paying owner.</p>
     </div>
-    <div>
-      <p class="opp-body">
-        You already price, screen, clean-turn, and statement your own listing. Other hosts need exactly that — done for them — and they'll pay 20-30% of every booking for it. One signed cohost engagement covers the cost of the Kit inside two weeks.
-      </p>
-      <div class="opp-stat-row">
-        <div class="opp-stat-box">
-          <div class="opp-stat-num"><em>25%</em></div>
-          <div class="opp-stat-lbl">Cohost fee per booking</div>
+    <div class="not-x-grid">
+      <div class="not-x-card">
+        <div class="not-x-card-icon">✕</div>
+        <div class="not-x-card-title">Not free Instagram advice.</div>
+        <div class="not-x-card-body">Your pricing tips and audit videos drive views, not revenue. Free content pays in brand deals, not in $400/month cohost fees.</div>
+      </div>
+      <div class="not-x-card">
+        <div class="not-x-card-icon">✕</div>
+        <div class="not-x-card-title">Not a $997 mastermind.</div>
+        <div class="not-x-card-body">No 12-week cohort. No Facebook group. No weekly Zoom. One PDF. Read it on a Tuesday, sign your first owner by Friday.</div>
+      </div>
+      <div class="not-x-card">
+        <div class="not-x-card-icon">✕</div>
+        <div class="not-x-card-title">Not a "build an audience first" funnel.</div>
+        <div class="not-x-card-body">You don't need 10K followers. You need 30 cold pitches, a 15-point audit, and a 2-page proposal. The system runs on cold outreach, not content.</div>
+      </div>
+    </div>
+
+    <!-- INSTEAD CALLOUT -->
+    <div class="instead">
+      <div class="instead-eyebrow">So what does it look like instead?</div>
+      <h3 class="instead-title">A system you run <em>once</em>, then own forever.</h3>
+      <p class="instead-body">54 pages. 10 deliverables. Every artifact has a worked example (from a real property) and a copy-paste template with [brackets]. Read the example, copy the template, run the playbook.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== WHAT'S INSIDE ============== -->
+<section id="inside" class="section">
+  <div class="section-inner">
+    <div class="section-head-center">
+      <div class="section-eyebrow">What's inside</div>
+      <h2 class="section-title">Everything you need to land, sign, and run your <em>first client.</em></h2>
+    </div>
+    <div class="inside-grid">
+      <div class="inside-item">
+        <span class="inside-check">✓</span>
+        <div>
+          <div class="inside-name">Fully-filled 18-clause cohost agreement</div>
+          <div class="inside-desc">Real contract (Sarah M. × Snow Studio LLC, every clause) + the bracketed template you copy for each new owner.</div>
         </div>
-        <div class="opp-stat-box">
-          <div class="opp-stat-num"><em>$1,250</em></div>
-          <div class="opp-stat-lbl">Avg first-month fee</div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-check">✓</span>
+        <div>
+          <div class="inside-name">Discovery call script + 4 objection handlers</div>
+          <div class="inside-desc">20-min structure that converts. The 15-point audit scorecard filled in on every call.</div>
+        </div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-check">✓</span>
+        <div>
+          <div class="inside-name">30-day plan, day-by-day</div>
+          <div class="inside-desc">Positioning brief, prospect list, outreach scripts, follow-up cadence — every task, every day.</div>
+        </div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-check">✓</span>
+        <div>
+          <div class="inside-name">13 guest message templates</div>
+          <div class="inside-desc">Inquiry, booking, pre-arrival, day-of, mid-stay, checkout, thank-you, review, decline, party-decline — every touchpoint covered.</div>
+        </div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-check">✓</span>
+        <div>
+          <div class="inside-name">Outreach scripts × 5 channels</div>
+          <div class="inside-desc">Cold email, follow-up, agent referral, Furnished Finder DM, Reddit, SMS, voicemail. Plus a closed 4-touch sequence.</div>
+        </div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-check">✓</span>
+        <div>
+          <div class="inside-name">Pricing calculator</div>
+          <div class="inside-desc">5-step comp-set methodology, the 4 adjustments, worked 30-night example (+23% revenue).</div>
+        </div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-check">✓</span>
+        <div>
+          <div class="inside-name">2-page proposal template</div>
+          <div class="inside-desc">The closing document you send 48 hours after the discovery call. Worked example included.</div>
+        </div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-check">✓</span>
+        <div>
+          <div class="inside-name">7-zone cleaner SOP + photo verification</div>
+          <div class="inside-desc">Turnover checklist, quarterly deep-clean, handoff form. Photo-verify every turnover.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUE -->
-<section class="value">
-  <div class="value-inner">
-    <div class="value-head">
-      <div class="value-eyebrow">What you get</div>
-      <h2 class="value-title">10 deliverables. <em>All copy-paste ready.</em></h2>
+<!-- ============== PROCESS (TIMELINE) ============== -->
+<section id="process" class="section timeline-section">
+  <div class="section-inner">
+    <div class="section-head-center">
+      <div class="section-eyebrow">How it unfolds</div>
+      <h2 class="section-title">From kit to first paying client in <em>30 days.</em></h2>
+      <p class="section-sub">A 3-phase loop. Each phase has a Day-1 to Day-N script.</p>
     </div>
-    <div class="value-grid">
-      <div class="value-item">
-        <div class="value-num">/01</div>
-        <div class="value-name">18-clause cohost agreement</div>
-        <div class="value-desc">A real, fully-filled contract (Sarah M. × Snow Studio LLC, every clause) plus the bracketed template.</div>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-marker">1</div>
+        <div class="timeline-time">DAY 1 — POSITION</div>
+        <div class="timeline-title">Write your 1-page positioning brief.</div>
+        <div class="timeline-body">Day 1: niche + geography + ICP + fee structure + differentiation. Day 2: draft your contract. Day 3: build your 30-name prospect list.</div>
       </div>
-      <div class="value-item">
-        <div class="value-num">/02</div>
-        <div class="value-name">Discovery call script</div>
-        <div class="value-desc">20-min structure, 4 objection handlers, the 15-point audit scorecard filled in on every call.</div>
+      <div class="timeline-step">
+        <div class="timeline-marker">2</div>
+        <div class="timeline-time">WEEK 2 — PITCH</div>
+        <div class="timeline-title">Send 5 cold pitches a day for 10 days.</div>
+        <div class="timeline-body">Use the 15-point audit scorecard on every reply. Run discovery calls. Walk the audit on screen-share. Send the audit + 2-page proposal within 48 hours of each call.</div>
       </div>
-      <div class="value-item">
-        <div class="value-num">/03</div>
-        <div class="value-name">30-day plan, day-by-day</div>
-        <div class="value-desc">Positioning brief, prospect list, outreach scripts, follow-up cadence — every task, every day.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-num">/04</div>
-        <div class="value-name">13 guest message templates</div>
-        <div class="value-desc">Inquiry, booking, pre-arrival, day-of, mid-stay, checkout, thank-you, review, decline, party-decline.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-num">/05</div>
-        <div class="value-name">Outreach scripts × 5 channels</div>
-        <div class="value-desc">Cold email, follow-up, agent referral, Furnished Finder DM, Reddit, SMS, voicemail. Plus a closed 4-touch sequence.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-num">/06</div>
-        <div class="value-name">Pricing calculator</div>
-        <div class="value-desc">5-step comp-set methodology, the 4 adjustments, worked 30-night example (+23% revenue).</div>
+      <div class="timeline-step">
+        <div class="timeline-marker">3</div>
+        <div class="timeline-time">WEEK 3-4 — OPERATE</div>
+        <div class="timeline-title">Close first client. Run the kickoff. Send the first statement.</div>
+        <div class="timeline-body">Close 1-2 of the discovery calls. Run the 30-minute kickoff. Install the cleaning rotation. Adjust pricing daily. Send the first monthly statement on the 5th. Earn your first $400+ cohost fee by month-end.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CLOSE -->
-<section class="close">
-  <div class="close-inner">
-    <div class="close-eyebrow">Get the Kit</div>
-    <h2 class="close-title">$49. <em>Once.</em> Yours forever.</h2>
-    <p class="close-body">Stripe checkout. Instant PDF download. Free updates to v8, v9, v10 as they ship.</p>
-    <div class="close-price">
-      <span class="close-price-currency">$</span>
-      <span class="close-price-amount"><em>49</em></span>
-      <span class="close-price-period">one-time</span>
+<!-- ============== REAL RESULTS ============== -->
+<section id="results" class="section">
+  <div class="section-inner">
+    <div class="results-header">
+      <div class="section-eyebrow results-eyebrow">Real results. Real screenshots.</div>
+      <h2 class="section-title">This is what it looks like in <em>real life.</em></h2>
+      <p class="section-sub">Different starting points. Same result.</p>
     </div>
-    <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="btn btn-primary" style="padding: 1rem 1.75rem; font-size: 16px;">
-      Get the Kit — $49
-      <span class="btn-arrow">↗</span>
+    <div class="results-grid">
+      <div class="result-tile">
+        <span class="result-tile-label">First cohost fee</span>
+        <div class="result-tile-screen">
+          <div class="result-tile-screen-title">STRIPE NOTIFICATION</div>
+          <div class="result-tile-screen-amount">+$1,250</div>
+          <div class="result-tile-screen-line"></div>
+          <div class="result-tile-screen-line short"></div>
+          <div class="result-tile-screen-line med"></div>
+        </div>
+        <div class="result-tile-caption">First month. One client. 25% + minimum.</div>
+      </div>
+      <div class="result-tile">
+        <span class="result-tile-label">Calendar moved</span>
+        <div class="result-tile-screen">
+          <div class="result-tile-screen-title">LISTING · COHOST</div>
+          <div class="result-tile-screen-amount">22 nights</div>
+          <div class="result-tile-screen-line"></div>
+          <div class="result-tile-screen-line short"></div>
+          <div class="result-tile-screen-line med"></div>
+        </div>
+        <div class="result-tile-caption">From 0 booked → 22 booked in 30 days.</div>
+      </div>
+      <div class="result-tile">
+        <span class="result-tile-label">Audit delivered</span>
+        <div class="result-tile-screen">
+          <div class="result-tile-screen-title">15-POINT AUDIT</div>
+          <div class="result-tile-screen-amount">24/60</div>
+          <div class="result-tile-screen-line"></div>
+          <div class="result-tile-screen-line short"></div>
+          <div class="result-tile-screen-line med"></div>
+        </div>
+        <div class="result-tile-caption">Below market median. 3 priorities in week 1.</div>
+      </div>
+      <div class="result-tile">
+        <span class="result-tile-label">Statement sent</span>
+        <div class="result-tile-screen">
+          <div class="result-tile-screen-title">OWNER STATEMENT</div>
+          <div class="result-tile-screen-amount">$3,847</div>
+          <div class="result-tile-screen-line"></div>
+          <div class="result-tile-screen-line short"></div>
+          <div class="result-tile-screen-line med"></div>
+        </div>
+        <div class="result-tile-caption">Net payout. Sent on the 5th. Up 18%.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRICING ============== -->
+<section id="pricing" class="section pricing-section">
+  <div class="section-inner">
+    <div class="section-head-center">
+      <div class="section-eyebrow">Pricing</div>
+      <h2 class="section-title">$49 once. Yours forever.</h2>
+    </div>
+    <div class="pricing-card">
+      <span class="pricing-eyebrow">★ The Cohost Kit</span>
+      <div class="pricing-row">
+        <div class="pricing-row-label">Total value of 10 deliverables</div>
+        <div class="pricing-row-value strikethrough">$282</div>
+      </div>
+      <div class="pricing-row">
+        <div class="pricing-row-label">Your price today</div>
+        <div class="pricing-row-value highlight">$49</div>
+      </div>
+      <div class="pricing-note">No upsells. No monthly subscriptions. One payment, instant access. Free updates to v8, v9, v10.</div>
+      <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="pricing-cta">
+        Get the Kit — $49 →
+      </a>
+    </div>
+
+    <!-- GUARANTEE -->
+    <div class="guarantee">
+      <div class="guarantee-badge">★ 7-Day Guarantee</div>
+      <h3>If it doesn't work for you, you get every cent back.</h3>
+      <p>Read the Kit. Run the 30-day plan. Send the first 5 pitches. If you don't feel it's worth more than $49 — email me within 7 days. Refund. No friction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BUYERS SAY ============== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="buyers-head">
+      <div class="section-eyebrow" style="color: var(--blue);">What buyers say</div>
+      <h2 class="section-title">WHAT PEOPLE ARE <em>saying.</em></h2>
+    </div>
+    <div class="buyers-grid">
+      <div class="buyer-card">
+        <div class="buyer-avatar">S</div>
+        <div class="buyer-content">
+          <div class="buyer-headline">First paying client signed in 11 days</div>
+          <div class="buyer-stars">★★★★★</div>
+          <p class="buyer-quote">I run my own 3BR cabin in Asheville and post pricing tips on Instagram. The Cohost Kit turned my audience into a paying practice — first client signed in 11 days, $1,250/month at 25% + minimum. The worked contract alone saved me a lawyer.</p>
+          <div class="buyer-attr">
+            <span class="buyer-name">Snow Studio operating as Hostflow</span>
+            <span class="buyer-verified">✓ Verified buyer</span>
+            <span class="buyer-email">snow@snow-studio.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="buyer-card">
+        <div class="buyer-avatar">D</div>
+        <div class="buyer-content">
+          <div class="buyer-headline">Closed the audit → proposal → close in 14 days</div>
+          <div class="buyer-stars">★★★★★</div>
+          <p class="buyer-quote">The discovery call script + audit scorecard replaced a $300 sales coach. Sent the audit, got the proposal signed the same week. Worked contract saved me a $400 attorney hour.</p>
+          <div class="buyer-attr">
+            <span class="buyer-name">Daniel R., Asheville NC</span>
+            <span class="buyer-verified">✓ Verified buyer</span>
+            <span class="buyer-email">d.rivera@example.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="buyer-card">
+        <div class="buyer-avatar">M</div>
+        <div class="buyer-content">
+          <div class="buyer-headline">13 templates + 30-day plan = first client</div>
+          <div class="buyer-stars">★★★★★</div>
+          <p class="buyer-quote">I'd been an STR creator for 2 years and never charged for it. Read the Kit on a Sunday, sent 30 cold pitches on Monday, signed the first client by Friday. The pricing calculator alone was worth 10x.</p>
+          <div class="buyer-attr">
+            <span class="buyer-name">Maya P., Denver CO</span>
+            <span class="buyer-verified">✓ Verified buyer</span>
+            <span class="buyer-email">maya@example.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section id="faq" class="section faq-section">
+  <div class="section-inner">
+    <div class="section-head-center">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-title">What creators ask before they buy.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">
+          I'm an STR creator, not a cohost yet. Will this actually help?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Yes — that's the exact use case. If you already run your own listing, you have 90% of the operating skill. The Kit adds the missing 10%: the 18-clause contract, the 30-day plan, the outreach scripts, the audit scorecard, the pricing math. Read Module 1 (the positioning brief) and you'll know within an hour whether this is for you.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          I don't have any cohosting experience yet — can I still use this?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>The Kit assumes you can run a listing. If you've never managed an Airbnb, start by managing your own — the Kit will then give you the playbook to convert that into a paid practice. If you've never run a listing at all, the Kit isn't the right starting point; rent and run one first.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Is the contract legally binding?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>It's a real contract, written in legal-style language, populated with all the clauses a cohosting engagement needs. But it's a template, not legal advice — your attorney should review before signing with real money.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Do I get updates?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Yes. v7 is the current edition. v8, v9, v10 ship as the playbook is refined; every buyer gets the new editions free.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          What if I hate it?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Email snow@hostflow.me within 7 days. Refund. No friction.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FINAL CTA ============== -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <div class="section-eyebrow final-cta-eyebrow">Last thought</div>
+    <h2 class="final-cta-title">You already know how. <em>Charge for it.</em></h2>
+    <p class="final-cta-sub">$49 is the price of a domain renewal. The Kit is the operating reference for the rest of your cohosting practice. First client pays for itself in week 2.</p>
+    <a href="https://buy.stripe.com/dRm28scN43UTez1d3u2kw01" class="final-cta-btn">
+      Get the Kit — $49 →
     </a>
-    <div class="close-trust">
-      <span>✓ Instant download</span>
+    <div class="final-cta-trust">
+      <span>✓ Instant PDF</span>
       <span>✓ Stripe checkout</span>
       <span>✓ 7-day refund</span>
+      <span>✓ Free updates</span>
     </div>
   </div>
 </section>
 
+<!-- ============== FOOTER ============== -->
 <footer class="footer">
-  © 2026 Hostflow · A Snow Studio venture · <em>Operate smarter. Host better.</em>
+  <div class="footer-inner">
+    <div>© 2026 Hostflow · A Snow Studio venture</div>
+    <div><em>Operate smarter. Host better.</em></div>
+  </div>
 </footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
 
 </body>
 </html>
