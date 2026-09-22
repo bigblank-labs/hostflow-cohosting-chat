@@ -201,12 +201,14 @@ button { font-family: inherit; }
   flex-shrink: 0;
 }
 .hero-title {
-  font-size: clamp(2rem, 5.5vw, 4.4rem);
+  font-size: clamp(1.85rem, 5.5vw, 4.4rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.035em;
   color: var(--ink);
   margin-bottom: 1.25rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .hero-title em {
   font-style: normal;
@@ -214,7 +216,6 @@ button { font-family: inherit; }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  white-space: nowrap;
 }
 .hero-sub {
   font-size: 16px;
