@@ -3,240 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HostFlow GTM — Activity Audit</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>HostFlow — Post today</title>
 <style>
-  :root {
-    --bg: #FAF8F2; --ink: #0A0B0E; --muted: #6B6F78; --line: #E5E3DA;
-    --blue: #2E5BFF; --green: #22C55E; --amber: #B7791F; --red: #DC2626;
-  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; font-size: 14px; line-height: 1.5; color: var(--ink); background: var(--bg); padding: 1.5rem; }
-  header { max-width: 1400px; margin: 0 auto 1.5rem; }
-  h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
-  .sub { font-size: 13px; color: var(--muted); }
-  .updated { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.85rem; max-width: 1400px; margin: 0 auto 1.5rem; }
-  .card { background: white; border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.15rem; }
-  .card-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
-  .card-value { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
-  .card-value.revenue { color: var(--blue); }
-  .card-sub { font-size: 11.5px; color: var(--muted); margin-top: 0.2rem; }
-  .controls { max-width: 1400px; margin: 0 auto 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
-  .controls input, .controls select { padding: 0.55rem 0.85rem; border: 1px solid var(--line); border-radius: 8px; font-size: 13px; font-family: inherit; background: white; }
-  .controls .grow { flex: 1; min-width: 200px; }
-  .controls a { padding: 0.55rem 0.9rem; background: var(--ink); color: white; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; }
-  .panel { background: white; border: 1px solid var(--line); border-radius: 14px; max-width: 1400px; margin: 0 auto 1.5rem; overflow: hidden; }
-  .panel-head { padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); font-weight: 700; }
-  .panel-body { padding: 1rem 1.25rem; }
-  .pains { list-style: none; column-count: 2; column-gap: 2rem; }
-  .pains li { padding: 0.35rem 0; font-size: 13.5px; }
-  .pains strong { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--blue); background: var(--line); padding: 1px 6px; border-radius: 4px; margin-right: 0.4rem; }
-  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-  thead { background: #F4F4EE; position: sticky; top: 0; z-index: 5; }
-  th { text-align: left; padding: 0.65rem 0.85rem; font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); cursor: pointer; user-select: none; }
-  th:hover { color: var(--ink); }
-  td { padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-  tr:hover td { background: #FAFAF6; }
-  .id { font-family: 'JetBrains Mono', monospace; color: var(--muted); font-size: 11px; }
-  .date { font-family: 'JetBrains Mono', monospace; font-size: 11px; white-space: nowrap; }
-  .community { font-weight: 600; font-size: 12px; }
-  .score { font-family: 'JetBrains Mono', monospace; font-weight: 700; text-align: center; border-radius: 6px; }
-  .score-high { color: white; background: var(--blue); }
-  .score-med { color: var(--ink); background: #FFE9C0; }
-  .score-low { color: var(--muted); background: var(--line); }
-  .cat { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: center; }
-  .title a { color: var(--ink); text-decoration: none; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #111;
+    background: #fafaf7;
+    padding: 24px 20px 80px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .meta { color: #6b6f78; font-size: 13px; margin-bottom: 28px; }
+  .row {
+    background: white;
+    border: 1px solid #e7e5dd;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .row-head {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .sub { color: #6b6f78; font-size: 12px; font-weight: 500; }
+  .score { background: #eef2ff; color: #2e5bff; padding: 1px 8px; border-radius: 4px;
+           font-size: 11px; font-weight: 600; font-family: ui-monospace, monospace; }
+  .subreddit { font-weight: 600; font-size: 13px; }
+  .title { font-size: 14px; }
+  .title a { color: #111; text-decoration: none; }
   .title a:hover { text-decoration: underline; }
-  .level { font-size: 10.5px; color: var(--muted); white-space: nowrap; }
-  .cta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--blue); white-space: nowrap; }
-  .status { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 2px 6px; border-radius: 4px; }
-  .status-open { background: #DBEAFE; color: #1E40AF; }
-  .status-posted { background: var(--green); color: white; }
-  .status-closed { background: #E5E7EB; color: var(--ink); }
-  .status-followed_up { background: #FEF3C7; color: #92400E; }
-  .response { font-size: 11.5px; color: var(--ink); line-height: 1.45; max-width: 320px; }
-  footer { max-width: 1400px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
-  .badge { display: inline-block; background: var(--line); padding: 2px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; }
-  @media (max-width: 700px) { .pains { column-count: 1; } .grid { grid-template-columns: repeat(2, 1fr); } }
+  pre.copy {
+    background: #f6f5ee;
+    border: 1px solid #e7e5dd;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    cursor: pointer;
+    user-select: all;
+    position: relative;
+  }
+  pre.copy:hover { background: #efece2; }
+  .hint { font-size: 11px; color: #6b6f78; margin-top: 6px; font-style: italic; }
+  .empty { padding: 40px 20px; text-align: center; color: #6b6f78; background: white;
+           border: 1px dashed #d3d6da; border-radius: 12px; }
+  footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e7e5dd;
+           color: #6b6f78; font-size: 12px; }
 </style>
 </head>
 <body>
+<h1>Post today</h1>
+<div class="meta">2026-09-30T07:38:10.221629+00:00Z · 13 drafts to post</div>
 
-<header>
-  <h1>HostFlow GTM — activity audit</h1>
-  <div class="sub">Every research row, draft, response, and reply, with the source link to the thread.</div>
-  <div class="updated">updated 2026-09-29T10:51:30.669999Z · 16 rows · page rendered every cron cycle</div>
-</header>
 
-<section class="grid">
-  <div class="card">
-    <div class="card-label">Total rows</div>
-    <div class="card-value">16</div>
-    <div class="card-sub">all-time activity</div>
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/AirBnBHosts</span>
+    <span class="score">score 11</span>
   </div>
-  <div class="card">
-    <div class="card-label">Drafts today</div>
-    <div class="card-value">5</div>
-    <div class="card-sub">2026-09-29</div>
-  </div>
-  <div class="card">
-    <div class="card-label">Open drafts</div>
-    <div class="card-value">13</div>
-    <div class="card-sub">awaiting your review</div>
-  </div>
-  <div class="card">
-    <div class="card-label">Kit mentions</div>
-    <div class="card-value">5</div>
-    <div class="card-sub">all-time</div>
-  </div>
-  <div class="card">
-    <div class="card-label">Free-guide mentions</div>
-    <div class="card-value">11</div>
-    <div class="card-sub">all-time</div>
-  </div>
-  <div class="card">
-    <div class="card-label">Avg score</div>
-    <div class="card-value">7.7</div>
-    <div class="card-sub">opportunity rating</div>
-  </div>
-  <div class="card">
-    <div class="card-label">Replies received</div>
-    <div class="card-value">0</div>
-    <div class="card-sub">awaiting live posting</div>
-  </div>
-  <div class="card">
-    <div class="card-label">Leads / Sales</div>
-    <div class="card-value">0 / 0</div>
-    <div class="card-sub">$0.00 revenue</div>
-  </div>
-</section>
-
-<section class="panel">
-  <div class="panel-head">Top pain points (cumulative)</div>
-  <div class="panel-body">
-    <ul class="pains"><li><strong>14×</strong> owner confused on fee structure — flat vs % vs hybrid</li>
-<li><strong>14×</strong> owner/operator scaling pain: how to add units without losing quality</li>
-<li><strong>14×</strong> how long does the acquisition cycle actually take?</li>
-<li><strong>14×</strong> existing pms looking for new services or upsells</li>
-<li><strong>14×</strong> want real-estate side income without buying</li>
-<li><strong>14×</strong> looking for a serious side hustle</li>
-<li><strong>3×</strong> owner confused on fee structure — flat vs %</li>
-<li><strong>3×</strong> cleaner accountability / photo verification</li></ul>
-  </div>
-</section>
-
-<div class="controls">
-  <input id="q" class="grow" placeholder="search title, response, community…" />
-  <select id="community">
-    <option value="">all communities</option>
-  </select>
-  <select id="status">
-    <option value="">all status</option>
-    <option value="open">open</option>
-    <option value="posted">posted</option>
-    <option value="closed">closed</option>
-    <option value="followed_up">followed_up</option>
-  </select>
-  <a href="activity.csv" download>⇩ activity.csv</a>
+  <div class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1vwzxyq/what_happens_when_you_remove_listing_with_current/" target="_blank" rel="noopener">What happens when you remove listing with current reservations</a></div>
+  <pre class="copy">Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily instead of seasonally, and over-communicate with guests at check-in and check-out. Most operators leave 15-30% of revenue on the table from one of those four.</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
 </div>
 
-<section class="panel" style="padding: 0;">
-  <table id="rows">
-    <thead>
-      <tr>
-        <th data-sort="id">id</th>
-        <th data-sort="date">date</th>
-        <th>community</th>
-        <th data-sort="score">score</th>
-        <th>cat</th>
-        <th>title / source link</th>
-        <th>level</th>
-        <th>cta</th>
-        <th>status</th>
-        <th>our response</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-date="2026-09-29" data-score="11" data-community="r/AirBnBHosts" data-category="G" data-status="open"><td class="id">132</td><td class="date">2026-09-29</td><td class="community">r/AirBnBHosts</td><td class="score score-high">11</td><td class="cat">G</td><td class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1vwzxyq/what_happens_when_you_remove_listing_with_current/" target="_blank" rel="noopener">What happens when you remove listing with current reservations</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-open">open</td><td class="response" title="Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily instead of seasonally, and over-communicate with guests at check-in and check-out. Most operators leave 15-30% of revenue on the table from one of those four.">Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily …</td></tr>
-<tr data-date="2026-09-29" data-score="8" data-community="r/AirBnBHosts" data-category="A" data-status="open"><td class="id">131</td><td class="date">2026-09-29</td><td class="community">r/AirBnBHosts</td><td class="score score-med">8</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1wspc6v/handling_property_damage_claims_and_guest/" target="_blank" rel="noopener">Handling property damage claims and guest security holds without losing hours on</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">STARTER_KIT</td><td class="status status-open">open</td><td class="response" title="Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins ">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run…</td></tr>
-<tr data-date="2026-09-29" data-score="8" data-community="r/PropertyManagement" data-category="G" data-status="superseded"><td class="id">130</td><td class="date">2026-09-29</td><td class="community">r/PropertyManagement</td><td class="score score-med">8</td><td class="cat">G</td><td class="title"><a href="https://www.reddit.com/r/PropertyManagement/comments/1wt6hzf/renting_out_my_property_from_the_uk_need_advice/" target="_blank" rel="noopener">Renting Out My Property from the UK: Need Advice on 99acres, Magicbricks &amp; N</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-superseded">superseded</td><td class="response" title="Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily instead of seasonally, and over-communicate with guests at check-in and check-out. Most operators leave 15-30% of revenue on the table from one of those four.">Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily …</td></tr>
-<tr data-date="2026-09-29" data-score="8" data-community="r/AirBnBHosts" data-category="A" data-status="open"><td class="id">129</td><td class="date">2026-09-29</td><td class="community">r/AirBnBHosts</td><td class="score score-med">8</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1wghs9h/last_minute_cancellation_process_question/" target="_blank" rel="noopener">Last minute cancellation process question.</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-open">open</td><td class="response" title="Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low months and rewards you on peak ones. Pure % breaks when the calendar goes empty; pure flat leaves money on the table when it doesn't.">Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low mont…</td></tr>
-<tr data-date="2026-09-29" data-score="10" data-community="r/PropertyManagement" data-category="B" data-status="open"><td class="id">128</td><td class="date">2026-09-29</td><td class="community">r/PropertyManagement</td><td class="score score-high">10</td><td class="cat">B</td><td class="title"><a href="https://www.reddit.com/r/PropertyManagement/comments/1wsvzbm/property_managers_using_buildium_or_appfolio_what/" target="_blank" rel="noopener">Property managers using Buildium or AppFolio, what does bank reconciliation actu</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-open">open</td><td class="response" title="Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily instead of seasonally, and over-communicate with guests at check-in and check-out. Most operators leave 15-30% of revenue on the table from one of those four.">Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily …</td></tr>
-<tr data-date="2026-09-28" data-score="4" data-community="r/sidehustle" data-category="D" data-status="open"><td class="id">127</td><td class="date">2026-09-28</td><td class="community">r/sidehustle</td><td class="score score-low">4</td><td class="cat">D</td><td class="title"><a href="https://www.reddit.com/r/sidehustle/comments/1wrw32z/side_hustle_geared_toward_hightraffic_residential/" target="_blank" rel="noopener">Side hustle geared toward high-traffic residential areas</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">STARTER_KIT</td><td class="status status-open">open</td><td class="response" title="Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins ">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run…</td></tr>
-<tr data-date="2026-09-28" data-score="6" data-community="r/PropertyManagement" data-category="G" data-status="superseded"><td class="id">126</td><td class="date">2026-09-28</td><td class="community">r/PropertyManagement</td><td class="score score-low">6</td><td class="cat">G</td><td class="title"><a href="https://www.reddit.com/r/PropertyManagement/comments/1wnh73s/have_an_address_handy/" target="_blank" rel="noopener">Have an Address Handy</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-superseded">superseded</td><td class="response" title="Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily instead of seasonally, and over-communicate with guests at check-in and check-out. Most operators leave 15-30% of revenue on the table from one of those four.">Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily …</td></tr>
-<tr data-date="2026-09-28" data-score="7" data-community="r/cohosting" data-category="A" data-status="open"><td class="id">125</td><td class="date">2026-09-28</td><td class="community">r/cohosting</td><td class="score score-med">7</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/cohosting/comments/1nvbnjw/first_cohosting_client_where_did_you_find_them/" target="_blank" rel="noopener">First cohosting client — where did you find them?</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-open">open</td><td class="response" title="Finding the first client is the hardest part — and almost no one does it the way the marketing says. What actually works: pick 5-10 STRs in your city that are clearly under-managed (old photos, slow replies, no reviews in 90 days), then walk in with a one-page audit + a concrete number (&quot;I can get y">Finding the first client is the hardest part — and almost no one does it the way the marketing says. What actually works: pick 5-10 STRs in …</td></tr>
-<tr data-date="2026-09-28" data-score="9" data-community="r/sidehustle" data-category="A" data-status="open"><td class="id">124</td><td class="date">2026-09-28</td><td class="community">r/sidehustle</td><td class="score score-med">9</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/sidehustle/comments/1pjqz5k/airbnb_property_management_as_side_hustle/" target="_blank" rel="noopener">Airbnb property management as a side hustle — realistic?</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">STARTER_KIT</td><td class="status status-open">open</td><td class="response" title="Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins ">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run…</td></tr>
-<tr data-date="2026-09-28" data-score="5" data-community="r/RealEstate" data-category="A" data-status="open"><td class="id">123</td><td class="date">2026-09-28</td><td class="community">r/RealEstate</td><td class="score score-low">5</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/RealEstate/comments/1l8f12j/real_estate_income_without_buying_property/" target="_blank" rel="noopener">Real estate income without buying property</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">STARTER_KIT</td><td class="status status-open">open</td><td class="response" title="Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins ">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run…</td></tr>
-<tr data-date="2026-09-28" data-score="10" data-community="r/PropertyManagement" data-category="A" data-status="open"><td class="id">122</td><td class="date">2026-09-28</td><td class="community">r/PropertyManagement</td><td class="score score-high">10</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/PropertyManagement/comments/1ka0ty7/fee_structure_downside/" target="_blank" rel="noopener">Fee structure downside</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-open">open</td><td class="response" title="Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low months and rewards you on peak ones. Pure % breaks when the calendar goes empty; pure flat leaves money on the table when it doesn't.">Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low mont…</td></tr>
-<tr data-date="2026-09-28" data-score="3" data-community="r/PropertyManagement" data-category="A" data-status="open"><td class="id">121</td><td class="date">2026-09-28</td><td class="community">r/PropertyManagement</td><td class="score score-low">3</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/PropertyManagement/comments/1n9mv91/who_when_to_hire_staff/" target="_blank" rel="noopener">Who &amp; When To Hire Staff?</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-open">open</td><td class="response" title="Scaling STR ops past 1-2 units usually breaks on three things in order: cleaner consistency (photo-verified turnovers, not 'looks clean'), pricing (one tool, daily rates, not spreadsheet wars), and owner reporting (monthly statement template, sent the 5th). Once those four systems exist, scaling is ">Scaling STR ops past 1-2 units usually breaks on three things in order: cleaner consistency (photo-verified turnovers, not 'looks clean'), p…</td></tr>
-<tr data-date="2026-09-28" data-score="10" data-community="r/shorttermrentals" data-category="A" data-status="open"><td class="id">120</td><td class="date">2026-09-28</td><td class="community">r/shorttermrentals</td><td class="score score-high">10</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/ShortTermRentals/comments/1vb96dc/looking_for_a_scalable_way_to_find_shortterm/" target="_blank" rel="noopener">Looking for a scalable way to find short-term rental leads</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-open">open</td><td class="response" title="Finding the first client is the hardest part — and almost no one does it the way the marketing says. What actually works: pick 5-10 STRs in your city that are clearly under-managed (old photos, slow replies, no reviews in 90 days), then walk in with a one-page audit + a concrete number (&quot;I can get y">Finding the first client is the hardest part — and almost no one does it the way the marketing says. What actually works: pick 5-10 STRs in …</td></tr>
-<tr data-date="2026-09-28" data-score="7" data-community="r/AirBnBHosts" data-category="A" data-status="open"><td class="id">119</td><td class="date">2026-09-28</td><td class="community">r/AirBnBHosts</td><td class="score score-med">7</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1tpq3kp/cleaning_fee/" target="_blank" rel="noopener">Cleaning Fee</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-open">open</td><td class="response" title="Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low months and rewards you on peak ones. Pure % breaks when the calendar goes empty; pure flat leaves money on the table when it doesn't.">Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low mont…</td></tr>
-<tr data-date="2026-09-28" data-score="7" data-community="r/AirBnBHosts" data-category="A" data-status="open"><td class="id">118</td><td class="date">2026-09-28</td><td class="community">r/AirBnBHosts</td><td class="score score-med">7</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1m3uhmn/best_way_to_benefit_from_a_superhosts_status/" target="_blank" rel="noopener">Best way to benefit from a Superhost's status while keeping the listing under my</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">STARTER_KIT</td><td class="status status-open">open</td><td class="response" title="Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins ">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run…</td></tr>
-<tr data-date="2026-09-28" data-score="10" data-community="r/AirBnBHosts" data-category="A" data-status="failed_post"><td class="id">117</td><td class="date">2026-09-28</td><td class="community">r/AirBnBHosts</td><td class="score score-high">10</td><td class="cat">A</td><td class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1msp1hu/ifwhenhow_should_i_give_feedback/" target="_blank" rel="noopener">If/when/how should I give feedback?</a></td><td class="level">LEVEL_2_TEACH</td><td class="cta">FREE_GUIDE</td><td class="status status-failed_post">failed_post</td><td class="response" title="The operational stuff that actually matters: a 10-item cleaner SOP with photo proof required, a guest-message template library you can fire-and-forget for the 80% of repeat questions, and a maintenance triage doc (urgent / this-week / next-stay). Build those once and you'll never think about them ag">The operational stuff that actually matters: a 10-item cleaner SOP with photo proof required, a guest-message template library you can fire-…</td></tr>
-    </tbody>
-  </table>
-</section>
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/PropertyManagement</span>
+    <span class="score">score 10</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/PropertyManagement/comments/1wsvzbm/property_managers_using_buildium_or_appfolio_what/" target="_blank" rel="noopener">Property managers using Buildium or AppFolio, what does bank reconciliation actually look like for you?</a></div>
+  <pre class="copy">Without seeing your specific setup, the usual things that move the needle: tighten your listing copy, refresh photos quarterly, price daily instead of seasonally, and over-communicate with guests at check-in and check-out. Most operators leave 15-30% of revenue on the table from one of those four.</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/PropertyManagement</span>
+    <span class="score">score 10</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/PropertyManagement/comments/1ka0ty7/fee_structure_downside/" target="_blank" rel="noopener">Fee structure downside</a></div>
+  <pre class="copy">Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low months and rewards you on peak ones. Pure % breaks when the calendar goes empty; pure flat leaves money on the table when it doesn't.</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/shorttermrentals</span>
+    <span class="score">score 10</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/ShortTermRentals/comments/1vb96dc/looking_for_a_scalable_way_to_find_shortterm/" target="_blank" rel="noopener">Looking for a scalable way to find short-term rental leads</a></div>
+  <pre class="copy">Finding the first client is the hardest part — and almost no one does it the way the marketing says. What actually works: pick 5-10 STRs in your city that are clearly under-managed (old photos, slow replies, no reviews in 90 days), then walk in with a one-page audit + a concrete number (&quot;I can get you X more nights/month at Y fee, no contract until you see it&quot;). Two of ten will say yes; one of those turns into a referral.
+
+I broke down the first-client loop into a one-page cheatsheet if it's useful — DM me and I'll send it.</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/sidehustle</span>
+    <span class="score">score 9</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/sidehustle/comments/1pjqz5k/airbnb_property_management_as_side_hustle/" target="_blank" rel="noopener">Airbnb property management as a side hustle — realistic?</a></div>
+  <pre class="copy">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins are real ($400-800/unit/month once you've got the systems).
+
+If you want the playbook we use — positioning brief, 30-day plan, contract template, pricing math — I packaged it here: https://www.hostflow.academy/</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/AirBnBHosts</span>
+    <span class="score">score 8</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1wspc6v/handling_property_damage_claims_and_guest/" target="_blank" rel="noopener">Handling property damage claims and guest security holds without losing hours on administrative disputes</a></div>
+  <pre class="copy">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins are real ($400-800/unit/month once you've got the systems).
+
+If you want the playbook we use — positioning brief, 30-day plan, contract template, pricing math — I packaged it here: https://www.hostflow.academy/</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/AirBnBHosts</span>
+    <span class="score">score 8</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1wghs9h/last_minute_cancellation_process_question/" target="_blank" rel="noopener">Last minute cancellation process question.</a></div>
+  <pre class="copy">Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low months and rewards you on peak ones. Pure % breaks when the calendar goes empty; pure flat leaves money on the table when it doesn't.</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/cohosting</span>
+    <span class="score">score 7</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/cohosting/comments/1nvbnjw/first_cohosting_client_where_did_you_find_them/" target="_blank" rel="noopener">First cohosting client — where did you find them?</a></div>
+  <pre class="copy">Finding the first client is the hardest part — and almost no one does it the way the marketing says. What actually works: pick 5-10 STRs in your city that are clearly under-managed (old photos, slow replies, no reviews in 90 days), then walk in with a one-page audit + a concrete number (&quot;I can get you X more nights/month at Y fee, no contract until you see it&quot;). Two of ten will say yes; one of those turns into a referral.
+
+I broke down the first-client loop into a one-page cheatsheet if it's useful — DM me and I'll send it.</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/AirBnBHosts</span>
+    <span class="score">score 7</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1tpq3kp/cleaning_fee/" target="_blank" rel="noopener">Cleaning Fee</a></div>
+  <pre class="copy">Quick framing on fees: most cohosts run a hybrid (20-25% of booking subtotal + a $200-400 monthly floor) because it protects you on low months and rewards you on peak ones. Pure % breaks when the calendar goes empty; pure flat leaves money on the table when it doesn't.</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/AirBnBHosts</span>
+    <span class="score">score 7</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/AirBnBHosts/comments/1m3uhmn/best_way_to_benefit_from_a_superhosts_status/" target="_blank" rel="noopener">Best way to benefit from a Superhost's status while keeping the listing under my account?</a></div>
+  <pre class="copy">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins are real ($400-800/unit/month once you've got the systems).
+
+If you want the playbook we use — positioning brief, 30-day plan, contract template, pricing math — I packaged it here: https://www.hostflow.academy/</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/RealEstate</span>
+    <span class="score">score 5</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/RealEstate/comments/1l8f12j/real_estate_income_without_buying_property/" target="_blank" rel="noopener">Real estate income without buying property</a></div>
+  <pre class="copy">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins are real ($400-800/unit/month once you've got the systems).
+
+If you want the playbook we use — positioning brief, 30-day plan, contract template, pricing math — I packaged it here: https://www.hostflow.academy/</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/sidehustle</span>
+    <span class="score">score 4</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/sidehustle/comments/1wrw32z/side_hustle_geared_toward_hightraffic_residential/" target="_blank" rel="noopener">Side hustle geared toward high-traffic residential areas</a></div>
+  <pre class="copy">Yes — cohosting is the cleanest way to earn real-estate-adjacent income without buying anything. You take over someone else's Airbnb and run it for a fee (typically 20-25%). Most cohosts start with 1-2 units from owners in their network, then grow through referrals from those first clients. Margins are real ($400-800/unit/month once you've got the systems).
+
+If you want the playbook we use — positioning brief, 30-day plan, contract template, pricing math — I packaged it here: https://www.hostflow.academy/</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
+
+<div class="row">
+  <div class="row-head">
+    <span class="subreddit">r/PropertyManagement</span>
+    <span class="score">score 3</span>
+  </div>
+  <div class="title"><a href="https://www.reddit.com/r/PropertyManagement/comments/1n9mv91/who_when_to_hire_staff/" target="_blank" rel="noopener">Who &amp; When To Hire Staff?</a></div>
+  <pre class="copy">Scaling STR ops past 1-2 units usually breaks on three things in order: cleaner consistency (photo-verified turnovers, not 'looks clean'), pricing (one tool, daily rates, not spreadsheet wars), and owner reporting (monthly statement template, sent the 5th). Once those four systems exist, scaling is just adding units — without them, scaling is hiring yourself into a corner.</pre>
+  <div class="hint">Click the link → paste above into the comment box → submit</div>
+</div>
+
 
 <footer>
-  <div>HostFlow GTM activity audit · v1 · all data sourced from gtm.db</div>
-  <div>
-    <span class="badge">L1</span> pure value &nbsp;
-    <span class="badge">L2</span> co-hosting teach &nbsp;
-    <span class="badge">L3</span> resource intro
-  </div>
+  Updates every 9am UTC. <a href="activity.csv" style="color:#2e5bff;">Full CSV</a> · <a href="activity-latest.json" style="color:#2e5bff;">JSON</a>
 </footer>
-
-<script>
-(function() {
-  const q = document.getElementById('q');
-  const community = document.getElementById('community');
-  const status = document.getElementById('status');
-  const tbody = document.querySelector('#rows tbody');
-  const rows = Array.from(tbody.querySelectorAll('tr'));
-
-  const communities = new Set();
-  for (const r of rows) communities.add(r.dataset.community);
-  for (const c of [...communities].sort()) {
-    const o = document.createElement('option');
-    o.value = c; o.textContent = c;
-    community.appendChild(o);
-  }
-
-  function filter() {
-    const needle = q.value.toLowerCase();
-    const com = community.value;
-    const st = status.value;
-    for (const r of rows) {
-      const text = r.innerText.toLowerCase();
-      const matchQ = !needle || text.includes(needle);
-      const matchC = !com || r.dataset.community === com;
-      const matchS = !st || r.dataset.status === st;
-      r.style.display = (matchQ && matchC && matchS) ? '' : 'none';
-    }
-  }
-  [q, community, status].forEach(el => el.addEventListener('input', filter));
-
-  document.querySelectorAll('thead th[data-sort]').forEach(th => {
-    th.addEventListener('click', () => {
-      const key = th.dataset.sort;
-      const dir = th.dataset.dir === 'asc' ? 'desc' : 'asc';
-      th.dataset.dir = dir;
-      const sorted = [...rows].sort((a, b) => {
-        const av = a.dataset[key], bv = b.dataset[key];
-        const an = (key === 'id' || key === 'score') ? parseFloat(av) : av;
-        const bn = (key === 'id' || key === 'score') ? parseFloat(bv) : bv;
-        if (an < bn) return dir === 'asc' ? -1 : 1;
-        if (an > bn) return dir === 'asc' ? 1 : -1;
-        return 0;
-      });
-      sorted.forEach(r => tbody.appendChild(r));
-    });
-  });
-})();
-</script>
 
 </body>
 </html>
