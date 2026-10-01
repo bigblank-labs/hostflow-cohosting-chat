@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HostFlow — Autonomous GTM Roadmap</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #fafaf7;
+    --panel: #ffffff;
+    --line: #e7e5dd;
+    --ink: #0a0b0e;
+    --muted: #6b6f78;
+    --blue: #2e5bff;
+    --green: #1f7a4d;
+    --amber: #b7791f;
+    --red: #c5302a;
+    --done: #e6f4ea;
+    --next: #fff4e0;
+    --blocked: #fce6e5;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--bg);
+    padding: 32px 24px 80px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+  h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin: 40px 0 12px;
+       padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; }
+  p { color: #1a1a1d; margin-bottom: 12px; }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 32px; }
+  .goal { background: #f0f4ff; border-left: 3px solid var(--blue); padding: 14px 18px;
+          border-radius: 6px; margin-bottom: 28px; font-size: 14px; }
+  .phase { background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+           padding: 18px 22px; margin-bottom: 16px; }
+  .phase-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px;
+               flex-wrap: wrap; }
+  .phase-num { background: #111; color: white; font-size: 11px; font-weight: 700;
+               padding: 2px 8px; border-radius: 4px; font-family: ui-monospace, monospace; }
+  .phase-name { font-size: 17px; font-weight: 700; }
+  .phase-time { color: var(--muted); font-size: 12px; margin-left: auto; }
+  .phase-status { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px;
+                  text-transform: uppercase; letter-spacing: 0.04em; }
+  .status-done { background: var(--done); color: var(--green); }
+  .status-next { background: var(--next); color: var(--amber); }
+  .status-blocked { background: var(--blocked); color: var(--red); }
+  .phase-body { font-size: 14px; color: #2a2a2d; }
+  .phase-body p { margin-bottom: 8px; }
+  ul { padding-left: 22px; margin: 6px 0 12px; }
+  li { margin-bottom: 4px; }
+  .table-wrap { overflow-x: auto; margin: 14px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 8px 10px; background: #f5f3eb; font-weight: 600;
+       border-bottom: 1px solid var(--line); }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .links a { display: inline-block; padding: 6px 12px; border: 1px solid var(--line);
+             border-radius: 6px; font-size: 13px; text-decoration: none; color: var(--ink);
+             background: #fdfdfb; }
+  .links a:hover { background: #f5f3eb; }
+  .links a.primary { background: var(--blue); color: white; border-color: var(--blue); }
+  .links a.primary:hover { background: #1d3fbb; }
+  .loop { background: linear-gradient(135deg, #f8f5ff 0%, #f0f4ff 100%);
+          border: 1px solid #e0e5ff; border-radius: 12px; padding: 22px;
+          margin: 28px 0; }
+  .loop-title { font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+                text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+  .loop-flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+               font-family: ui-monospace, monospace; font-size: 13px; }
+  .step { background: white; border: 1px solid var(--line); padding: 8px 14px;
+          border-radius: 6px; white-space: nowrap; }
+  .arrow { color: var(--muted); }
+  .metric { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted);
+            background: #fdfdfb; padding: 2px 6px; border-radius: 4px; }
+  code { background: #f5f3eb; padding: 1px 6px; border-radius: 4px; font-family: ui-monospace, monospace;
+         font-size: 13px; }
+  hr { border: none; border-top: 1px dashed var(--line); margin: 36px 0; }
+  .next-step { background: var(--ink); color: white; padding: 18px 22px;
+               border-radius: 10px; margin-top: 28px; }
+  .next-step .label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+                     opacity: 0.6; margin-bottom: 4px; }
+  .next-step .action { font-size: 15px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<h1>HostFlow — Autonomous GTM Roadmap</h1>
+<div class="sub">90-day plan to reach $5k/mo profit with a self-tuning digital-product agent.</div>
+
+<div class="goal">
+<strong>North star:</strong> The agent does everything — research, build, distribute, measure, reinvest.
+You review approvals. $5k/mo profit by day 90.
+</div>
+
+<div class="loop">
+  <div class="loop-title">The closed loop</div>
+  <div class="loop-flow">
+    <span class="step">research</span><span class="arrow">→</span>
+    <span class="step">build</span><span class="arrow">→</span>
+    <span class="step">distribute</span><span class="arrow">→</span>
+    <span class="step">measure</span><span class="arrow">→</span>
+    <span class="step">reinvest</span><span class="arrow">→</span>
+    <span class="step" style="background:#dfe7ff;border-color:var(--blue);">research…</span>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-top:14px;margin-bottom:0;">
+    Each cycle feeds the next. By day 60 the agent picks its own next product
+    based on what sold. By day 90 it's adjusting copy, timing, and channels from
+    its own data. You approve the final version, agent ships it.
+  </p>
+</div>
+
+<h2>Live today (right now)</h2>
+
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">LIVE</span>
+    <span class="phase-name">Distribute + Measure</span>
+    <span class="phase-time">Day 0</span>
+    <span class="phase-status status-done">SHIPPED</span>
+  </div>
+  <div class="phase-body">
+    <p><strong>What works today:</strong> Agent pulls real Reddit threads, scores them, generates context-aware drafts, ships a daily bundle via Telegram + a simple posting page + Notion DB.</p>
+    <p><strong>Live URLs:</strong></p>
+    <ul>
+      <li>Posting page (one-click copy-paste): <code>bigblank-labs.github.io/hostflow-cohosting-chat/gtm/</code></li>
+      <li>Daily Notion card (HostFlow workspace): <code>notion.so/3eba6870764c81e884d6d63d1a8ba8f8</code></li>
+      <li>GTM Activity DB: <code>notion.so/a86c28b61a4d46f9be62598c44ed950f</code></li>
+      <li>Download bundle (local poster): <code>bigblank-labs.github.io/hostflow-cohosting-chat/download/hostflow_post.py</code></li>
+    </ul>
+    <div class="links">
+      <a class="primary" href="https://bigblank-labs.github.io/hostflow-cohosting-chat/gtm/" target="_blank" rel="noopener">Open posting page</a>
+      <a href="https://www.notion.so/3eba6870764c81e884d6d63d1a8ba8f8" target="_blank" rel="noopener">Notion card</a>
+      <a href="download/hostflow_post.py" target="_blank" rel="noopener">Download poster script</a>
+    </div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">P1</span>
+    <span class="phase-name">Phase 1 — Build (digital products)</span>
+    <span class="phase-time">Days 1–14 · 1 product/week</span>
+    <span class="phase-status status-next">NEXT</span>
+  </div>
+  <div class="phase-body">
+    <p><strong>Goal:</strong> 5 small digital products live, generating traffic + first Stripe sales.</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Product</th><th>Format</th><th>Price</th><th>Effort</th></tr>
+      <tr><td>Airbnb cohost fee calculator</td><td>Interactive HTML</td><td>Free (lead magnet)</td><td>2–3 hrs</td></tr>
+      <tr><td>Cohost SOP pack</td><td>PDF (8 SOP templates)</td><td>$19</td><td>1 hr repackage</td></tr>
+      <tr><td>PM outreach script library</td><td>PDF (10 cold-DM templates)</td><td>Free</td><td>30 min</td></tr>
+      <tr><td>30-day launch plan</td><td>PDF (rebrand of starter kit)</td><td>$39</td><td>1 hr rebrand</td></tr>
+      <tr><td>Quickstart video</td><td>60-sec Loom/record</td><td>Free (embed in landing)</td><td>1 hr</td></tr>
+    </table>
+    </div>
+    <p style="font-size:13px;color:var(--muted);">Don't build one perfect product. Build 5 small ones quickly and let analytics pick the winner.</p>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">P4</span>
+    <span class="phase-name">Phase 4 — Analytics → Auto-reinvest (the missing piece)</span>
+    <span class="phase-time">Days 1–7 (parallel with P1)</span>
+    <span class="phase-status status-next">NEXT</span>
+  </div>
+  <div class="phase-body">
+    <p><strong>Why now:</strong> Without analytics, you're building blind. This is the highest-leverage build first.</p>
+    <ul>
+      <li>Stripe webhook → <code>gtm.db</code> on every checkout (sale, revenue, customer email)</li>
+      <li>Landing page view → <code>gtm.db</code> (which page, dwell time)</li>
+      <li>Reddit click → <code>gtm.db</code> (UTM-tracked permalinks)</li>
+      <li>Agent's daily cycle now reads sale/lead metrics → adjusts strategy</li>
+    </ul>
+    <p style="font-size:13px;color:var(--muted);">~30 min for Stripe webhook + ~30 min for landing analytics. Together: the loop is closed.</p>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">P2</span>
+    <span class="phase-name">Phase 2 — Research (auto-suggest new products)</span>
+    <span class="phase-time">Days 8–14</span>
+    <span class="phase-status status-blocked">BLOCKED ON P1</span>
+  </div>
+  <div class="phase-body">
+    <p><strong>Goal:</strong> Agent proposes new product ideas from Reddit pain points + competitor gaps + Stripe analytics.</p>
+    <ul>
+      <li><code>product_research.py</code> — clusters gtm_activity pain points by frequency, finds gaps vs current catalog</li>
+      <li>Cross-references: BiggerPackets, Vacation Rental University, Airbnb host communities</li>
+      <li>Outputs: <em>title, format (PDF/HTML/video), price, draft outline</em> for each new product idea</li>
+      <li>You review + approve. Agent ships to landing + Notion + CTA library</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">P3</span>
+    <span class="phase-name">Phase 3 — Build pipeline (draft → ship)</span>
+    <span class="phase-time">Days 12–18</span>
+    <span class="phase-status status-blocked">BLOCKED ON P1+P2</span>
+  </div>
+  <div class="phase-body">
+    <p><strong>Goal:</strong> Outline → render → sales copy → Stripe → publish, mostly automated.</p>
+    <ul>
+      <li><code>product_builder.py</code> — turns outline into PDF (reportlab) or HTML page (hostflow-deploy)</li>
+      <li>Auto-creates Stripe payment link</li>
+      <li>Updates <code>gtm.db</code> with the new CTA option so it gets mentioned in posts</li>
+      <li>Publishes to landing + Notion product library</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">P5</span>
+    <span class="phase-name">Phase 5 — Multi-channel distribution</span>
+    <span class="phase-time">Days 18–28</span>
+    <span class="phase-status status-blocked">BLOCKED ON P1+P4</span>
+  </div>
+  <div class="phase-body">
+    <p><strong>Goal:</strong> Stop relying solely on Reddit. Run a daily cross-channel post from one prompt.</p>
+    <ul>
+      <li><strong>LinkedIn</strong> — "I'm helping STR operators..." founder content</li>
+      <li><strong>Twitter/X</strong> — short-form tips, fee calculator screenshots</li>
+      <li><strong>YouTube Shorts</strong> — 60-sec cohosting tips</li>
+      <li><strong>Email drip</strong> — anyone who hits a free tool → 5-email sequence → product</li>
+      <li><strong>IndieHackers / ProductHunt</strong> — every new product launches publicly</li>
+    </ul>
+    <p style="font-size:13px;color:var(--muted);">Same content, different formats. One research cycle → many mouths.</p>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">P6</span>
+    <span class="phase-name">Phase 6 — Self-tuning agent</span>
+    <span class="phase-time">Days 28–60</span>
+    <span class="phase-status status-blocked">BLOCKED ON P1–P5</span>
+  </div>
+  <div class="phase-body">
+    <p><strong>Goal:</strong> Agent reads its own data and adjusts strategy without your input.</p>
+    <ul>
+      <li>Identifies top-converting product → spawns 2 more like it</li>
+      <li>Identifies best-performing subreddit → schedules 2x/day there</li>
+      <li>Identifies best time-of-day → shifts cron accordingly</li>
+      <li>A/B tests CTA copy, posting cadence, subject lines</li>
+      <li>Weekly Sunday report: "what worked, what to do more, what to drop"</li>
+    </ul>
+  </div>
+</div>
+
+<h2>90-day target</h2>
+
+<div class="table-wrap">
+<table>
+  <tr><th>Day</th><th>What's live</th><th>Revenue</th></tr>
+  <tr><td>14</td><td>5 digital products, daily posting, first Stripe sale recorded</td><td>$0–100</td></tr>
+  <tr><td>30</td><td>Products + organic, agent posting to 3+ channels</td><td>$200–500/mo</td></tr>
+  <tr><td>60</td><td>Agent auto-suggests + builds new products from winning patterns</td><td>$1–2k/mo</td></tr>
+  <tr><td>90</td><td>Self-sustaining loop. You review approvals, agent does everything else</td><td>$3–5k/mo</td></tr>
+</table>
+</div>
+
+<h2>What I want to be honest about</h2>
+
+<p>This is <strong>2–4 weeks of building, not 2–4 days</strong>. The "full auto pilot" is real but requires:</p>
+<ul>
+  <li>4–5 product builds to start (1 per week)</li>
+  <li>Stripe webhook integration</li>
+  <li>Landing page analytics</li>
+  <li>Email capture + drip</li>
+  <li>Multi-channel posting</li>
+</ul>
+
+<p>I can build all of this. Tell me which phase to start with and I'll execute.</p>
+
+<hr>
+
+<div class="next-step">
+  <div class="label">RECOMMENDED NEXT STEP</div>
+  <div class="action">Build the Stripe webhook + landing analytics — closes the loop so the agent can see what sells. ~1 hour total. Tell me to go and I'll ship it.</div>
+</div>
+
+<div class="links" style="margin-top: 20px;">
+  <a class="primary" href="https://bigblank-labs.github.io/hostflow-cohosting-chat/gtm/" target="_blank" rel="noopener">Open daily posting page</a>
+  <a href="https://www.notion.so/3eba6870764c81e884d6d63d1a8ba8f8" target="_blank" rel="noopener">Today's Notion card</a>
+  <a href="https://www.notion.so/a86c28b61a4d46f9be62598c44ed950f" target="_blank" rel="noopener">GTM Activity DB</a>
+  <a href="https://bigblank-labs.github.io/hostflow-cohosting-chat/download/hostflow_post.py" target="_blank" rel="noopener">Download poster</a>
+</div>
+
+</body>
+</html>
