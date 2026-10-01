@@ -58,12 +58,19 @@
   .empty { padding: 40px 20px; text-align: center; color: #6b6f78; background: white;
            border: 1px dashed #d3d6da; border-radius: 12px; }
   footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e7e5dd;
-           color: #6b6f78; font-size: 12px; }
+           color: #6b6f78; font-size: 12px; display: flex; gap: 16px; flex-wrap: wrap; }
+  footer a { color: #2e5bff; }
+  .post-btn {
+    display: inline-block; margin-left: 12px;
+    padding: 3px 10px; border-radius: 6px; background: #2e5bff; color: white;
+    font-size: 11px; text-decoration: none; font-weight: 600;
+  }
+  .post-btn:hover { background: #1d3fbb; }
 </style>
 </head>
 <body>
 <h1>Post today</h1>
-<div class="meta">2026-09-30T09:03:00.863309+00:00Z · 14 drafts to post</div>
+<div class="meta">2026-10-01T07:44:45.410791+00:00Z · 14 drafts to post</div>
 
 
 <div class="row">
@@ -235,7 +242,7 @@ If you want the playbook we use — positioning brief, 30-day plan, contract tem
 
 
 <footer>
-  Updates every 9am UTC. <a href="activity.csv" style="color:#2e5bff;">Full CSV</a> · <a href="activity-latest.json" style="color:#2e5bff;">JSON</a>
+  Updates every 9am UTC. <a href="activity.csv">CSV</a> · <a href="activity-latest.json">JSON</a> · <a href="download/hostflow_post.py">Post script</a>
 </footer>
 
 </body>
